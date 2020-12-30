@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">EDSA</string>
+    <string name="extended_appname">Email Data Storage Application</string>
 </resources>

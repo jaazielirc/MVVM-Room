@@ -1,18 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".Controlador.MainActivity">
+
+    <ImageView
+        android:id="@+id/main_imgedsa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/edsalogo"
+        android:contentDescription="@string/app_name" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/main_element1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/main_imgedsa">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/main_loginUsername"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:ems="10"
+            android:textSize="20sp"
+            android:layout_gravity="center"
+            android:textColor="@color/negro"
+            android:textColorHint="@color/azulCielo"
+            android:singleLine="true"
+            android:inputType="textVisiblePassword"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/main_element2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:passwordToggleEnabled="true"
+        android:textColorHint="@color/azulCielo"
+        android:layout_below="@id/main_element1">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/main_loginPassword"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:ems="10"
+            android:textSize="20sp"
+            android:layout_gravity="center"
+            android:textColor="@color/negro"
+            android:textColorHint="@color/azulCielo"
+            android:singleLine="true"
+            android:inputType="textPassword"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
+        android:id="@+id/main_forgotPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Olvidé mi contraseña"
+        android:gravity="center_horizontal"
+        android:textSize="25sp"
+        android:paddingTop="25dp"
+        android:textStyle="bold"
+        android:textColor="@color/negro"
+        android:layout_below="@id/main_element2"/>
+
+    <Button
+        android:id="@+id/main_btnAcceder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text=" Acceder "
+        android:textAllCaps="false"
+        android:textColor="@color/negro"
+        android:textSize="30sp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/btn_style"
+        android:layout_centerHorizontal="true"
+        android:elevation="5dp"
+        android:layout_below="@id/main_forgotPassword"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
