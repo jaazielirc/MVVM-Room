@@ -5,8 +5,7 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-
-class DBHelper(
+class DBHelper (
     context: Context?,
     nombre: String?,
     factory: SQLiteDatabase.CursorFactory?,
@@ -19,22 +18,22 @@ class DBHelper(
     private var resultInsertar = 0L
     private var resultActualizar = 0
     //DB y TABLAS
-    private val nombreBD = "EDSA.db"
     private val tablaUsuario = "USUARIOS"
     private val tablaEmail = "EMAILS"
     private val tablaCuenta = "CUENTAS"
 
     //columnas de c/tabla
     private val usuarioColumna1 = "NOMBRE"
-    private val usuarioColumna2 = "PSSWRD"
+    private val usuarioColumna2 = "PASSWORD"
+    private val usuarioColumna3 = "KEYWORD"
 
     private val emailColumna1 = "ID"
     private val emailColumna2 = "NOMBRE"
-    private val emailColumna3 = "PSSWRD"
+    private val emailColumna3 = "PASSWORD"
 
     private val cuentaColumna1 = "ID"
     private val cuentaColumna2 = "NOMBRE"
-    private val cuentaColumna3 = "PSSWRD"
+    private val cuentaColumna3 = "PASSWORD"
     private val cuentaColumna4 = "TIPO"
 
     init {
@@ -42,23 +41,29 @@ class DBHelper(
         cv = ContentValues()
     }
 
+    companion object {
+        val nombreDB = "EDSA.db"
+        val version = 1
+    }
+
     override fun onCreate(sqldb: SQLiteDatabase?) {
         sqldb!!.execSQL(
             "CREATE TABLE $tablaUsuario " +
-                    "($usuarioColumna1 TEXT NOT NULL PRIMARY KEY" +
-                    " $usuarioColumna2 TEXT NOT NULL)"
+                    "($usuarioColumna1 TEXT NOT NULL PRIMARY KEY," +
+                    " $usuarioColumna2 TEXT NOT NULL," +
+                    " $usuarioColumna3 TEXT NOT NULL)"
         )
 
         sqldb.execSQL(
             "CREATE TABLE $tablaEmail " +
-                    "($emailColumna1 TEXT NOT NULL PRIMARY KEY" +
+                    "($emailColumna1 TEXT NOT NULL PRIMARY KEY," +
                     " $emailColumna2 TEXT NOT NULL," +
                     " $emailColumna3 TEXT NOT NULL)"
         )
 
         sqldb.execSQL(
-            "CREATE TABLE $tablaEmail " +
-                    "($cuentaColumna1 TEXT NOT NULL PRIMARY KEY" +
+            "CREATE TABLE $tablaCuenta " +
+                    "($cuentaColumna1 TEXT NOT NULL PRIMARY KEY," +
                     " $cuentaColumna2 TEXT," +
                     " $cuentaColumna3 TEXT," +
                     " $cuentaColumna4 TEXT NOT NULL)"
@@ -71,9 +76,10 @@ class DBHelper(
     }
 
     //--------- INSERTAR ---------//
-    fun insertarUsuario(nombre: String, psswrd: String): Boolean {
+    fun insertarUsuario(nombre: String, psswrd: String, keyword: String): Boolean {
         cv.put(usuarioColumna1, nombre) //ID
         cv.put(usuarioColumna2, psswrd)
+        cv.put(usuarioColumna3, keyword)
 
         resultInsertar = db.insert(tablaUsuario, null, cv)
         db.close()
@@ -177,8 +183,10 @@ class DBHelper(
     }
 
     //--------- ELIMINAR ---------//
-    fun delUsuario(nombre: String, psswrd: String): Int{
-        return db.delete(tablaUsuario, "$usuarioColumna1 = $nombre AND $usuarioColumna2 = $psswrd", null)
+    fun delUsuario(nombre: String, psswrd: String, keyword: String): Int{
+        return db.delete(tablaUsuario, "$usuarioColumna1 = $nombre AND " +
+                "$usuarioColumna2 = $psswrd AND " +
+                "$usuarioColumna3 = $keyword", null)
     }
     fun delEmail(id: String, nombre: String): Int{
         return db.delete(tablaEmail, "$emailColumna1 = $id AND $emailColumna2 = $nombre", null)

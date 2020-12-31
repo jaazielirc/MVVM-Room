@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/support1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/blanco"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:background="@color/azulCielo"
+            android:layout_alignParentStart="true"
+            android:text=" Nombre de Usuario "/>
+
+        <TextView
+            android:id="@+id/support2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/negro"
+            android:textSize="20sp"
+            android:padding="3dp"
+            android:background="@color/ver_pistache"
+            android:paddingTop="10dp"
+            android:layout_below="@id/support1"
+            android:layout_alignParentEnd="true"
+            android:text="@string/support_usr"/>
+
+        <TextView
+            android:id="@+id/support3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/blanco"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
+            android:background="@color/azulCielo"
+            android:layout_below="@id/support2"
+            android:layout_alignParentStart="true"
+            android:text=" Contraseña "/>
+
+        <TextView
+            android:id="@+id/support4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/negro"
+            android:textSize="20sp"
+            android:padding="3dp"
+
+            android:paddingTop="10dp"
+            android:background="@color/ver_pistache"
+            android:layout_below="@id/support3"
+            android:layout_alignParentEnd="true"
+            android:text="@string/support_pss"/>
+
+        <TextView
+            android:id="@+id/support5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/blanco"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
+            android:layout_below="@id/support4"
+            android:background="@color/azulCielo"
+            android:layout_alignParentStart="true"
+            android:text=" Palabra secreta "/>
+
+        <TextView
+            android:id="@+id/support6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/support5"
+            android:layout_alignParentEnd="true"
+            android:paddingTop="10dp"
+            android:background="@color/ver_pistache"
+            android:text="@string/support_key1"
+            android:textColor="@color/negro"
+            android:padding="3dp"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/support7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/negro"
+            android:textSize="20sp"
+            android:paddingTop="10dp"
+            android:background="@color/ver_pistache"
+            android:layout_below="@id/support6"
+            android:padding="3dp"
+            android:layout_alignParentEnd="true"
+            android:text="@string/support_key2"/>
+    </RelativeLayout>
+</ScrollView>

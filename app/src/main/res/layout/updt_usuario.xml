@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:padding="16dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/opc_usuario">
+
+    <ImageView
+        android:id="@+id/imgerror"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/errormoji"
+        android:contentDescription="@string/app_name"
+        android:layout_centerHorizontal="true"/>
+
+    <ImageView
+        android:id="@+id/usr_updt_help"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline_help_black_18dp"
+        android:layout_alignParentEnd="true"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/usr_updt_element1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imgerror"
+        android:paddingTop="20dp">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/usr_updt_username"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:ems="10"
+            android:hint="Nombre de Usuario"
+            android:textColorHint="@color/azulCielo"
+            android:textSize="20sp"
+            android:textColor="@color/blanco"
+            android:layout_gravity="center"
+            android:singleLine="true"
+            android:inputType="textVisiblePassword"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/usr_updt_element2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/usr_updt_element1">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/usr_keyword"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:ems="10"
+            android:hint="Palabra Secreta"
+            android:textColorHint="@color/azulCielo"
+            android:textSize="20sp"
+            android:textColor="@color/blanco"
+            android:layout_gravity="center"
+            android:singleLine="true"
+            android:inputType="textVisiblePassword"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/usr_updt_element3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/usr_updt_element2"
+        app:passwordToggleTint="@color/rosa"
+        app:passwordToggleEnabled="true">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/usr_updt_password"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:ems="10"
+            android:hint="Contraseña"
+            android:textColorHint="@color/azulCielo"
+            android:textSize="20sp"
+            android:textColor="@color/blanco"
+            android:layout_gravity="center"
+            android:singleLine="true"
+            android:inputType="textPassword"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/usr_updt_element4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/usr_updt_element3"
+        app:passwordToggleTint="@color/rosa"
+        app:passwordToggleEnabled="true">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/usr_updt_npassword"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:ems="10"
+            android:hint="Contraseña Nueva"
+            android:textColorHint="@color/azulCielo"
+            android:textSize="20sp"
+            android:textColor="@color/blanco"
+            android:layout_gravity="center"
+            android:singleLine="true"
+            android:inputType="textPassword"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/usr_updt_btnActualizar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" Actualizar "
+        android:textAllCaps="false"
+        android:textColor="@color/txt_pressed_style"
+        android:textSize="30sp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/btn_style"
+        android:layout_centerHorizontal="true"
+        android:elevation="5dp"
+        android:layout_below="@id/usr_updt_element4"/>
+</RelativeLayout>

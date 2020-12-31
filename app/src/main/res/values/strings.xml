@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">EDSA</string>
     <string name="extended_appname">Email Data Storage Application</string>
+    <string name="support_usr">El usuario debe contener mínimo 5 caracteres, máximo 15 con al menos 1 número</string>
+    <string name="support_pss">La contraseña debe contener mínimo 8 caracteres, máximo 15 con al menos 1 letra mayúscula, 1 minúscula, 1 número y 1 caracter especial (,.-_*%)</string>
+    <string name="support_key1">La palabra secreta te ayudará a mantener tu cuenta más segura</string>
+    <string name="support_key2">Esta debe contener mínimo 6 caracteres, sin números y con al menos 1 caracter especial</string>
 </resources>

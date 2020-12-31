@@ -2,12 +2,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_splashscreen"
+    android:background="@drawable/bckgrnd_splashscreen"
     android:padding="10dp">
 
     <ImageView
+        android:id="@+id/edsalogo"
         android:layout_centerHorizontal="true"
-        android:paddingTop="200dp"
+        android:paddingTop="150dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:src="@drawable/edsalogo"
@@ -15,11 +16,11 @@
 
     <TextView
         android:layout_alignParentBottom="true"
-        android:paddingBottom="200dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:textSize="40sp"
+        android:layout_below="@id/edsalogo"
+        android:textSize="35sp"
         android:textStyle="bold"
         android:text="@string/extended_appname"
         android:textColor="@color/blanco"/>
