@@ -65,6 +65,12 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
             this.finish()
         }
+
+        txtForPsswrd.setOnClickListener {
+            val intent = Intent(this.applicationContext, ActualizarPssUsuario::class.java)
+            startActivity(intent)
+            this.finish()
+        }
     }
 
     private fun VerificarLogin( usuario: String, psswrd: String ): Boolean{

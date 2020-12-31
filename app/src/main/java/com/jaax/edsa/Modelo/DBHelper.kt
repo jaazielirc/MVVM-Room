@@ -5,6 +5,8 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.util.Log
+
 class DBHelper (
     context: Context?,
     nombre: String?,
@@ -131,15 +133,14 @@ class DBHelper (
     //--------- ACTUALIZAR ---------//
     fun updtDatosUsuario(
         nombreActual: String,
-        nombreNuevo: String,
-        psswrdActual: String,
-        psswrdNuevo: String ): Boolean {
-        cv.put(usuarioColumna1, nombreNuevo)
+        psswrdNuevo: String,
+        keyActual: String): Boolean {
         cv.put(usuarioColumna2, psswrdNuevo)
 
         resultActualizar = db.update(
-            tablaUsuario, cv, "$usuarioColumna1 = $nombreActual AND $usuarioColumna2 = $psswrdActual", null
+            tablaUsuario, cv, "$usuarioColumna1 =? AND $usuarioColumna3 =?", arrayOf(nombreActual, keyActual)
         )
+        Log.i("actu: ", ""+resultActualizar)
         return resultActualizar > 0
     }
 
@@ -155,8 +156,8 @@ class DBHelper (
 
         resultActualizar = db.update(
             tablaEmail, cv,
-            "$emailColumna1 = $id AND $emailColumna2 = $nombreActual AND $emailColumna3 = $psswrdActual",
-            null
+            "$emailColumna1 =? AND $emailColumna2 =? AND $emailColumna3 =?",
+            arrayOf(id, nombreActual, psswrdActual)
         )
         return resultActualizar > 0
     }

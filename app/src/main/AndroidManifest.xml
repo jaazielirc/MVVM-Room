@@ -23,6 +23,9 @@
         <activity android:name=".Controlador.RegistrarUsuario"
             android:theme="@style/AppTheme">
         </activity>
+        <activity android:name=".Controlador.ActualizarPssUsuario"
+            android:theme="@style/AppTheme">
+        </activity>
     </application>
 
 </manifest>

@@ -6,10 +6,10 @@
     android:background="@drawable/opc_usuario">
 
     <ImageView
-        android:id="@+id/imgsad"
+        android:id="@+id/imgdel"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:src="@drawable/tearmoji"
+        android:src="@drawable/errormoji"
         android:contentDescription="@string/app_name"
         android:layout_centerHorizontal="true"/>
 
@@ -24,7 +24,7 @@
         android:id="@+id/usr_del_element1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/imgsad"
+        android:layout_below="@id/imgdel"
         android:paddingTop="20dp">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/usr_del_username"

@@ -5,19 +5,23 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.Gravity
-import android.widget.*
+import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.jaax.edsa.Modelo.DBHelper
 import com.jaax.edsa.Modelo.Usuario
 import com.jaax.edsa.R
-import com.jaax.edsa.Vista.SupportUser
+import com.jaax.edsa.Vista.SupportNPss
 import java.lang.NullPointerException
 
-class RegistrarUsuario: AppCompatActivity() {
+class ActualizarPssUsuario: AppCompatActivity() {
     private lateinit var usuario: EditText
-    private lateinit var psswrd: EditText
+    private lateinit var npsswrd: EditText
+    private lateinit var ncpsswrd: EditText
     private lateinit var keyword: EditText
-    private lateinit var btnReg: Button
+    private lateinit var btnUpdt: Button
     private lateinit var help: ImageView
     private lateinit var db: DBHelper
     private lateinit var toast: Toast
@@ -25,39 +29,37 @@ class RegistrarUsuario: AppCompatActivity() {
     @SuppressLint("ShowToast")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.reg_usuario)
+        setContentView(R.layout.updt_pss_usuario)
 
-        supportActionBar!!.title = "Registrar usuario"
-        usuario = findViewById(R.id.usr_reg_username)
-        psswrd = findViewById(R.id.usr_reg_password)
-        keyword = findViewById(R.id.usr_reg_keyword)
-        btnReg = findViewById(R.id.usr_reg_btnRegistrar)
-        help = findViewById(R.id.usr_reg_help)
+        supportActionBar!!.title = "Cambiar contraseña"
+        usuario = findViewById(R.id.usr_updt_username)
+        npsswrd = findViewById(R.id.usr_updt_password)
+        ncpsswrd = findViewById(R.id.usr_updt_npassword)
+        keyword = findViewById(R.id.usr_updt_keyword)
+        btnUpdt = findViewById(R.id.usr_updt_btnActualizar)
+        help = findViewById(R.id.usr_updt_help)
         db = DBHelper(this.applicationContext, DBHelper.nombreDB, null, DBHelper.version)
         toast = Toast.makeText(this.applicationContext, "txt", Toast.LENGTH_LONG)
-
-        /*usuario.setText("jaax1")
-        psswrd.setText("j44x.EDSA")
-        keyword.setText("deve.loper")*/
     }
 
     override fun onResume() {
         super.onResume()
-        help.setOnClickListener { SupportUser().show(supportFragmentManager, "helpUser") }
+        help.setOnClickListener { SupportNPss().show(supportFragmentManager, "helpNPss") }
 
-        btnReg.setOnClickListener {
+        btnUpdt.setOnClickListener {
             val usr = usuario.text.toString()
-            val pss = psswrd.text.toString()
+            val npss = npsswrd.text.toString()
+            val ncpss = ncpsswrd.text.toString()
             val key = keyword.text.toString()
-            val usuario = Usuario(usr, pss, key, ArrayList())
-            val acceso = datosValidos(usuario.nombre, usuario.password, usuario.keyword)
+            val usuario = Usuario(usr, npss, key, ArrayList())
+            val acceso = datosValidos(usuario.nombre, usuario.password, ncpss, usuario.keyword)
             if( acceso ){
-                val registro = registrarUsuario(usuario)
-                if( registro ) {
-                    btnReg.isEnabled = false
-                    btnReg.elevation = 5.0F
-                    btnReg.setBackgroundResource(R.drawable.unable_btn_style)
-                    btnReg.setTextColor(Color.GRAY)
+                val actualizar = actualizarPssUsuario(usuario)
+                if( actualizar ) {
+                    btnUpdt.isEnabled = false
+                    btnUpdt.elevation = 5.0F
+                    btnUpdt.setBackgroundResource(R.drawable.unable_btn_style)
+                    btnUpdt.setTextColor(Color.GRAY)
                     val thread = object : Thread() {
                         override fun run() {
                             try {
@@ -76,45 +78,46 @@ class RegistrarUsuario: AppCompatActivity() {
         }
     }
 
-    private fun registrarUsuario( user: Usuario ): Boolean{
-        val cursor = db.getAllUsuarios() //por si ya existe ese usuario
-        val listaUsrs = arrayListOf<String>()
+    private fun actualizarPssUsuario( user: Usuario ): Boolean {
+        val cursor = db.getAllUsuarios()
+        val listUsrs = arrayListOf<String>()
+        val listKeys = arrayListOf<String>()
         var i = 0
-        var insertar = false
+        var update = false
         toast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0)
         try {
             if( cursor.count>0 ){
                 while( cursor.moveToNext() ){
-                    listaUsrs.add(cursor.getString(0)) //llenar con usuarios si ya existen
-                    if( listaUsrs.get(i).equals(user.nombre) ){
-                        i = 0
+                    listUsrs.add(cursor.getString(0))
+                    listKeys.add(cursor.getString(2))
+                    if( listUsrs.get(i).equals(user.nombre) && listKeys.get(i).equals(user.keyword) ){
+                        update = db.updtDatosUsuario(user.nombre, user.password, user.keyword)
                         break
                     }
                     i++
                 }
-            } else insertar = db.insertarUsuario(user.nombre, user.password, user.keyword) //primer cuenta agregada
-            if( i != 0 ) insertar = db.insertarUsuario(user.nombre, user.password, user.keyword)
-
-            if(insertar){
-                toast.setText("Registro exitoso\nRedirigiendo al inicio...")
+            }
+            if(update){
+                toast.setText("Tu contraseña se ha actualizado\nRedirigiendo al inicio...")
                 toast.show()
             } else {
-                toast.setText("Elige otro nombre de usuario")
-                toast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 230)
+                toast.setText("Error al actualizar")
+                toast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 300)
                 toast.show()
             }
-        } catch (ne: NullPointerException){}
-        return insertar
+        }catch(ne: NullPointerException){}
+        return update
     }
 
-    private fun datosValidos(name: String, pss: String, key: String): Boolean{
-        val counts = arrayOf(0, 0, 0)
+    private fun datosValidos(name: String, npss: String, ncpss: String, key: String): Boolean{
+        val counts = arrayOf(0, 0, 0, 0, 0)
         val regexU = Regex("(?=.*[a-zA-Z])(?=.*\\d)\\S{5,15}" )
         val regexP = Regex("(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[,._*%-])\\S{8,15}")
+        val regexC = Regex("(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[,._*%-])\\S{8,15}")
         val regexK = Regex("(?=.*[a-zA-Z])(?=.*[,._*%-])\\S{6,15}")
         toast.setText("Si necesitas ayuda, toca '?' para más información")
 
-        if( name=="" || pss=="" || key=="" ){
+        if( name=="" || npss=="" || ncpss=="" || key=="" ){
             toast.setText("Uno o más campos están vacíos, si necesitas ayuda toca '?'")
             toast.show()
             return false
@@ -124,18 +127,28 @@ class RegistrarUsuario: AppCompatActivity() {
                 usuario.error = "!"
                 toast.show()
             }
-            if(!pss.matches(regexP)){
+            if(!npss.matches(regexP)){
                 counts[1]++
-                psswrd.error = "!"
+                npsswrd.error = "!"
+                toast.show()
+            }
+            if(!ncpss.matches(regexC)){
+                counts[2]++
+                ncpsswrd.error = "!"
                 toast.show()
             }
             if(!key.matches(regexK)){
-                counts[2]++
+                counts[3]++
                 keyword.error = "!"
                 toast.show()
             }
+
+            if( npss != ncpss ){
+                counts[4]++
+                ncpsswrd.error = "Las contraseñas no coinciden"
+            }
         }
-        if( counts[0]==0 && counts[1]==0 && counts[2]==0 )
+        if( counts[0]==0 && counts[1]==0 && counts[2]==0 && counts[3]==0 && counts[4]==0 )
             return true
         return false
     }

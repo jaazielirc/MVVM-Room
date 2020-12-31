@@ -6,10 +6,10 @@
     android:background="@drawable/opc_usuario">
 
     <ImageView
-        android:id="@+id/imgerror"
+        android:id="@+id/imgthink"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:src="@drawable/errormoji"
+        android:src="@drawable/thinkmoji"
         android:contentDescription="@string/app_name"
         android:layout_centerHorizontal="true"/>
 
@@ -24,7 +24,7 @@
         android:id="@+id/usr_updt_element1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/imgerror"
+        android:layout_below="@id/imgthink"
         android:paddingTop="20dp">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/usr_updt_username"
@@ -46,7 +46,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/usr_updt_element1">
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/usr_keyword"
+            android:id="@+id/usr_updt_keyword"
             android:layout_width="250dp"
             android:layout_height="50dp"
             android:ems="10"
@@ -71,7 +71,7 @@
             android:layout_width="250dp"
             android:layout_height="50dp"
             android:ems="10"
-            android:hint="Contraseña"
+            android:hint="Contraseña Nueva"
             android:textColorHint="@color/azulCielo"
             android:textSize="20sp"
             android:textColor="@color/blanco"
@@ -92,7 +92,7 @@
             android:layout_width="250dp"
             android:layout_height="50dp"
             android:ems="10"
-            android:hint="Contraseña Nueva"
+            android:hint="Confirmar Contraseña"
             android:textColorHint="@color/azulCielo"
             android:textSize="20sp"
             android:textColor="@color/blanco"
