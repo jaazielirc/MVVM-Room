@@ -58,7 +58,7 @@ class ActualizarPssUsuario: AppCompatActivity() {
                 if( actualizar ) {
                     btnUpdt.isEnabled = false
                     btnUpdt.elevation = 5.0F
-                    btnUpdt.setBackgroundResource(R.drawable.unable_btn_style)
+                    btnUpdt.setBackgroundResource(R.drawable.disable_btn_style)
                     btnUpdt.setTextColor(Color.GRAY)
                     val thread = object : Thread() {
                         override fun run() {

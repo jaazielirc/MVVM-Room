@@ -14,13 +14,14 @@ import com.jaax.edsa.Vista.SupportUser
 import java.lang.NullPointerException
 
 class RegistrarUsuario: AppCompatActivity() {
-    private lateinit var usuario: EditText
+    private lateinit var user: EditText
     private lateinit var psswrd: EditText
     private lateinit var keyword: EditText
     private lateinit var btnReg: Button
     private lateinit var help: ImageView
     private lateinit var db: DBHelper
     private lateinit var toast: Toast
+    private lateinit var usuario: Usuario
 
     @SuppressLint("ShowToast")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,7 +29,7 @@ class RegistrarUsuario: AppCompatActivity() {
         setContentView(R.layout.reg_usuario)
 
         supportActionBar!!.title = "Registrar usuario"
-        usuario = findViewById(R.id.usr_reg_username)
+        user = findViewById(R.id.usr_reg_username)
         psswrd = findViewById(R.id.usr_reg_password)
         keyword = findViewById(R.id.usr_reg_keyword)
         btnReg = findViewById(R.id.usr_reg_btnRegistrar)
@@ -36,9 +37,9 @@ class RegistrarUsuario: AppCompatActivity() {
         db = DBHelper(this.applicationContext, DBHelper.nombreDB, null, DBHelper.version)
         toast = Toast.makeText(this.applicationContext, "txt", Toast.LENGTH_LONG)
 
-        /*usuario.setText("jaax1")
+        user.setText("jaax1")
         psswrd.setText("j44x.EDSA")
-        keyword.setText("deve.loper")*/
+        keyword.setText("deve.loper")
     }
 
     override fun onResume() {
@@ -46,18 +47,20 @@ class RegistrarUsuario: AppCompatActivity() {
         help.setOnClickListener { SupportUser().show(supportFragmentManager, "helpUser") }
 
         btnReg.setOnClickListener {
-            val usr = usuario.text.toString()
+            val usr = user.text.toString()
             val pss = psswrd.text.toString()
             val key = keyword.text.toString()
-            val usuario = Usuario(usr, pss, key, ArrayList())
+            usuario = Usuario(usr, pss, key, ArrayList())
             val acceso = datosValidos(usuario.nombre, usuario.password, usuario.keyword)
             if( acceso ){
                 val registro = registrarUsuario(usuario)
                 if( registro ) {
                     btnReg.isEnabled = false
-                    btnReg.elevation = 5.0F
-                    btnReg.setBackgroundResource(R.drawable.unable_btn_style)
+                    btnReg.elevation = 5F
+                    btnReg.setBackgroundResource(R.drawable.disable_btn_style)
                     btnReg.setTextColor(Color.GRAY)
+                    toast.setText("Registro exitoso\nRedirigiendo al inicio...")
+                    toast.show()
                     val thread = object : Thread() {
                         override fun run() {
                             try {
@@ -71,6 +74,10 @@ class RegistrarUsuario: AppCompatActivity() {
                         }
                     }
                     thread.start()
+                } else {
+                    toast.setText("Elige otro nombre de usuario")
+                    toast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 230)
+                    toast.show()
                 }
             }
         }
@@ -95,14 +102,6 @@ class RegistrarUsuario: AppCompatActivity() {
             } else insertar = db.insertarUsuario(user.nombre, user.password, user.keyword) //primer cuenta agregada
             if( i != 0 ) insertar = db.insertarUsuario(user.nombre, user.password, user.keyword)
 
-            if(insertar){
-                toast.setText("Registro exitoso\nRedirigiendo al inicio...")
-                toast.show()
-            } else {
-                toast.setText("Elige otro nombre de usuario")
-                toast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 230)
-                toast.show()
-            }
         } catch (ne: NullPointerException){}
         return insertar
     }
@@ -121,7 +120,7 @@ class RegistrarUsuario: AppCompatActivity() {
         } else {
             if(!name.matches(regexU)){
                 counts[0]++
-                usuario.error = "!"
+                user.error = "!"
                 toast.show()
             }
             if(!pss.matches(regexP)){

@@ -58,14 +58,14 @@ class DBHelper (
 
         sqldb.execSQL(
             "CREATE TABLE $tablaEmail " +
-                    "($emailColumna1 TEXT NOT NULL PRIMARY KEY," +
+                    "($emailColumna1 TEXT NOT NULL," +
                     " $emailColumna2 TEXT NOT NULL," +
                     " $emailColumna3 TEXT NOT NULL)"
         )
 
         sqldb.execSQL(
             "CREATE TABLE $tablaCuenta " +
-                    "($cuentaColumna1 TEXT NOT NULL PRIMARY KEY," +
+                    "($cuentaColumna1 TEXT NOT NULL," +
                     " $cuentaColumna2 TEXT," +
                     " $cuentaColumna3 TEXT," +
                     " $cuentaColumna4 TEXT NOT NULL)"
@@ -117,14 +117,14 @@ class DBHelper (
     fun getEmailsByID(ID: String): Cursor {
         return db.rawQuery("SELECT * FROM $tablaEmail WHERE $emailColumna1 =?", arrayOf(ID))
     }
-    fun getDatosEmailById(nombre: String): Cursor {
-        return db.rawQuery("SELECT * FROM $tablaEmail WHERE $emailColumna2 =?", arrayOf(nombre))
+    fun getDatosEmailByID(ID: String, nombre: String): Cursor {
+        return db.rawQuery("SELECT * FROM $tablaEmail WHERE $emailColumna1 =? AND $emailColumna2 =?", arrayOf(ID, nombre))
     }
 
-    fun getCuentasById(ID: String): Cursor {
+    fun getCuentasByID(ID: String): Cursor {
         return db.rawQuery("SELECT * FROM $tablaCuenta WHERE $cuentaColumna1 =?", arrayOf(ID))
     }
-    fun getDatosSingleCuentaById(idEmail: String, idCuenta: String): Cursor {
+    fun getDatosSingleCuentaByID(idEmail: String, idCuenta: String): Cursor {
         return db.rawQuery(
             "SELECT * FROM $tablaCuenta WHERE $cuentaColumna1 =? AND $cuentaColumna2 =?", arrayOf(idEmail, idCuenta)
         )

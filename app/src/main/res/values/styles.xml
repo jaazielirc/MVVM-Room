@@ -6,4 +6,11 @@
         <item name="colorPrimaryDark">@color/rosa</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+
+    <style name="EmailsStyle" parent="Theme.AppCompat.Light">
+        <item name="colorPrimary">@color/ama_suave</item>
+        <item name="colorPrimaryDark">@color/azulCielo</item>
+        <item name="colorAccent">@color/azulCielo</item>
+        <item name="android:textColor">@color/negro</item>
+    </style>
 </resources>

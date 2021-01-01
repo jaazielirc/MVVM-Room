@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="4dp"
+    android:paddingStart="10dp"
+    android:paddingEnd="10dp"
+    android:background="@color/blanco">
+
+    <TextView
+        android:id="@+id/adapter_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="email"
+        android:textSize="20sp"
+        android:layout_alignParentStart="true"
+        android:textColor="@color/negro"/>
+    <TextView
+        android:id="@+id/adapter_psswrd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="password"
+        android:textSize="20sp"
+        android:layout_alignParentStart="true"
+        android:textColor="@color/negro"
+        android:layout_below="@id/adapter_email"/>
+    <ToggleButton
+        android:id="@+id/adapter_toggle"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/togglebtn_style"
+        android:textOff=""
+        android:textOn=""/>
+</RelativeLayout>

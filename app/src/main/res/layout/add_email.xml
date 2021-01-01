@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="10dp"
+    android:background="@drawable/bckgrnd_splashscreen"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/addmail_element1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/addmail_nombre"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:ems="10"
+            android:hint="Correo electrónico"
+            android:textColorHint="@color/agtive"
+            android:textSize="20sp"
+            android:textColor="@color/ama_suave"
+            android:layout_gravity="center"
+            android:singleLine="true"
+            android:inputType="textEmailAddress|textNoSuggestions"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/addmail_element2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/addmail_element1"
+        app:passwordToggleTint="@color/ama_suave"
+        app:passwordToggleEnabled="true"
+        android:paddingTop="20dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/addmail_psswrd"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
+            android:ems="10"
+            android:hint="Contraseña"
+            android:inputType="textPassword|text"
+            android:singleLine="true"
+            android:textColor="@color/ama_suave"
+            android:textColorHint="@color/ama_suave"
+            android:textSize="20sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/addmail_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" Agregar "
+        android:textAllCaps="false"
+        android:textColor="@color/txt_pressed_style"
+        android:textSize="30sp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/btn_style"
+        android:layout_centerHorizontal="true"
+        android:elevation="5dp"
+        android:layout_below="@id/addmail_element2"/>
+
+</RelativeLayout>
