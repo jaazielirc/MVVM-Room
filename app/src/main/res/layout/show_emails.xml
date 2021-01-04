@@ -4,7 +4,23 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="10dp">
+    <!--ToggleButton
+        android:id="@+id/emails_verpss_toggle"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/toggle_psswrd_style"
+        android:textOff=""
+        android:textOn=""/-->
 
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/emails_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textNoSuggestions"
+        android:background="@color/mamey">
+        <requestFocus/>
+    </androidx.appcompat.widget.SearchView>
     <ImageView
         android:id="@+id/imgNoEmail"
         android:layout_width="wrap_content"
@@ -21,12 +37,12 @@
         android:textSize="25sp"
         android:gravity="center"
         android:layout_marginBottom="20dp"/>
+
     <ListView
         android:id="@+id/emails_lista"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:listSelector="@color/grisClaro"
-        android:drawSelectorOnTop="true"/>
+        android:layout_below="@id/emails_search"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/emails_add"

@@ -3,7 +3,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="10dp"
-    android:background="@drawable/bckgrnd_splashscreen"
+    android:background="@drawable/bckgrnd_email_options"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <com.google.android.material.textfield.TextInputLayout
@@ -18,7 +18,7 @@
             android:hint="Correo electrónico"
             android:textColorHint="@color/agtive"
             android:textSize="20sp"
-            android:textColor="@color/ama_suave"
+            android:textColor="@color/mamey"
             android:layout_gravity="center"
             android:singleLine="true"
             android:inputType="textEmailAddress|textNoSuggestions"/>
@@ -29,7 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/addmail_element1"
-        app:passwordToggleTint="@color/ama_suave"
+        app:passwordToggleTint="@color/mamey"
         app:passwordToggleEnabled="true"
         android:paddingTop="20dp">
 
@@ -42,8 +42,8 @@
             android:hint="Contraseña"
             android:inputType="textPassword|text"
             android:singleLine="true"
-            android:textColor="@color/ama_suave"
-            android:textColorHint="@color/ama_suave"
+            android:textColor="@color/mamey"
+            android:textColorHint="@color/agtive"
             android:textSize="20sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -53,10 +53,10 @@
         android:layout_height="wrap_content"
         android:text=" Agregar "
         android:textAllCaps="false"
-        android:textColor="@color/txt_pressed_style"
+        android:textColor="@color/txt_pressed_style_cl"
         android:textSize="30sp"
         android:layout_marginTop="30dp"
-        android:background="@drawable/btn_style"
+        android:background="@drawable/btn_style_cl"
         android:layout_centerHorizontal="true"
         android:elevation="5dp"
         android:layout_below="@id/addmail_element2"/>

@@ -86,10 +86,10 @@
         android:layout_height="wrap_content"
         android:text=" Registrar "
         android:textAllCaps="false"
-        android:textColor="@color/txt_pressed_style"
+        android:textColor="@color/txt_pressed_style_dk"
         android:textSize="30sp"
         android:layout_marginTop="50dp"
-        android:background="@drawable/btn_style"
+        android:background="@drawable/btn_style_dk"
         android:layout_centerHorizontal="true"
         android:elevation="5dp"
         android:layout_below="@id/usr_reg_element3"/>

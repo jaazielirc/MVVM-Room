@@ -58,10 +58,10 @@
         android:layout_height="wrap_content"
         android:text=" Acceder "
         android:textAllCaps="false"
-        android:textColor="@color/txt_pressed_style"
+        android:textColor="@color/txt_pressed_style_dk"
         android:textSize="30sp"
         android:layout_marginTop="40dp"
-        android:background="@drawable/btn_style"
+        android:background="@drawable/btn_style_dk"
         android:layout_centerHorizontal="true"
         android:elevation="5dp"
         android:layout_below="@id/main_element2"/>
@@ -75,7 +75,7 @@
         android:layout_centerHorizontal="true"
         android:gravity="center_horizontal"
         android:text="Nuevo usuario"
-        android:textColor="@color/txt_pressed_style"
+        android:textColor="@color/txt_pressed_style_dk"
         android:textSize="20sp" />
 
     <TextView
@@ -88,6 +88,6 @@
         android:layout_alignParentBottom="true"
         android:gravity="center_horizontal"
         android:text="Olvidé mi contraseña"
-        android:textColor="@color/txt_pressed_style"
+        android:textColor="@color/txt_pressed_style_dk"
         android:textSize="20sp" />
 </RelativeLayout>

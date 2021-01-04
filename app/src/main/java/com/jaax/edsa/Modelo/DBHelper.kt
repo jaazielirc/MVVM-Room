@@ -114,17 +114,21 @@ class DBHelper (
         return db.rawQuery("SELECT * FROM $tablaUsuario", null)
     }
 
-    fun getEmailsByID(ID: String): Cursor {
+    fun getUsuarioById(ID: String): Cursor {
+        return db.rawQuery("SELECT * FROM $tablaUsuario WHERE $usuarioColumna1 =?", arrayOf(ID))
+    }
+
+    fun getEmailsById(ID: String): Cursor { //datos de email por usuario
         return db.rawQuery("SELECT * FROM $tablaEmail WHERE $emailColumna1 =?", arrayOf(ID))
     }
-    fun getDatosEmailByID(ID: String, nombre: String): Cursor {
+    fun getDatosEmailById(ID: String, nombre: String): Cursor { //datos de email individuales
         return db.rawQuery("SELECT * FROM $tablaEmail WHERE $emailColumna1 =? AND $emailColumna2 =?", arrayOf(ID, nombre))
     }
 
-    fun getCuentasByID(ID: String): Cursor {
+    fun getCuentasById(ID: String): Cursor {
         return db.rawQuery("SELECT * FROM $tablaCuenta WHERE $cuentaColumna1 =?", arrayOf(ID))
     }
-    fun getDatosSingleCuentaByID(idEmail: String, idCuenta: String): Cursor {
+    fun getDatosSingleCuentaById(idEmail: String, idCuenta: String): Cursor {
         return db.rawQuery(
             "SELECT * FROM $tablaCuenta WHERE $cuentaColumna1 =? AND $cuentaColumna2 =?", arrayOf(idEmail, idCuenta)
         )
@@ -140,7 +144,6 @@ class DBHelper (
         resultActualizar = db.update(
             tablaUsuario, cv, "$usuarioColumna1 =? AND $usuarioColumna3 =?", arrayOf(nombreActual, keyActual)
         )
-        Log.i("actu: ", ""+resultActualizar)
         return resultActualizar > 0
     }
 
@@ -148,7 +151,6 @@ class DBHelper (
         id: String,
         nombreActual: String,
         nombreNuevo: String,
-        psswrdActual: String,
         psswrdNuevo: String
     ): Boolean {
         cv.put(emailColumna2, nombreNuevo)
@@ -156,9 +158,9 @@ class DBHelper (
 
         resultActualizar = db.update(
             tablaEmail, cv,
-            "$emailColumna1 =? AND $emailColumna2 =? AND $emailColumna3 =?",
-            arrayOf(id, nombreActual, psswrdActual)
-        )
+            "$emailColumna1 =? AND $emailColumna2 =?",
+            arrayOf(id, nombreActual)
+        ) //sólo es necesario verificar ID y Nombre del email
         return resultActualizar > 0
     }
 

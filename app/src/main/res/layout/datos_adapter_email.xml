@@ -5,7 +5,8 @@
     android:padding="4dp"
     android:paddingStart="10dp"
     android:paddingEnd="10dp"
-    android:background="@color/blanco">
+    android:background="@drawable/item_selected_lv"
+    android:elevation="5dp">
 
     <TextView
         android:id="@+id/adapter_email"
@@ -14,7 +15,9 @@
         android:text="email"
         android:textSize="20sp"
         android:layout_alignParentStart="true"
-        android:textColor="@color/negro"/>
+        android:textColor="@color/negro"
+        android:focusable="false"
+        android:focusableInTouchMode="false"/>
     <TextView
         android:id="@+id/adapter_psswrd"
         android:layout_width="wrap_content"
@@ -23,14 +26,7 @@
         android:textSize="20sp"
         android:layout_alignParentStart="true"
         android:textColor="@color/negro"
-        android:layout_below="@id/adapter_email"/>
-    <ToggleButton
-        android:id="@+id/adapter_toggle"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="20dp"
-        android:layout_alignParentEnd="true"
-        android:background="@drawable/togglebtn_style"
-        android:textOff=""
-        android:textOn=""/>
+        android:layout_below="@id/adapter_email"
+        android:focusable="false"
+        android:focusableInTouchMode="false"/>
 </RelativeLayout>
