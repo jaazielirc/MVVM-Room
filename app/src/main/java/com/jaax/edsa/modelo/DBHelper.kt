@@ -5,6 +5,7 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.util.Log
 
 class DBHelper (
     context: Context?,
@@ -121,9 +122,9 @@ class DBHelper (
     fun getCuentasById(ID: String): Cursor {
         return db.rawQuery("SELECT * FROM $tablaCuenta WHERE $cuentaColumna1 =?", arrayOf(ID))
     }
-    fun getDatosCuentaById(ID: String, nombre: String): Cursor {
+    fun getDatosCuentaById(ID: String, tipo: String): Cursor {
         return db.rawQuery(
-            "SELECT * FROM $tablaCuenta WHERE $cuentaColumna1 =? AND $cuentaColumna2 =?", arrayOf(ID, nombre)
+            "SELECT * FROM $tablaCuenta WHERE $cuentaColumna1 =? AND $cuentaColumna4 =?", arrayOf(ID, tipo)
         )
     }
 
@@ -144,7 +145,7 @@ class DBHelper (
         id: String,
         nombreActual: String,
         nombreNuevo: String,
-        psswrdNuevo: String
+        psswrdNuevo: String,
     ): Boolean {
         cv.put(emailColumna2, nombreNuevo)
         cv.put(emailColumna3, psswrdNuevo)
@@ -162,6 +163,7 @@ class DBHelper (
         nombreActual: String,
         nombreNuevo: String,
         psswrdNuevo: String,
+        tipoActual: String,
         tipoNuevo: String
     ): Boolean {
         cv.put(cuentaColumna2, nombreNuevo)
@@ -170,8 +172,8 @@ class DBHelper (
 
         resultActualizar = db.update(
             tablaCuenta, cv,
-            "$cuentaColumna1 =? AND $cuentaColumna2 =?",
-            arrayOf(id, nombreActual) //sólo se requieren ID y Nombre de la cuenta
+            "$cuentaColumna1 =? AND $cuentaColumna2 =? AND $cuentaColumna4 =?",
+            arrayOf(id, nombreActual, tipoActual) //sólo se requieren ID y Nombre de la cuenta
         )
         return resultActualizar > 0
     }
@@ -183,9 +185,16 @@ class DBHelper (
                 "$usuarioColumna3 =?", arrayOf(nombre, psswrd, keyword))
     }*/
     fun delEmail(id: String, nombre: String): Int{
-        return db.delete(tablaEmail, "$emailColumna1 =? AND $emailColumna2 =?", arrayOf(id, nombre))
+        val del1 = db.delete(tablaEmail, "$emailColumna1 =? AND $emailColumna2 =?", arrayOf(id, nombre))
+        val del2 = db.delete(tablaCuenta, "$cuentaColumna1 =?", arrayOf(id))
+        Log.i("DEL_EMAIL", del1.toString())
+        Log.i("DEL_EMAIL_ACC", del2.toString())
+        var totalDel = 0
+        if( del1!=0 && del2!=0 )
+            totalDel = 1
+        return totalDel
     }
-    fun delCuenta( id: String, nombre: String ): Int{
-        return db.delete(tablaCuenta, "$cuentaColumna1 =? AND $cuentaColumna2 =?", arrayOf(id, nombre))
+    fun delCuenta( id: String, tipo: String ): Int{
+        return db.delete(tablaCuenta, "$cuentaColumna1 =? AND $cuentaColumna4 =?", arrayOf(id, tipo))
     }
 }

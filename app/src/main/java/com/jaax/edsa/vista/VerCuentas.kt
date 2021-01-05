@@ -6,20 +6,16 @@ import android.app.Dialog
 import android.os.Bundle
 import android.view.Gravity
 import android.view.View
-import android.widget.ImageView
-import android.widget.ListView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.DialogFragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.jaax.edsa.R
-import com.jaax.edsa.controlador.AddAccountFragment
-import com.jaax.edsa.controlador.CuentaAdapter
+import com.jaax.edsa.controlador.*
 import com.jaax.edsa.modelo.Cuenta
 import com.jaax.edsa.modelo.DBHelper
 import java.sql.SQLException
 
-class VerCuentas(private val ID: String): DialogFragment(), AddAccountFragment.OnCallbackReceivedAdd {
+class VerCuentas(private val ID: String): DialogFragment() {
     private lateinit var db: DBHelper
     private lateinit var addCuenta: FloatingActionButton
     private lateinit var listaCuentas: ListView
@@ -53,10 +49,52 @@ class VerCuentas(private val ID: String): DialogFragment(), AddAccountFragment.O
 
     override fun onResume() {
         super.onResume()
+        onClick()
+    }
+
+    private fun onClick() {
         addCuenta.setOnClickListener {
-            AddAccountFragment(this.ID).show(
+            AddCuentaFragment(this.ID).show(
                 this@VerCuentas.activity!!.supportFragmentManager, "addAccount"
             )
+            this@VerCuentas.dismiss()
+        }
+        listaCuentas.onItemLongClickListener = AdapterView.OnItemLongClickListener { _, view, pos, _ ->
+            view?.isSelected = true
+            val popupMenu = PopupMenu(this@VerCuentas.context, view)
+            popupMenu.menuInflater.inflate(R.menu.opc_cuenta, popupMenu.menu)
+            popupMenu.setOnMenuItemClickListener { item ->
+                when (item?.itemId) {
+                    R.id.menu_edacc -> {
+                        val updt = UpdateCuentaFragment(
+                            this.ID,
+                            cuentaAdapter.cuentas[pos].usuario,
+                            cuentaAdapter.cuentas[pos].passwrd,
+                            cuentaAdapter.cuentas[pos].tipo
+                        )
+                        updt.show(this@VerCuentas.activity!!.supportFragmentManager, "updateCuenta")
+                        this@VerCuentas.dismiss()
+                    }
+                    R.id.menu_delacc -> {
+                        val del = DeleteCuentaFragment(
+                            this.ID,
+                            cuentaAdapter.cuentas[pos].usuario,
+                            cuentaAdapter.cuentas[pos].tipo,
+                        )
+                        del.show(this@VerCuentas.activity!!.supportFragmentManager, "delCuenta")
+                        this@VerCuentas.dismiss()
+                    }
+                }
+                true
+            }
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                popupMenu.gravity = Gravity.CENTER_HORIZONTAL
+            }
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q) {
+                popupMenu.setForceShowIcon(true)
+            }
+            popupMenu.show()
+            true
         }
     }
 
@@ -81,7 +119,7 @@ class VerCuentas(private val ID: String): DialogFragment(), AddAccountFragment.O
             listaCuentas.adapter = cuentaAdapter
         }catch (sql: SQLException){}
     }
-    private fun refreshListAccounts(){
+    /*private fun refreshListAccounts(){
         val allCuentas = ArrayList<Cuenta>()
         try {
             val cursor = db.getCuentasById(this.ID)
@@ -102,10 +140,5 @@ class VerCuentas(private val ID: String): DialogFragment(), AddAccountFragment.O
             cuentaAdapter.cuentas.addAll(allCuentas)
             cuentaAdapter.notifyDataSetChanged()
         }catch (sql: SQLException){}
-    }
-
-    override fun refreshByAdding() {
-        refreshListAccounts()
-    }
-
+    }*/
 }

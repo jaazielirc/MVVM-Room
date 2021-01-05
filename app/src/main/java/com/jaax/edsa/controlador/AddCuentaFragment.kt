@@ -13,11 +13,9 @@ import androidx.fragment.app.DialogFragment
 import com.jaax.edsa.R
 import com.jaax.edsa.modelo.Cuenta
 import com.jaax.edsa.modelo.DBHelper
-import com.jaax.edsa.modelo.Email
-import java.lang.ClassCastException
-import java.sql.SQLException
+import com.jaax.edsa.vista.VerCuentas
 
-class AddAccountFragment(private val ID: String): DialogFragment() {
+class AddCuentaFragment(private val ID: String): DialogFragment() {
     private lateinit var db: DBHelper
     private lateinit var toast: Toast
     private lateinit var cuenta: Cuenta
@@ -25,12 +23,6 @@ class AddAccountFragment(private val ID: String): DialogFragment() {
     private lateinit var edTxtPsswrd: EditText
     private lateinit var edTxtTipo: EditText
     private lateinit var btnAgregar: Button
-    private lateinit var callBack: OnCallbackReceivedAdd
-
-    interface OnCallbackReceivedAdd{
-        fun refreshByAdding()
-    }
-
 
     @SuppressLint("ShowToast")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -105,7 +97,7 @@ class AddAccountFragment(private val ID: String): DialogFragment() {
 
     private fun datosValidos(usr: String, type: String): Boolean{
         val counts = arrayOf(0, 0)
-        if( usr.length < 1 ){
+        if(usr.isEmpty()){
             edTxtUser.error = "!"
             toast.setText("Ingresa un usuario válido")
             toast.setGravity(Gravity.TOP, 0, -100)
@@ -119,8 +111,15 @@ class AddAccountFragment(private val ID: String): DialogFragment() {
             toast.show()
             counts[2]++
         }
-        if( counts[0]==0 && counts[1]==0 )
+        if(counts[0]==0 && counts[1]==0 )
             return true
         return false
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        VerCuentas(this.ID).show(
+            this@AddCuentaFragment.activity!!.supportFragmentManager, "verCuentas"
+        )
     }
 }
