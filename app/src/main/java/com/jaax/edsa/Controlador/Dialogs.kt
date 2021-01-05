@@ -3,10 +3,8 @@ package com.jaax.edsa.Vista
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.Dialog
-import android.content.DialogInterface
 import android.database.sqlite.SQLiteException
 import android.os.Bundle
-import android.util.Log
 import android.view.Gravity
 import android.widget.Button
 import android.widget.EditText
@@ -17,6 +15,7 @@ import com.jaax.edsa.Modelo.DBHelper
 import com.jaax.edsa.Modelo.Email
 import com.jaax.edsa.Modelo.Usuario
 import com.jaax.edsa.R
+import java.lang.ClassCastException
 import java.sql.SQLException
 
 class SupportUser: DialogFragment(){
@@ -27,11 +26,7 @@ class SupportUser: DialogFragment(){
         val builder = AlertDialog.Builder(activity)
         builder
             .setView(view)
-            .setPositiveButton("Entendido", object : DialogInterface.OnClickListener{
-                override fun onClick(p0: DialogInterface?, p1: Int) {
-                    dismiss()
-                }
-            })
+            .setPositiveButton("Entendido") { _, _ -> dismiss() }
         return builder.create()
     }
 }
@@ -44,22 +39,19 @@ class SupportNPss: DialogFragment(){
         val builder = AlertDialog.Builder(activity)
         builder
             .setView(view)
-            .setPositiveButton("Entendido", object : DialogInterface.OnClickListener{
-                override fun onClick(p0: DialogInterface?, p1: Int) {
-                    dismiss()
-                }
-            })
+            .setPositiveButton("Entendido") { _, _ -> dismiss() }
         return builder.create()
     }
 }
 
-class AddMailFragment(val ID: String): DialogFragment(){
+class AddMailFragment(private val ID: String): DialogFragment(){
     private lateinit var db: DBHelper
     private lateinit var toast: Toast
     private lateinit var email: Email
     private lateinit var edTxtEmail: EditText
     private lateinit var edTxtPsswrd: EditText
     private lateinit var btnAgregar: Button
+    private lateinit var callBack: OnCallbackReceivedAdd
 
     @SuppressLint("ShowToast")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -76,6 +68,18 @@ class AddMailFragment(val ID: String): DialogFragment(){
         builder.setView(view)
 
         return builder.create()
+    }
+
+    interface OnCallbackReceivedAdd{
+        fun refreshByAdding()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        try{
+            callBack = context as OnCallbackReceivedAdd
+        }catch (cce: ClassCastException){cce.printStackTrace()}
+        callBack.refreshByAdding()
     }
 
     override fun onResume() {
@@ -95,21 +99,6 @@ class AddMailFragment(val ID: String): DialogFragment(){
                 } else {
                     toast.setText("Error al agregar\nIntenta de nuevo")
                     toast.show()
-                    /*btnAgregar.isEnabled = false
-                    btnAgregar.setBackgroundResource(R.drawable.disable_btn_style)
-                    btnAgregar.setTextColor(Color.GRAY)
-                    val thread = object : Thread() {
-                        override fun run() {
-                            try {
-                                sleep(2000)
-                            } finally {
-                                btnAgregar.isEnabled = true
-                                btnAgregar.setBackgroundResource(R.drawable.btn_style_dk)
-                                btnAgregar.setTextColor(Color.BLACK)
-                            }
-                        }
-                    }
-                    thread.start()*/
                 }
             }
         }
@@ -157,21 +146,6 @@ class AddMailFragment(val ID: String): DialogFragment(){
             toast.setText("Ingresa una dirección de correo válida")
             toast.setGravity(Gravity.TOP, 0, -100)
             toast.show()
-
-            /*activity!!.runOnUiThread(object : Thread(){
-                override fun run() {
-                    try {
-                        btnAgregar.isEnabled = false
-                        btnAgregar.setBackgroundResource(R.drawable.disable_btn_style)
-                        btnAgregar.setTextColor(Color.GRAY)
-                        sleep(2000)
-                    } finally {
-                        btnAgregar.isEnabled = true
-                        btnAgregar.setBackgroundResource(R.drawable.btn_style_dk)
-                        btnAgregar.setTextColor(Color.BLACK)
-                    }
-                }
-            })*/
             counts[0]++
         }
         if( pss.length < 3 ){
@@ -187,7 +161,7 @@ class AddMailFragment(val ID: String): DialogFragment(){
     }
 }
 
-class UpdateMailFragment(val ID: String): DialogFragment(){
+class UpdateMailFragment(private val ID: String): DialogFragment(){
     private lateinit var db: DBHelper
     private lateinit var toast: Toast
     private lateinit var email: Email
@@ -200,6 +174,7 @@ class UpdateMailFragment(val ID: String): DialogFragment(){
     private lateinit var togglePsswrd: ToggleButton
     private lateinit var bundleN: String
     private lateinit var bundleP: String
+    private lateinit var callBack: OnCallbackReceivedEdit
 
     @SuppressLint("ShowToast")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -221,6 +196,16 @@ class UpdateMailFragment(val ID: String): DialogFragment(){
         return builder.create()
     }
 
+    interface OnCallbackReceivedEdit {
+        fun refreshByEditing()
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        try{
+            callBack = context as OnCallbackReceivedEdit
+        }catch (cce: ClassCastException){cce.printStackTrace()}
+        callBack.refreshByEditing()
+    }
     override fun onResume() {
         super.onResume()
         onClick()
@@ -245,8 +230,8 @@ class UpdateMailFragment(val ID: String): DialogFragment(){
             val edTextKey = edTxtKeyword.text.toString()
             val newEmail = Email( usuario.nombre, edTextUser, edTextPass, ArrayList() )
 
-            Log.i("OrigiEmail", "${email.ID} - ${email.nombre} - ${email.passwrd}")
-            Log.i("ModifEmail", "${newEmail.ID} - ${newEmail.nombre} - ${newEmail.passwrd}")
+            /*Log.i("OrigiEmail", "${email.ID} - ${email.nombre} - ${email.passwrd}")
+            Log.i("ModifEmail", "${newEmail.ID} - ${newEmail.nombre} - ${newEmail.passwrd}")*/
 
             val acceso = datosValidos(newEmail.nombre, newEmail.passwrd, usuario.keyword, edTextKey)
 
@@ -267,21 +252,6 @@ class UpdateMailFragment(val ID: String): DialogFragment(){
                         toast.setGravity(Gravity.CENTER_HORIZONTAL, 0 ,0)
                         toast.show()
                     }
-                    /*btnAgregar.isEnabled = false
-                    btnAgregar.setBackgroundResource(R.drawable.disable_btn_style)
-                    btnAgregar.setTextColor(Color.GRAY)
-                    val thread = object : Thread() {
-                        override fun run() {
-                            try {
-                                sleep(2000)
-                            } finally {
-                                btnAgregar.isEnabled = true
-                                btnAgregar.setBackgroundResource(R.drawable.btn_style_dk)
-                                btnAgregar.setTextColor(Color.BLACK)
-                            }
-                        }
-                    }
-                    thread.start()*/
                 }
             }
         }
@@ -325,11 +295,10 @@ class UpdateMailFragment(val ID: String): DialogFragment(){
         try {
             if( cursor.count>0 ){
                 if( (emailAddress.nombre==newEmailAddrss.nombre) && (emailAddress.passwrd==newEmailAddrss.passwrd) ){
-                    toast.setText("Sin cambios2")
-                    toast.setGravity(Gravity.BOTTOM, 0 ,0)
-                    toast.show()
                     return actualizar
-                } else {actualizar = db.updtDatosEmail( emailAddress.ID, emailAddress.nombre, newEmailAddrss.nombre, newEmailAddrss.passwrd )}
+                } else {
+                    actualizar = db.updtDatosEmail( emailAddress.ID, emailAddress.nombre, newEmailAddrss.nombre, newEmailAddrss.passwrd )
+                }
             } else {
                 toast.setText("No existe ese email")
                 toast.show()
@@ -354,21 +323,6 @@ class UpdateMailFragment(val ID: String): DialogFragment(){
             toast.setText("Ingresa una dirección de correo válida")
             toast.setGravity(Gravity.TOP, 0, -100)
             toast.show()
-
-            /*activity!!.runOnUiThread(object : Thread(){
-                override fun run() {
-                    try {
-                        btnAgregar.isEnabled = false
-                        btnAgregar.setBackgroundResource(R.drawable.disable_btn_style)
-                        btnAgregar.setTextColor(Color.GRAY)
-                        sleep(2000)
-                    } finally {
-                        btnAgregar.isEnabled = true
-                        btnAgregar.setBackgroundResource(R.drawable.btn_style_dk)
-                        btnAgregar.setTextColor(Color.BLACK)
-                    }
-                }
-            })*/
             counts[0]++
         }
         if( pss.length < 3 ){
@@ -385,5 +339,68 @@ class UpdateMailFragment(val ID: String): DialogFragment(){
         if( counts[0]==0 && counts[1]==0 && counts[2]==0)
             return true
         return false
+    }
+}
+
+class DelMailFragment( private val ID: String, private val nombre: String ): DialogFragment(){
+    private lateinit var db: DBHelper
+    private lateinit var toast: Toast
+    private lateinit var email: Email
+    private lateinit var callBack: OnCallbackReceivedDel
+
+    @SuppressLint("ShowToast")
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        db = DBHelper(activity!!.applicationContext, DBHelper.nombreDB, null, DBHelper.version)
+        toast = Toast.makeText(activity!!.applicationContext, "txt", Toast.LENGTH_SHORT)
+        toast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0)
+        email = Email(ID, nombre, "", ArrayList())
+        val msj = "También se eliminarán las cuentas asociadas al email"
+        val builder = AlertDialog.Builder(activity)
+        builder
+            .setTitle("¿Eliminar ${email.nombre}?")
+            .setMessage(msj)
+            .setIcon(R.drawable.baseline_delete_black_18dp)
+            .setPositiveButton("Eliminar") { _, _ ->
+                val del = eliminarEmail(email)
+                if( del != 0 ){
+                    toast.setText("El email se eliminó correctamente")
+                    toast.show()
+                } else {
+                    toast.setText("Error al eliminar\nIntenta nuevamente")
+                    toast.show()
+                }
+            }
+            .setNegativeButton("Cancelar") {_, _ -> dismiss() }
+
+        return builder.create()
+    }
+
+    interface OnCallbackReceivedDel {
+        fun refreshByDeleting()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        try{
+            callBack = context as OnCallbackReceivedDel
+        }catch (cce: ClassCastException){cce.printStackTrace()}
+        callBack.refreshByDeleting()
+    }
+
+    private fun eliminarEmail(delEmail: Email): Int {
+        val cursor = db.getDatosEmailById(delEmail.ID, delEmail.nombre) //debe haber sólo 1 email si existe
+        var eliminar = 0
+        try {
+            if(cursor.count>0){
+                if( cursor.count>0 ){
+                    eliminar = db.delEmail(delEmail.ID, delEmail.nombre)
+                    return eliminar
+                } else {
+                    toast.setText("Ese email no existe (?")
+                    toast.show()
+                }
+            }
+        }catch(sql: SQLiteException){sql.printStackTrace()}
+        return eliminar //== 0 -> no se pudo eliminar
     }
 }

@@ -4,11 +4,9 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.Gravity
-import android.view.MenuItem
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.get
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.jaax.edsa.Controlador.EmailAdapter
 import com.jaax.edsa.Controlador.MainActivity
@@ -17,9 +15,13 @@ import com.jaax.edsa.Modelo.Email
 import com.jaax.edsa.R
 import java.sql.SQLException
 
+class VerEmails: AppCompatActivity(),
+    SearchView.OnQueryTextListener,
+    androidx.appcompat.widget.SearchView.OnQueryTextListener,
+    AddMailFragment.OnCallbackReceivedAdd,
+    UpdateMailFragment.OnCallbackReceivedEdit,
+    DelMailFragment.OnCallbackReceivedDel {
 
-class VerEmails: AppCompatActivity(), SearchView.OnQueryTextListener,
-    androidx.appcompat.widget.SearchView.OnQueryTextListener {
     private lateinit var db: DBHelper
     private lateinit var addEmail: FloatingActionButton
     private lateinit var refreshList: FloatingActionButton
@@ -68,52 +70,37 @@ class VerEmails: AppCompatActivity(), SearchView.OnQueryTextListener,
                 supportFragmentManager,
                 "agregarEmailNuevo"
             )}
-        refreshList.setOnClickListener {
-            refreshList.visibility = View.INVISIBLE
-            searchView.setQuery("", false)
-            refreshList.postDelayed(object : Runnable {
-                override fun run() {
-                    refreshList.visibility = View.VISIBLE
-                }
-            }, 3000)
-            refreshListEmails()
-        }
-        listaEmail.setOnItemLongClickListener(object : AdapterView.OnItemLongClickListener{
-            override fun onItemLongClick(
-                parent: AdapterView<*>?,
-                view: View?,
-                pos: Int,
-                id: Long
-            ): Boolean {
+        refreshList.setOnClickListener { refreshListEmails() }
+        listaEmail.onItemLongClickListener = AdapterView.OnItemLongClickListener { _, view, pos, _ ->
                 view?.isSelected = true
                 val popupMenu = PopupMenu(this@VerEmails, view)
                 popupMenu.menuInflater.inflate(R.menu.opc_email, popupMenu.menu)
-                popupMenu.setOnMenuItemClickListener(object : PopupMenu.OnMenuItemClickListener{
-                    override fun onMenuItemClick(item: MenuItem?): Boolean {
-                        when( item?.itemId ){
-                            R.id.menu_editmail -> {
-                                val updt = UpdateMailFragment(usuarioActual)
-                                val bundle = Bundle()
-                                val bundleNombre = emailAdapter.emails.get(pos).nombre
-                                val bundlePsswrd = emailAdapter.emails.get(pos).passwrd
-                                updt.arguments = bundle
-                                bundle.putString("bundleEmailNombre", bundleNombre)
-                                bundle.putString("bundleEmailPsswrd", bundlePsswrd)
-                                updt.show(this@VerEmails.supportFragmentManager, "updateEmail")
-                            }
-                            R.id.menu_addcuenta -> {
-                                val bun = emailAdapter.emails.get(pos).nombre
-                                toast.setText(bun)
-                                toast.show()
-                            }
-                            R.id.menu_delemail -> {
-                                toast.setText("DEL EMAIL")
-                                toast.show()
-                            }
+                popupMenu.setOnMenuItemClickListener { item ->
+                    when (item?.itemId) {
+                        R.id.menu_editmail -> {
+                            val updt = UpdateMailFragment(usuarioActual)
+                            val bundle = Bundle()
+                            val bundleNombre = emailAdapter.emails[pos].nombre
+                            val bundlePsswrd = emailAdapter.emails[pos].passwrd
+                            updt.arguments = bundle
+                            bundle.putString("bundleEmailNombre", bundleNombre)
+                            bundle.putString("bundleEmailPsswrd", bundlePsswrd)
+                            updt.show(this@VerEmails.supportFragmentManager, "updateEmail")
                         }
-                        return true
+                        R.id.menu_addcuenta -> {
+                            val bun = emailAdapter.emails[pos].nombre
+                            toast.setText(bun)
+                            toast.show()
+                        }
+                        R.id.menu_delemail -> {
+                            DelMailFragment(
+                                emailAdapter.emails[pos].ID,
+                                emailAdapter.emails[pos].nombre
+                            ).show(this@VerEmails.supportFragmentManager, "deleteEmail")
+                        }
                     }
-                })
+                    true
+                }
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
                     popupMenu.gravity = Gravity.CENTER_HORIZONTAL
                 }
@@ -121,14 +108,15 @@ class VerEmails: AppCompatActivity(), SearchView.OnQueryTextListener,
                     popupMenu.setForceShowIcon(true)
                 }
                 popupMenu.show()
-                return true
+                true
             }
-        })
     }
 
     private fun refreshListEmails(){
+        refreshList.visibility = View.INVISIBLE
+        searchView.setQuery("", false)
+        refreshList.postDelayed({ refreshList.visibility = View.VISIBLE }, 3000)
         val allEmails = ArrayList<Email>()
-
         try {
             val cursor = db.getEmailsById(this.usuarioActual)
             if( cursor.count>0 ){
@@ -184,13 +172,14 @@ class VerEmails: AppCompatActivity(), SearchView.OnQueryTextListener,
         this.finish()
     }
 
-    override fun onQueryTextSubmit(p0: String?): Boolean {
+    override fun onQueryTextSubmit(p0: String?): Boolean { return false }
+
+    override fun onQueryTextChange(p0: String?): Boolean {
+        emailAdapter.getFilter().filter(p0)
         return false
     }
 
-    override fun onQueryTextChange(p0: String?): Boolean {
-        val txt = p0
-        emailAdapter.getFilter().filter(txt)
-        return false
-    }
+    override fun refreshByAdding() { refreshListEmails() }
+    override fun refreshByEditing() { refreshListEmails() }
+    override fun refreshByDeleting() { refreshListEmails() }
 }

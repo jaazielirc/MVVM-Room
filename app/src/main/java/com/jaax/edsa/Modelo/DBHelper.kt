@@ -187,14 +187,14 @@ class DBHelper (
 
     //--------- ELIMINAR ---------//
     fun delUsuario(nombre: String, psswrd: String, keyword: String): Int{
-        return db.delete(tablaUsuario, "$usuarioColumna1 = $nombre AND " +
-                "$usuarioColumna2 = $psswrd AND " +
-                "$usuarioColumna3 = $keyword", null)
+        return db.delete(tablaUsuario, "$usuarioColumna1 = $? AND " +
+                "$usuarioColumna2 =? AND " +
+                "$usuarioColumna3 =?", arrayOf(nombre, psswrd, keyword))
     }
     fun delEmail(id: String, nombre: String): Int{
-        return db.delete(tablaEmail, "$emailColumna1 = $id AND $emailColumna2 = $nombre", null)
+        return db.delete(tablaEmail, "$emailColumna1 =? AND $emailColumna2 =?", arrayOf(id, nombre))
     }
     fun delCuenta( id: String, nombre: String ): Int{
-        return db.delete(tablaCuenta, "$cuentaColumna1 = $id AND $cuentaColumna2 = $nombre", null)
+        return db.delete(tablaCuenta, "$cuentaColumna1 =? AND $cuentaColumna2 =?", arrayOf(id, nombre))
     }
 }
