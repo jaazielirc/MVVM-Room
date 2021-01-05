@@ -1,4 +1,4 @@
-package com.jaax.edsa.Controlador
+package com.jaax.edsa.controlador
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -9,10 +9,10 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import com.jaax.edsa.Modelo.DBHelper
-import com.jaax.edsa.Modelo.Usuario
+import com.jaax.edsa.modelo.DBHelper
+import com.jaax.edsa.modelo.Usuario
 import com.jaax.edsa.R
-import com.jaax.edsa.Vista.VerEmails
+import com.jaax.edsa.vista.VerEmails
 import java.lang.NullPointerException
 
 class MainActivity : AppCompatActivity() {

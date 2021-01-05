@@ -1,4 +1,4 @@
-package com.jaax.edsa.Modelo
+package com.jaax.edsa.modelo
 
 class Email(
     var ID: String,

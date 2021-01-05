@@ -1,4 +1,4 @@
-package com.jaax.edsa.Controlador
+package com.jaax.edsa.controlador
 
 import android.content.Context
 import android.text.TextUtils
@@ -8,10 +8,8 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.Filter
 import android.widget.TextView
-import android.widget.ToggleButton
-import com.jaax.edsa.Modelo.Email
+import com.jaax.edsa.modelo.Email
 import com.jaax.edsa.R
-import java.text.FieldPosition
 
 class EmailAdapter(private val context: Context, var emails: ArrayList<Email>): BaseAdapter() {
     private class ViewHolder(view: View?){

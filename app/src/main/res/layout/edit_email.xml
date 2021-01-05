@@ -108,11 +108,11 @@
         android:layout_height="wrap_content"
         android:text=" Guardar cambios "
         android:textAllCaps="false"
-        android:textColor="@color/txt_pressed_style_cl"
+        android:textColor="@color/txt_pressed_email_style"
         android:textSize="30sp"
         android:layout_marginTop="30dp"
         android:layout_gravity="center"
-        android:background="@drawable/btn_style_cl"
+        android:background="@drawable/btn_email_style"
         android:elevation="5dp"/>
 
 </LinearLayout>

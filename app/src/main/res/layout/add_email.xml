@@ -2,9 +2,9 @@
 <RelativeLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:padding="10dp"
-    android:background="@drawable/bckgrnd_email_options"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:background="@drawable/bckgrnd_email_options">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/addmail_element1"
@@ -53,10 +53,10 @@
         android:layout_height="wrap_content"
         android:text=" Agregar "
         android:textAllCaps="false"
-        android:textColor="@color/txt_pressed_style_cl"
+        android:textColor="@color/txt_pressed_email_style"
         android:textSize="30sp"
         android:layout_marginTop="30dp"
-        android:background="@drawable/btn_style_cl"
+        android:background="@drawable/btn_email_style"
         android:layout_centerHorizontal="true"
         android:elevation="5dp"
         android:layout_below="@id/addmail_element2"/>

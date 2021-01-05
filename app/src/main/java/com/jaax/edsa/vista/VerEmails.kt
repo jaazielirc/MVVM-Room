@@ -1,4 +1,4 @@
-package com.jaax.edsa.Vista
+package com.jaax.edsa.vista
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -8,10 +8,9 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.jaax.edsa.Controlador.EmailAdapter
-import com.jaax.edsa.Controlador.MainActivity
-import com.jaax.edsa.Modelo.DBHelper
-import com.jaax.edsa.Modelo.Email
+import com.jaax.edsa.controlador.*
+import com.jaax.edsa.modelo.DBHelper
+import com.jaax.edsa.modelo.Email
 import com.jaax.edsa.R
 import java.sql.SQLException
 
@@ -20,7 +19,7 @@ class VerEmails: AppCompatActivity(),
     androidx.appcompat.widget.SearchView.OnQueryTextListener,
     AddMailFragment.OnCallbackReceivedAdd,
     UpdateMailFragment.OnCallbackReceivedEdit,
-    DelMailFragment.OnCallbackReceivedDel {
+    DeleteMailFragment.OnCallbackReceivedDel {
 
     private lateinit var db: DBHelper
     private lateinit var addEmail: FloatingActionButton
@@ -77,6 +76,9 @@ class VerEmails: AppCompatActivity(),
                 popupMenu.menuInflater.inflate(R.menu.opc_email, popupMenu.menu)
                 popupMenu.setOnMenuItemClickListener { item ->
                     when (item?.itemId) {
+                        R.id.menu_cuentas -> {
+                            VerCuentas(emailAdapter.emails[pos].nombre).show(this@VerEmails.supportFragmentManager, "verCuentas")
+                        }
                         R.id.menu_editmail -> {
                             val updt = UpdateMailFragment(usuarioActual)
                             val bundle = Bundle()
@@ -87,13 +89,8 @@ class VerEmails: AppCompatActivity(),
                             bundle.putString("bundleEmailPsswrd", bundlePsswrd)
                             updt.show(this@VerEmails.supportFragmentManager, "updateEmail")
                         }
-                        R.id.menu_addcuenta -> {
-                            val bun = emailAdapter.emails[pos].nombre
-                            toast.setText(bun)
-                            toast.show()
-                        }
                         R.id.menu_delemail -> {
-                            DelMailFragment(
+                            DeleteMailFragment(
                                 emailAdapter.emails[pos].ID,
                                 emailAdapter.emails[pos].nombre
                             ).show(this@VerEmails.supportFragmentManager, "deleteEmail")

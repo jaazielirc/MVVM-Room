@@ -1,9 +1,9 @@
-package com.jaax.edsa.Vista
+package com.jaax.edsa.vista
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.jaax.edsa.Controlador.MainActivity
+import com.jaax.edsa.controlador.MainActivity
 import com.jaax.edsa.R
 
 class SplashScreen: AppCompatActivity() {

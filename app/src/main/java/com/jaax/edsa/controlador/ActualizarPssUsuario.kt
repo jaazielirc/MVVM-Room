@@ -1,4 +1,4 @@
-package com.jaax.edsa.Controlador
+package com.jaax.edsa.controlador
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -10,10 +10,10 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.jaax.edsa.Modelo.DBHelper
-import com.jaax.edsa.Modelo.Usuario
+import com.jaax.edsa.modelo.DBHelper
+import com.jaax.edsa.modelo.Usuario
 import com.jaax.edsa.R
-import com.jaax.edsa.Vista.SupportNPss
+import com.jaax.edsa.vista.SupportNPss
 import java.lang.NullPointerException
 
 class ActualizarPssUsuario: AppCompatActivity() {

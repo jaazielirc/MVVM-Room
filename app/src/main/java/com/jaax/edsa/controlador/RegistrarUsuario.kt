@@ -1,4 +1,4 @@
-package com.jaax.edsa.Controlador
+package com.jaax.edsa.controlador
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -7,10 +7,10 @@ import android.os.Bundle
 import android.view.Gravity
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import com.jaax.edsa.Modelo.DBHelper
-import com.jaax.edsa.Modelo.Usuario
+import com.jaax.edsa.modelo.DBHelper
+import com.jaax.edsa.modelo.Usuario
 import com.jaax.edsa.R
-import com.jaax.edsa.Vista.SupportUser
+import com.jaax.edsa.vista.SupportUser
 import java.lang.NullPointerException
 
 class RegistrarUsuario: AppCompatActivity() {

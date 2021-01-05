@@ -10,23 +10,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Vista.SplashScreen"
+        <activity android:name=".vista.SplashScreen"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Controlador.MainActivity"
+        <activity android:name=".controlador.MainActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
-        <activity android:name=".Controlador.RegistrarUsuario"
+        <activity android:name=".controlador.RegistrarUsuario"
             android:theme="@style/AppTheme">
         </activity>
-        <activity android:name=".Controlador.ActualizarPssUsuario"
+        <activity android:name=".controlador.ActualizarPssUsuario"
             android:theme="@style/AppTheme">
         </activity>
-        <activity android:name=".Vista.VerEmails"
+        <activity android:name=".vista.VerEmails"
             android:theme="@style/EmailsStyle">
         </activity>
     </application>

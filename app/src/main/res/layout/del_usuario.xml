@@ -86,10 +86,10 @@
         android:layout_height="wrap_content"
         android:text=" Eliminar "
         android:textAllCaps="false"
-        android:textColor="@color/txt_pressed_style_dk"
+        android:textColor="@color/txt_pressed_user_style"
         android:textSize="30sp"
         android:layout_marginTop="50dp"
-        android:background="@drawable/btn_style_dk"
+        android:background="@drawable/btn_user_style"
         android:layout_centerHorizontal="true"
         android:elevation="5dp"
         android:layout_below="@id/usr_del_element3"/>

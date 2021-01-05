@@ -1,22 +1,20 @@
-package com.jaax.edsa.Modelo
+package com.jaax.edsa.modelo
 
 import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import android.util.Log
 
 class DBHelper (
     context: Context?,
     nombre: String?,
     factory: SQLiteDatabase.CursorFactory?,
     version: Int
-):
-    SQLiteOpenHelper(context, nombre, factory, version) {
+): SQLiteOpenHelper(context, nombre, factory, version) {
 
-    private val db: SQLiteDatabase
-    private val cv: ContentValues
+    private val db: SQLiteDatabase = this.writableDatabase
+    private val cv: ContentValues = ContentValues()
     private var resultInsertar = 0L
     private var resultActualizar = 0
     //DB y TABLAS
@@ -38,14 +36,9 @@ class DBHelper (
     private val cuentaColumna3 = "PASSWORD"
     private val cuentaColumna4 = "TIPO"
 
-    init {
-        db = this.writableDatabase
-        cv = ContentValues()
-    }
-
     companion object {
-        val nombreDB = "EDSA.db"
-        val version = 1
+        const val nombreDB = "EDSA.db"
+        const val version = 1
     }
 
     override fun onCreate(sqldb: SQLiteDatabase?) {
@@ -128,9 +121,9 @@ class DBHelper (
     fun getCuentasById(ID: String): Cursor {
         return db.rawQuery("SELECT * FROM $tablaCuenta WHERE $cuentaColumna1 =?", arrayOf(ID))
     }
-    fun getDatosSingleCuentaById(idEmail: String, idCuenta: String): Cursor {
+    fun getDatosCuentaById(ID: String, nombre: String): Cursor {
         return db.rawQuery(
-            "SELECT * FROM $tablaCuenta WHERE $cuentaColumna1 =? AND $cuentaColumna2 =?", arrayOf(idEmail, idCuenta)
+            "SELECT * FROM $tablaCuenta WHERE $cuentaColumna1 =? AND $cuentaColumna2 =?", arrayOf(ID, nombre)
         )
     }
 
@@ -168,9 +161,7 @@ class DBHelper (
         id: String,
         nombreActual: String,
         nombreNuevo: String,
-        psswrdActual: String,
         psswrdNuevo: String,
-        tipoActual: String,
         tipoNuevo: String
     ): Boolean {
         cv.put(cuentaColumna2, nombreNuevo)
@@ -179,18 +170,18 @@ class DBHelper (
 
         resultActualizar = db.update(
             tablaCuenta, cv,
-            "$cuentaColumna1 = $id AND $cuentaColumna2 = $nombreActual AND $cuentaColumna3 = $psswrdActual AND $cuentaColumna4 = $tipoActual",
-            null
+            "$cuentaColumna1 =? AND $cuentaColumna2 =?",
+            arrayOf(id, nombreActual) //sólo se requieren ID y Nombre de la cuenta
         )
         return resultActualizar > 0
     }
 
     //--------- ELIMINAR ---------//
-    fun delUsuario(nombre: String, psswrd: String, keyword: String): Int{
+    /*fun delUsuario(nombre: String, psswrd: String, keyword: String): Int{
         return db.delete(tablaUsuario, "$usuarioColumna1 = $? AND " +
                 "$usuarioColumna2 =? AND " +
                 "$usuarioColumna3 =?", arrayOf(nombre, psswrd, keyword))
-    }
+    }*/
     fun delEmail(id: String, nombre: String): Int{
         return db.delete(tablaEmail, "$emailColumna1 =? AND $emailColumna2 =?", arrayOf(id, nombre))
     }

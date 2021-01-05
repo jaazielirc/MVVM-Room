@@ -24,6 +24,7 @@
     <color name="grisClaro">#B1BFBB</color>
     <color name="naranja">#FEAE0E</color>
     <color name="mamey">#FF5733</color>
+    <color name="aguamarina">#33FFBA</color>
     <drawable name="item_pressed_lv">#B1BFBB</drawable>
     <drawable name="item_select_lv">#61F679</drawable>
 </resources>

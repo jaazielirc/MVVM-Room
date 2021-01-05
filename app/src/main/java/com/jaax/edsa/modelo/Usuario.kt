@@ -1,4 +1,4 @@
-package com.jaax.edsa.Modelo
+package com.jaax.edsa.modelo
 
 class Usuario(
     var nombre: String,
