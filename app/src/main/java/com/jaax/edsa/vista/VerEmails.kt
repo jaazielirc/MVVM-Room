@@ -2,34 +2,37 @@ package com.jaax.edsa.vista
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.database.sqlite.SQLiteException
 import android.os.Bundle
 import android.view.Gravity
+import android.view.Menu
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
+import androidx.appcompat.widget.SwitchCompat
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.jaax.edsa.controlador.*
 import com.jaax.edsa.modelo.DBHelper
 import com.jaax.edsa.modelo.Email
 import com.jaax.edsa.R
-import java.sql.SQLException
 
 class VerEmails: AppCompatActivity(),
-    SearchView.OnQueryTextListener,
-    androidx.appcompat.widget.SearchView.OnQueryTextListener,
     AddMailFragment.OnCallbackReceivedAdd,
     UpdateMailFragment.OnCallbackReceivedEdit,
     DeleteMailFragment.OnCallbackReceivedDel {
 
     private lateinit var db: DBHelper
     private lateinit var addEmail: FloatingActionButton
-    private lateinit var refreshList: FloatingActionButton
     private lateinit var listaEmail: ListView
     private lateinit var txtNoEmail: TextView
     private lateinit var imgNoEmail: ImageView
     private lateinit var toast: Toast
     private lateinit var emailAdapter: EmailAdapter
-    private lateinit var searchView: androidx.appcompat.widget.SearchView
+    private lateinit var prevPass: ArrayList<String>
+    private lateinit var switchView: SwitchCompat
+    private lateinit var swipeRefresh: SwipeRefreshLayout
 
     private var usuarioActual = "abc123"
 
@@ -38,17 +41,16 @@ class VerEmails: AppCompatActivity(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.show_emails)
 
-        supportActionBar!!.title = "Emails"
         addEmail = findViewById(R.id.emails_add)
         listaEmail = findViewById(R.id.emails_lista)
         txtNoEmail = findViewById(R.id.textNoEmail)
         imgNoEmail = findViewById(R.id.imgNoEmail)
-        refreshList = findViewById(R.id.emails_refresh)
-        searchView = findViewById(R.id.emails_search)
+        swipeRefresh = findViewById(R.id.emails_refresh)
         db = DBHelper(this.applicationContext, DBHelper.nombreDB, null, DBHelper.version)
         toast = Toast.makeText(this.applicationContext, "txt", Toast.LENGTH_LONG)
         toast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0)
-        searchView.setOnQueryTextListener(this)
+        supportActionBar?.title = "EDSA: $usuarioActual"
+        prevPass = ArrayList(0)
     }
 
     override fun onStart() {
@@ -69,7 +71,10 @@ class VerEmails: AppCompatActivity(),
                 supportFragmentManager,
                 "agregarEmailNuevo"
             )}
-        refreshList.setOnClickListener { refreshListEmails() }
+        swipeRefresh.setOnRefreshListener {
+            refreshListEmails()
+            swipeRefresh.isRefreshing = false
+        }
         listaEmail.onItemLongClickListener = AdapterView.OnItemLongClickListener { _, view, pos, _ ->
                 view?.isSelected = true
                 val popupMenu = PopupMenu(this@VerEmails, view)
@@ -109,35 +114,6 @@ class VerEmails: AppCompatActivity(),
             }
     }
 
-    private fun refreshListEmails(){
-        refreshList.visibility = View.INVISIBLE
-        searchView.setQuery("", false)
-        refreshList.postDelayed({ refreshList.visibility = View.VISIBLE }, 3000)
-        val allEmails = ArrayList<Email>()
-        try {
-            val cursor = db.getEmailsById(this.usuarioActual)
-            if( cursor.count>0 ){
-                while(cursor.moveToNext()){
-                    val email = Email(
-                        this.usuarioActual,
-                        cursor.getString(1),
-                        cursor.getString(2),
-                        ArrayList()
-                    )
-                    allEmails.add(email)
-                }
-                txtNoEmail.visibility = View.GONE
-                imgNoEmail.visibility = View.GONE
-                searchView.visibility = View.VISIBLE
-            } else {
-                searchView.visibility = View.INVISIBLE
-            }
-            emailAdapter.emails.clear()
-            emailAdapter.emails.addAll(allEmails)
-            emailAdapter.notifyDataSetChanged()
-        }catch (sql: SQLException){}
-    }
-
     private fun mostrarEmails() {
         val allEmails = ArrayList<Email>()
         try {
@@ -154,13 +130,85 @@ class VerEmails: AppCompatActivity(),
                 }
                 txtNoEmail.visibility = View.GONE
                 imgNoEmail.visibility = View.GONE
-            } else {
-                searchView.visibility = View.INVISIBLE
             }
             emailAdapter = EmailAdapter(this.applicationContext, allEmails)
             listaEmail.adapter = emailAdapter
-        }catch (sql: SQLException){}
+            hideAndRefillPasswords(prevPass, emailAdapter, true)
+        }catch (sql: SQLiteException){}
     }
+
+    private fun refreshListEmails(){
+        val allEmails = ArrayList<Email>()
+        try {
+            val cursor = db.getEmailsById(this.usuarioActual)
+            if( cursor.count>0 ){
+                while(cursor.moveToNext()){
+                    val email = Email(
+                        this.usuarioActual,
+                        cursor.getString(1),
+                        cursor.getString(2),
+                        ArrayList()
+                    )
+                    allEmails.add(email)
+                }
+                txtNoEmail.visibility = View.GONE
+                imgNoEmail.visibility = View.GONE
+            }
+            emailAdapter.emails.clear()
+            emailAdapter.emails.addAll(allEmails)
+            switchView.isChecked = false
+            hideAndRefillPasswords(prevPass, emailAdapter, true)
+        }catch (sql: SQLiteException){}
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val menuInflater = menuInflater
+        menuInflater.inflate(R.menu.opc_toolbar, menu)
+
+        val searchView = menu?.findItem(R.id.menu_searchview)!!.actionView as SearchView
+        switchView = menu.findItem(R.id.menu_view_password).actionView as SwitchCompat
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                searchView.clearFocus()
+                return false
+            }
+            override fun onQueryTextChange(newText: String?): Boolean {
+                emailAdapter.getFilter().filter(newText)
+                emailAdapter.notifyDataSetChanged()
+                return true
+            }
+        })
+
+        switchView.setOnClickListener {
+            if(switchView.isChecked){
+                hideAndRefillPasswords(prevPass, emailAdapter, false)
+            } else {
+                hideAndRefillPasswords(prevPass, emailAdapter, true)
+            }
+        }
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    private fun hideAndRefillPasswords( arraypss: ArrayList<String>, adapter: EmailAdapter, hide: Boolean ) {
+        val count = adapter.emails.count()
+        for( i: Int in 0 until count ){ arraypss.add( adapter.emails[i].passwrd ) }
+        if( hide ){
+            for( i: Int in 0 until count ){
+                adapter.emails[i].passwrd = "*******"
+            }
+            adapter.notifyDataSetChanged()
+        } else {
+            for( i: Int in 0 until count ){
+                adapter.emails[i].passwrd = arraypss[i]
+            }
+            adapter.notifyDataSetChanged()
+        }
+    }
+
+    override fun refreshByAdding() { refreshListEmails() }
+    override fun refreshByEditing() { refreshListEmails() }
+    override fun refreshByDeleting() { refreshListEmails() }
 
     override fun onBackPressed() {
         super.onBackPressed()
@@ -168,15 +216,4 @@ class VerEmails: AppCompatActivity(),
         startActivity(intent)
         this.finish()
     }
-
-    override fun onQueryTextSubmit(p0: String?): Boolean { return false }
-
-    override fun onQueryTextChange(p0: String?): Boolean {
-        emailAdapter.getFilter().filter(p0)
-        return false
-    }
-
-    override fun refreshByAdding() { refreshListEmails() }
-    override fun refreshByEditing() { refreshListEmails() }
-    override fun refreshByDeleting() { refreshListEmails() }
 }

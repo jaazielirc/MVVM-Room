@@ -8,25 +8,50 @@
     android:background="@drawable/item_selected_lv"
     android:elevation="5dp">
 
-    <TextView
-        android:id="@+id/adapter_email"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/linear1"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="email"
-        android:textSize="20sp"
-        android:layout_alignParentStart="true"
-        android:textColor="@color/negro"
-        android:focusable="false"
-        android:focusableInTouchMode="false"/>
-    <TextView
-        android:id="@+id/adapter_psswrd"
-        android:layout_width="wrap_content"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/baseline_person_black_18dp"/>
+        <TextView
+            android:id="@+id/adapter_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="email"
+            android:textSize="20sp"
+            android:layout_marginStart="10dp"
+            android:textColor="@color/negro"
+            android:focusable="false"
+            android:focusableInTouchMode="false"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear2"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="password"
-        android:textSize="20sp"
-        android:layout_alignParentStart="true"
-        android:textColor="@color/negro"
-        android:layout_below="@id/adapter_email"
-        android:focusable="false"
-        android:focusableInTouchMode="false"/>
+        android:orientation="horizontal"
+        android:layout_below="@id/linear1">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/baseline_vpn_key_black_18dp"/>
+        <TextView
+            android:id="@+id/adapter_psswrd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="password"
+            android:textSize="20sp"
+            android:textColor="@color/negro"
+            android:layout_marginStart="10dp"
+            android:focusable="false"
+            android:layout_marginTop="3dp"
+            android:focusableInTouchMode="false"/>
+    </LinearLayout>
 </RelativeLayout>

@@ -12,14 +12,10 @@ import com.jaax.edsa.modelo.Email
 import com.jaax.edsa.R
 
 class EmailAdapter(private val context: Context, var emails: ArrayList<Email>): BaseAdapter() {
-    private class ViewHolder(view: View?){
-        var nombreEmail: TextView
-        var password: TextView
 
-        init {
-            this.nombreEmail = view?.findViewById(R.id.adapter_email) as TextView
-            this.password = view.findViewById(R.id.adapter_psswrd) as TextView
-        }
+    private class ViewHolder(view: View?){
+        var nombreEmail = view?.findViewById(R.id.adapter_email) as TextView
+        var password = view?.findViewById(R.id.adapter_psswrd) as TextView
     }
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view: View?
@@ -41,6 +37,7 @@ class EmailAdapter(private val context: Context, var emails: ArrayList<Email>): 
 
         return view!!
     }
+
     override fun getCount(): Int {
         return emails.count()
     }
@@ -54,7 +51,7 @@ class EmailAdapter(private val context: Context, var emails: ArrayList<Email>): 
     }
 
     fun getFilter(): Filter {
-        val filter = object : Filter() {
+        return object : Filter() {
             override fun performFiltering(buscar: CharSequence?): FilterResults {
                 val filterResults = FilterResults()
 
@@ -63,7 +60,7 @@ class EmailAdapter(private val context: Context, var emails: ArrayList<Email>): 
                     filterResults.values = emails
                 } else {
                     val emailsFound = ArrayList<Email>()
-                    for( ef: Email in emails ){
+                    for( ef: Email in emails){
                         if( ef.nombre.contains(buscar!!, true) ){
                             emailsFound.add( ef )
                         }
@@ -83,6 +80,5 @@ class EmailAdapter(private val context: Context, var emails: ArrayList<Email>): 
                 }
             }
         }
-        return filter
     }
 }
