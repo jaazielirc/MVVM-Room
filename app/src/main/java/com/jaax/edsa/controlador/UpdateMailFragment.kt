@@ -87,9 +87,6 @@ class UpdateMailFragment(private val ID: String): DialogFragment(){
             val edTextKey = edTxtKeyword.text.toString()
             val newEmail = Email( usuario.nombre, edTextUser, edTextPass, ArrayList() )
 
-            /*Log.i("OrigiEmail", "${email.ID} - ${email.nombre} - ${email.passwrd}")
-            Log.i("ModifEmail", "${newEmail.ID} - ${newEmail.nombre} - ${newEmail.passwrd}")*/
-
             val acceso = datosValidos(newEmail.nombre, newEmail.passwrd, usuario.keyword, edTextKey)
 
             if(acceso){
@@ -148,21 +145,22 @@ class UpdateMailFragment(private val ID: String): DialogFragment(){
 
     private fun modificarEmail(emailAddress: Email, newEmailAddrss: Email): Boolean{
         val cursor = db.getDatosEmailById(emailAddress.ID, emailAddress.nombre) //debe haber sólo 1 email si existe
+        val cursor2 = db.getCuentasById(emailAddress.nombre) // nombreEmail == idCuenta
         var actualizar = false
+        var actualizar2 = false
+
         try {
             if( cursor.count>0 ){
                 if( (emailAddress.nombre==newEmailAddrss.nombre) && (emailAddress.passwrd==newEmailAddrss.passwrd) ){
-                    return actualizar
+                    return false
                 } else {
                     actualizar = db.updtDatosEmail( emailAddress.ID, emailAddress.nombre, newEmailAddrss.nombre, newEmailAddrss.passwrd )
                 }
-            } else {
-                toast.setText("No existe ese email")
-                toast.show()
             }
+            if( cursor2.count>0 ) { actualizar2 = db.updateChildIdPerParentId(emailAddress.nombre, newEmailAddrss.nombre, 0) }
         } catch (ne: SQLException){ne.printStackTrace()}
 
-        return actualizar
+        return (actualizar && actualizar2)
     }
 
     private fun datosValidos(mail: String, pss: String, key: String, matchKey: String): Boolean{

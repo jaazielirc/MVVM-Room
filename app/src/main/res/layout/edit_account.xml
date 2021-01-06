@@ -17,6 +17,7 @@
             android:layout_height="30dp"
             android:layout_gravity="center"
             android:checked="false"
+            android:enabled="false"
             android:background="@drawable/toggle_edit_style"
             android:textOff=""
             android:textOn=""/>

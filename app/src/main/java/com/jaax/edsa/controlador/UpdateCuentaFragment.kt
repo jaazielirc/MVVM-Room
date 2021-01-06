@@ -99,14 +99,14 @@ class UpdateCuentaFragment(
                 }
             }
         }
-        toggleUser.setOnCheckedChangeListener { _, isChecked ->
+        /*toggleUser.setOnCheckedChangeListener { _, isChecked ->
             if( isChecked  ){
                 edTxtUsuario.isEnabled = true
                 edTxtUsuario.requestFocus()
             } else {
                 edTxtUsuario.isEnabled = false
             }
-        }
+        }*/
         togglePsswrd.setOnCheckedChangeListener { _, isChecked ->
             if( isChecked  ){
                 edTxtPsswrd.isEnabled = true

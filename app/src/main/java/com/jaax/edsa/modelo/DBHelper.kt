@@ -5,7 +5,6 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import android.util.Log
 
 class DBHelper (
     context: Context?,
@@ -18,6 +17,8 @@ class DBHelper (
     private val cv: ContentValues = ContentValues()
     private var resultInsertar = 0L
     private var resultActualizar = 0
+    private var resultEliminar = 0
+
     //DB y TABLAS
     private val tablaUsuario = "USUARIOS"
     private val tablaEmail = "EMAILS"
@@ -178,23 +179,41 @@ class DBHelper (
         return resultActualizar > 0
     }
 
+    fun updateChildIdPerParentId(idActual: String, newId: String, table: Int): Boolean{
+        when(table){
+            0 -> {
+                cv.put(cuentaColumna1, newId)
+                resultActualizar = db.update( tablaCuenta, cv,"$cuentaColumna1 =?", arrayOf(idActual) )
+                return resultActualizar>0
+            }
+            1 -> {
+                cv.put(emailColumna1, newId)
+                resultActualizar = db.update( tablaEmail, cv,"$emailColumna1 =?", arrayOf(idActual) )
+                return resultActualizar>0
+            }
+        }
+        return false
+    }
+
     //--------- ELIMINAR ---------//
     /*fun delUsuario(nombre: String, psswrd: String, keyword: String): Int{
         return db.delete(tablaUsuario, "$usuarioColumna1 = $? AND " +
                 "$usuarioColumna2 =? AND " +
                 "$usuarioColumna3 =?", arrayOf(nombre, psswrd, keyword))
     }*/
-    fun delEmail(id: String, nombre: String): Int{
-        val del1 = db.delete(tablaEmail, "$emailColumna1 =? AND $emailColumna2 =?", arrayOf(id, nombre))
-        val del2 = db.delete(tablaCuenta, "$cuentaColumna1 =?", arrayOf(id))
-        Log.i("DEL_EMAIL", del1.toString())
-        Log.i("DEL_EMAIL_ACC", del2.toString())
-        var totalDel = 0
-        if( del1!=0 && del2!=0 )
-            totalDel = 1
-        return totalDel
+    fun delEmail(id: String, nombre: String): Boolean{
+        resultEliminar = db.delete(tablaEmail, "$emailColumna1 =? AND $emailColumna2 =?", arrayOf(id, nombre))
+        return resultEliminar != 0
     }
-    fun delCuenta( id: String, tipo: String ): Int{
-        return db.delete(tablaCuenta, "$cuentaColumna1 =? AND $cuentaColumna4 =?", arrayOf(id, tipo))
+    fun delCuenta( id: String, tipo: String ): Boolean{
+        resultEliminar = db.delete(tablaCuenta, "$cuentaColumna1 =? AND $cuentaColumna4 =?", arrayOf(id, tipo))
+        return resultEliminar != 0
+    }
+    fun truncateTablePerParentDeleted(idParent: String, table: Int): Boolean{
+        when(table){
+            0 -> { resultEliminar = db.delete(tablaCuenta, "$cuentaColumna1 =?", arrayOf(idParent)) }
+            1 -> { resultEliminar = db.delete(tablaEmail, "$emailColumna1 =?", arrayOf(idParent)) }
+        }
+        return resultEliminar != 0
     }
 }

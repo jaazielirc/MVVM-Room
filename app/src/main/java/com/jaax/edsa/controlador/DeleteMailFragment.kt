@@ -32,9 +32,9 @@ class DeleteMailFragment( private val ID: String, private val nombre: String ): 
             .setMessage(msj)
             .setIcon(R.drawable.baseline_delete_black_18dp)
             .setPositiveButton("Eliminar") { _, _ ->
-                val del = eliminarEmail(email)
-                if( del != 0 ){
-                    toast.setText("El email se eliminó correctamente")
+                val delete = eliminarEmail(email)
+                if( delete ){
+                    toast.setText("Email eliminado")
                     toast.show()
                 } else {
                     toast.setText("Error al eliminar\nIntenta nuevamente")
@@ -58,20 +58,21 @@ class DeleteMailFragment( private val ID: String, private val nombre: String ): 
         callBack.refreshByDeleting()
     }
 
-    private fun eliminarEmail(delEmail: Email): Int {
+    private fun eliminarEmail(delEmail: Email): Boolean {
         val cursor = db.getDatosEmailById(delEmail.ID, delEmail.nombre) //debe haber sólo 1 email si existe
-        var eliminar = 0
+        val cursor2 = db.getCuentasById(delEmail.nombre)
+        var eliminar = false
+        var eliminar2 = false
         try {
-            if(cursor.count>0){
-                if( cursor.count>0 ){
-                    eliminar = db.delEmail(delEmail.ID, delEmail.nombre)
-                    return eliminar
-                } else {
-                    toast.setText("Ese email no existe (?")
-                    toast.show()
-                }
+            if(cursor.count>0){ eliminar = db.delEmail(delEmail.ID, delEmail.nombre) }
+
+            eliminar2 = if(cursor2.count>0){
+                db.truncateTablePerParentDeleted(delEmail.nombre, 0)
+            } else {
+                true //el email no tiene cuentas agregadas
             }
         }catch(sql: SQLiteException){sql.printStackTrace()}
-        return eliminar //== 0 -> no se pudo eliminar
+
+        return (eliminar && eliminar2)
     }
 }

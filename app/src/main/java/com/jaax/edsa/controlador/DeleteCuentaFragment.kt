@@ -34,8 +34,8 @@ class DeleteCuentaFragment(
             .setMessage("¿Eliminar ${cuenta.usuario}?")
             .setIcon(R.drawable.baseline_delete_black_18dp)
             .setPositiveButton("Eliminar") { _, _ ->
-                val del = eliminarCuenta(cuenta)
-                if( del != 0 ){
+                val delete = eliminarCuenta(cuenta)
+                if( delete ){
                     toast.setText("Cuenta eliminada")
                     toast.show()
                 } else {
@@ -48,9 +48,9 @@ class DeleteCuentaFragment(
         return builder.create()
     }
 
-    private fun eliminarCuenta(delCuenta: Cuenta): Int {
+    private fun eliminarCuenta(delCuenta: Cuenta): Boolean {
         val cursor = db.getDatosCuentaById(this.ID, this.type) //debe haber sólo 1 email si existe
-        var eliminar = 0
+        var eliminar = false
         try {
             if(cursor.count>0){
                 if( cursor.count>0 ){
@@ -62,7 +62,7 @@ class DeleteCuentaFragment(
                 }
             }
         }catch(sql: SQLiteException){sql.printStackTrace()}
-        return eliminar //== 0 -> no se pudo eliminar
+        return eliminar
     }
 
     override fun onDestroy() {
