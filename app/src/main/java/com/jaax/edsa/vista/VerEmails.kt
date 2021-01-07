@@ -49,7 +49,6 @@ class VerEmails: AppCompatActivity(),
         db = DBHelper(this.applicationContext, DBHelper.nombreDB, null, DBHelper.version)
         toast = Toast.makeText(this.applicationContext, "txt", Toast.LENGTH_LONG)
         toast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0)
-        supportActionBar?.title = "EDSA: $usuarioActual"
         prevPass = ArrayList(0)
     }
 
@@ -58,6 +57,7 @@ class VerEmails: AppCompatActivity(),
         val intent = intent.extras
         if( intent != null ) usuarioActual = intent.getString("usuarioActual")!!
         mostrarEmails()
+        supportActionBar?.title = "EDSA: $usuarioActual"
     }
 
     override fun onResume() {

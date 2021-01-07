@@ -7,4 +7,24 @@
     <string name="support_key2">Esta debe contener mínimo 6 caracteres, sin números y con al menos 1 caracter especial</string>
     <string name="support_npss">La contraseña nueva debe contener mínimo 8 caracteres, máximo 15 con al menos 1 letra mayúscula, 1 minúscula, 1 número y 1 caracter especial (,.-_*%)</string>
     <string name="support_ncpss">La contraseña confirmada debe coincidir con la contraseña nueva</string>
+    <string name="avanzar">Avanzar</string>
+    <string name="retroceder">Retroceder</string>
+    <string name="registrarme">Registrarme</string>
+    <string name="quees_txt1">¿Qué es EDSA?</string>
+    <string name="quees_txt2">Es una aplicación para gestionar de mejor manera tus correos electrónicos.</string>
+    <string name="funciona_txt1">¿Cómo funciona?</string>
+    <string name="funciona_txt2">a) Haz clic en agregar email</string>
+    <string name="funciona_txt3">b) Completa el formulario</string>
+    <string name="funcionb_txt1">
+        Nos interesa asignarle una cuenta al email agregado\n\n
+        c) Haz clic en \'Ver cuentas\'
+    </string>
+    <string name="funcionb_txt2">d) Haz clic en agregar cuenta</string>
+    <string name="funcionc_txt1">e) Completa el formulario</string>
+    <string name="funcionc_txt2">Puedes editar o eliminar la cuenta recién agregada</string>
+    <string name="goto_txt1">¡ Felicidades !</string>
+    <string name="goto_txt2">
+        Has concluido el tutorial\n\n
+        Ahora puedes comenzar a usar EDSA
+    </string>
 </resources>

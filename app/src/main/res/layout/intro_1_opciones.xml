@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/intro_imgedsa"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/edsalogo"
+        android:contentDescription="@string/app_name" />
+
+    <TextView
+        android:id="@+id/welcome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="¡Hola!\nElige una opción"
+        android:textColor="@color/blanco"
+        android:textSize="30sp"
+        android:gravity="center"
+        android:layout_below="@id/intro_imgedsa"/>
+
+    <Button
+        android:id="@+id/intro_goto_tutorial"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="Tomar el tutorial"
+        android:textAllCaps="false"
+        android:textColor="@color/txt_pressed_user_style"
+        android:background="@drawable/btn_goto_style"
+        android:layout_above="@id/intro_goto_registro"
+        android:layout_marginBottom="50dp"
+        android:elevation="5dp"
+        android:layout_centerHorizontal="true"/>
+
+    <Button
+        android:id="@+id/intro_goto_registro"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="Saltar a mi registro"
+        android:textAllCaps="false"
+        android:textColor="@color/txt_pressed_user_style"
+        android:background="@drawable/btn_goto_style"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="70dp"
+        android:elevation="5dp"
+        android:layout_centerHorizontal="true"/>
+</RelativeLayout>

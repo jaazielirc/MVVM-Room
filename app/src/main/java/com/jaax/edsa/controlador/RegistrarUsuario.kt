@@ -26,7 +26,7 @@ class RegistrarUsuario: AppCompatActivity() {
     @SuppressLint("ShowToast")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.reg_usuario)
+        setContentView(R.layout.add_usuario)
 
         supportActionBar!!.title = "Registrar usuario"
         user = findViewById(R.id.usr_reg_username)

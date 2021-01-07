@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+    android:id="@+id/funcionc_txt2"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="@string/funcionc_txt1"
+    android:textColor="@color/blanco"
+    android:textSize="23sp"
+    android:gravity="start"
+    android:layout_marginTop="15dp"
+    android:paddingStart="10dp"
+    android:paddingEnd="10dp"/>
+
+    <ImageView
+        android:id="@+id/funcionc_img1"
+        android:layout_width="wrap_content"
+        android:layout_height="220dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/edsa_tutorial_5"
+        android:layout_below="@id/funcionc_txt2"/>
+
+    <TextView
+        android:id="@+id/funcionc_txt3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/funcionc_txt2"
+        android:textColor="@color/blanco"
+        android:textSize="23sp"
+        android:gravity="start"
+        android:layout_marginTop="15dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:layout_below="@id/funcionc_img1"/>
+
+    <ImageView
+        android:id="@+id/funcionc_img2"
+        android:layout_width="250dp"
+        android:layout_height="200dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/edsa_tutorial_6"
+        android:layout_below="@id/funcionc_txt3"/>
+
+    <Button
+        android:id="@+id/funcionc_previous"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="@string/retroceder"
+        android:textAllCaps="false"
+        android:textColor="@color/txt_pressed_user_style"
+        android:background="@drawable/btn_previous_style"
+        android:elevation="5dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignEnd="@id/separacion"
+        android:layout_marginBottom="40dp"
+        android:layout_marginEnd="50dp"/>
+
+    <TextView
+        android:id="@+id/separacion"
+        android:layout_width="50dp"
+        android:layout_height="5dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/negro" />
+
+    <Button
+        android:id="@+id/funcionc_next"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="@string/avanzar"
+        android:textAllCaps="false"
+        android:textColor="@color/txt_pressed_user_style"
+        android:background="@drawable/btn_next_style"
+        android:elevation="5dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@id/separacion"
+        android:layout_marginStart="50dp"
+        android:layout_marginBottom="40dp"/>
+</RelativeLayout>

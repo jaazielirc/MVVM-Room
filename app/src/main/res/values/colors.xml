@@ -25,6 +25,9 @@
     <color name="naranja">#FEAE0E</color>
     <color name="mamey">#FF5733</color>
     <color name="aguamarina">#33FFBA</color>
+    <color name="salmon">#FA8072</color>
+    <color name="casi_salmon">#EDA0A0</color>
+    <color name="medio_salmon">#802E2E</color>
     <drawable name="item_pressed_lv">#B1BFBB</drawable>
     <drawable name="item_select_lv">#61F679</drawable>
 </resources>

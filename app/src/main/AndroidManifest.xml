@@ -29,6 +29,9 @@
         <activity android:name=".vista.VerEmails"
             android:theme="@style/EmailsStyle">
         </activity>
+        <activity android:name=".vista.Introduccion"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
     </application>
 
 </manifest>
