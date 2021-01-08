@@ -142,7 +142,7 @@ class DBHelper (
     }
 
     //--------- ACTUALIZAR ---------//
-    fun updtDatosUsuario(
+    fun updtPasswordUsuario(
         nombreActual: String,
         psswrdNuevo: String,
         keyActual: String): Boolean {
@@ -152,6 +152,20 @@ class DBHelper (
 
         resultActualizar = db.update(
             tablaUsuario, cv, "$usuarioColumna1 =? AND $usuarioColumna3 =?", arrayOf(nombreActual, keyActual)
+        )
+        return resultActualizar > 0
+    }
+
+    fun updtKeywordUsuario(
+        nombreActual: String,
+        psswrdActual: String,
+        keyNuevo: String): Boolean {
+        db = this.writableDatabase
+        cv = ContentValues()
+        cv.put(usuarioColumna3, keyNuevo)
+
+        resultActualizar = db.update(
+            tablaUsuario, cv, "$usuarioColumna1 =? AND $usuarioColumna2 =?", arrayOf(nombreActual, psswrdActual)
         )
         return resultActualizar > 0
     }

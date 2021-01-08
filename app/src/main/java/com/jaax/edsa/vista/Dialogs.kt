@@ -19,19 +19,6 @@ class SupportUser: DialogFragment(){
     }
 }
 
-class SupportNPss: DialogFragment(){
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val inflater = activity!!.layoutInflater
-        val view = inflater.inflate(R.layout.support_npss, null)
-
-        val builder = AlertDialog.Builder(activity)
-        builder
-            .setView(view)
-            .setPositiveButton("Entendido") { _, _ -> this.dismiss() }
-        return builder.create()
-    }
-}
-
 class ExitApp: DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val builder = AlertDialog.Builder(activity)

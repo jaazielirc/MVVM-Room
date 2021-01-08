@@ -7,32 +7,79 @@
 
     <ImageView
         android:id="@+id/imgthink"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         android:src="@drawable/thinkmoji"
         android:contentDescription="@string/app_name"
         android:layout_centerHorizontal="true"/>
 
     <ImageView
-        android:id="@+id/usr_updt_help"
+        android:id="@+id/edituser_help"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/baseline_help_black_18dp"
         android:layout_alignParentEnd="true"/>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/usr_updt_element1"
+    <TextView
+        android:id="@+id/txtrecuperar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/imgthink"
+        android:text="Cambiar"
+        android:textColor="@color/negro"
+        android:textSize="25sp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:layout_below="@id/imgthink"/>
+
+    <LinearLayout
+        android:id="@+id/linearradio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/txtrecuperar"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/edituser_radiopss"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Contraseña"
+            android:textAlignment="textStart"
+            android:textSize="17sp"
+            android:textColor="@color/negro"/>
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/edituser_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:checked="false"/>
+
+        <TextView
+            android:id="@+id/edituser_radiokey"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Palabra secreta"
+            android:textAlignment="textEnd"
+            android:textSize="17sp"
+            android:textColor="@color/negro"/>
+
+    </LinearLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/edituser_element1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/linearradio"
         android:paddingTop="20dp">
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/usr_updt_username"
-            android:layout_width="250dp"
+            android:id="@+id/edituser_username"
+            android:layout_width="300dp"
             android:layout_height="50dp"
             android:ems="10"
-            android:hint="Nombre de Usuario"
-            android:textColorHint="@color/azulCielo"
+            android:textColorHint="@color/negro"
             android:textSize="20sp"
             android:textColor="@color/blanco"
             android:layout_gravity="center"
@@ -41,38 +88,18 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/usr_updt_element2"
+        android:id="@+id/edituser_element2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/usr_updt_element1">
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/usr_updt_keyword"
-            android:layout_width="250dp"
-            android:layout_height="50dp"
-            android:ems="10"
-            android:hint="Palabra Secreta"
-            android:textColorHint="@color/azulCielo"
-            android:textSize="20sp"
-            android:textColor="@color/blanco"
-            android:layout_gravity="center"
-            android:singleLine="true"
-            android:inputType="textVisiblePassword"/>
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/usr_updt_element3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/usr_updt_element2"
+        android:layout_below="@id/edituser_element1"
         app:passwordToggleTint="@color/rosa"
         app:passwordToggleEnabled="true">
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/usr_updt_password"
-            android:layout_width="250dp"
+            android:id="@+id/edituser_credencial"
+            android:layout_width="300dp"
             android:layout_height="50dp"
             android:ems="10"
-            android:hint="Contraseña Nueva"
-            android:textColorHint="@color/azulCielo"
+            android:textColorHint="@color/negro"
             android:textSize="20sp"
             android:textColor="@color/blanco"
             android:layout_gravity="center"
@@ -81,28 +108,56 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/usr_updt_element4"
+        android:id="@+id/edituser_element3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/usr_updt_element3"
+        android:layout_below="@id/edituser_element2"
         app:passwordToggleTint="@color/rosa"
         app:passwordToggleEnabled="true">
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/usr_updt_npassword"
-            android:layout_width="250dp"
+            android:id="@+id/edituser_new_credencial"
+            android:layout_width="300dp"
             android:layout_height="50dp"
             android:ems="10"
-            android:hint="Confirmar Contraseña"
-            android:textColorHint="@color/azulCielo"
+            android:textColorHint="@color/negro"
             android:textSize="20sp"
             android:textColor="@color/blanco"
             android:layout_gravity="center"
             android:singleLine="true"
             android:inputType="textPassword"/>
     </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/edituser_element4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edituser_element3"
+        app:passwordToggleTint="@color/rosa"
+        app:passwordToggleEnabled="true">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edituser_confirmar_new_credencial"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:ems="10"
+            android:textColorHint="@color/negro"
+            android:textSize="20sp"
+            android:textColor="@color/blanco"
+            android:layout_gravity="center"
+            android:singleLine="true"
+            android:inputType="textPassword"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <ImageView
+        android:id="@+id/edituser_back"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/arrow_back_24px"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/btn_goto_style"/>
 
     <Button
-        android:id="@+id/usr_updt_btnActualizar"
+        android:id="@+id/edituser_btnActualizar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=" Actualizar "
@@ -113,5 +168,5 @@
         android:background="@drawable/btn_user_style"
         android:layout_centerHorizontal="true"
         android:elevation="5dp"
-        android:layout_below="@id/usr_updt_element4"/>
+        android:layout_below="@id/edituser_element4"/>
 </RelativeLayout>

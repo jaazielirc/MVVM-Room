@@ -22,7 +22,7 @@
         <activity android:name=".controlador.AddUsuario"
             android:theme="@style/AppTheme">
         </activity>
-        <activity android:name=".controlador.ActualizarPssUsuario"
+        <activity android:name=".controlador.UpdateUsuario"
             android:theme="@style/AppTheme">
         </activity>
         <activity android:name=".controlador.VerEmails"

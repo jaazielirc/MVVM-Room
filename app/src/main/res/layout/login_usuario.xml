@@ -88,7 +88,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:gravity="center_horizontal"
-        android:text="Olvidé mi contraseña"
+        android:text="Olvidé mis datos"
         android:textColor="@color/txt_pressed_user_style"
         android:textSize="20sp" />
 </RelativeLayout>

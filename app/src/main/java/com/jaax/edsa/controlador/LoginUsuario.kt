@@ -45,11 +45,9 @@ class LoginUsuario: AppCompatActivity() {
         txtForPsswrd = findViewById(R.id.main_forgotPassword)
         txtNewUser = findViewById(R.id.main_newuser)
         db = DBHelper(this.applicationContext, DBHelper.nombreDB, null, DBHelper.version)
-        toast = Toast.makeText(this.applicationContext, "txt", Toast.LENGTH_LONG)
+        toast = Toast.makeText(this.applicationContext, "txt", Toast.LENGTH_SHORT)
         toast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0)
         initUsuario()
-
-        edTxtPsswrd.setText("j44x.EDSA")
         edTxtUsuario.setText( usuarioActual.nombre )
     }
 
@@ -85,7 +83,10 @@ class LoginUsuario: AppCompatActivity() {
         }*/
 
         txtForPsswrd.setOnClickListener {
-            val intent = Intent(this.applicationContext, ActualizarPssUsuario::class.java)
+            val intent = Intent(this.applicationContext, UpdateUsuario::class.java)
+            intent.putExtra("Login_usrNombre", usuarioActual.nombre)
+            intent.putExtra("Login_usrPassword", usuarioActual.password)
+            intent.putExtra("Login_usrKeyword", usuarioActual.keyword)
             startActivity(intent)
             this.finish()
         }
