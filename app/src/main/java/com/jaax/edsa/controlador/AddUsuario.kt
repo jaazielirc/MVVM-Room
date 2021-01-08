@@ -37,9 +37,6 @@ class AddUsuario: AppCompatActivity() {
         help = findViewById(R.id.usr_reg_help)
         toast = Toast.makeText(this.applicationContext, "txt", Toast.LENGTH_LONG)
         db = DBHelper(this.applicationContext, DBHelper.nombreDB, null, DBHelper.version)
-        user.setText("jaax1")
-        psswrd.setText("j44x.EDSA")
-        keyword.setText("deve.loper")
     }
 
     override fun onResume() {

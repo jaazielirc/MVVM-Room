@@ -39,7 +39,7 @@ class DeleteMailFragment( emailForDelete: Email, usrForKeyword: Usuario): Dialog
     @SuppressLint("ShowToast")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val inflater = activity!!.layoutInflater
-        val view = inflater.inflate(R.layout.edit_account, null)
+        val view = inflater.inflate(R.layout.del_email, null)
         val builder = AlertDialog.Builder(activity)
 
         txtEmail = view.findViewById(R.id.deletequestion)
@@ -48,7 +48,8 @@ class DeleteMailFragment( emailForDelete: Email, usrForKeyword: Usuario): Dialog
         db = DBHelper(activity!!.applicationContext, DBHelper.nombreDB, null, DBHelper.version)
         toast = Toast.makeText(activity!!.applicationContext, "txt", Toast.LENGTH_SHORT)
         toast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0)
-        txtEmail.append("\n${email.nombre}?")
+        val del = "Eliminar ${email.nombre} ?"
+        txtEmail.text = del
         builder.setView(view)
         return builder.create()
     }
@@ -68,6 +69,10 @@ class DeleteMailFragment( emailForDelete: Email, usrForKeyword: Usuario): Dialog
                    toast.show()
                    this.dismiss()
                }
+            } else {
+                keyword.error = "!"
+                toast.setText("Verifica tus datos")
+                toast.show()
             }
         }
     }
@@ -89,7 +94,7 @@ class DeleteMailFragment( emailForDelete: Email, usrForKeyword: Usuario): Dialog
             if(cursor.count>0){ eliminar = db.delEmail(delEmail.ID, delEmail.nombre) }
 
             eliminar2 = if(cursor2.count>0){
-                db.truncateTablePerParentDeleted(delEmail.nombre, 0)
+                db.truncateTablePerParentDeleted(delEmail.nombre, 0) //elimina las cuentas por ID de Email
             } else {
                 true //el email no tiene cuentas agregadas
             }

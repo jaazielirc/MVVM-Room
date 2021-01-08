@@ -33,7 +33,7 @@ class DeleteCuentaFragment(cuentaForDelete: Cuenta, emailForReference: Email): D
 
         val builder = AlertDialog.Builder(activity)
         builder
-            .setMessage("¿Eliminar ${cuenta.usuario}?")
+            .setMessage("¿Eliminar\n${cuenta.usuario} : ${cuenta.tipo}?")
             .setIcon(R.drawable.baseline_delete_black_18dp)
             .setPositiveButton("Eliminar") { _, _ ->
                 val delete = eliminarCuenta(cuenta)

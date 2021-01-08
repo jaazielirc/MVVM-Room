@@ -16,6 +16,7 @@ import com.jaax.edsa.controlador.*
 import com.jaax.edsa.modelo.DBHelper
 import com.jaax.edsa.modelo.Email
 import com.jaax.edsa.R
+import com.jaax.edsa.modelo.Cuenta
 import com.jaax.edsa.modelo.Usuario
 import com.jaax.edsa.vista.ExitApp
 
@@ -139,10 +140,10 @@ class VerEmails: AppCompatActivity(),
                         ArrayList()
                     )
                     allEmails.add(email)
-                    usuarioActual.emails = allEmails
                 }
-                txtNoEmail.visibility = View.GONE
-                imgNoEmail.visibility = View.GONE
+                usuarioActual.emails = setMissingDataEmail(allEmails) //se agregan las cuentas que es el dato faltante de los Email
+                txtNoEmail.visibility = View.INVISIBLE
+                imgNoEmail.visibility = View.INVISIBLE
             }
             emailAdapter = EmailAdapter(this.applicationContext, allEmails)
             listaEmail.adapter = emailAdapter
@@ -165,16 +166,40 @@ class VerEmails: AppCompatActivity(),
                         ArrayList()
                     )
                     allEmails.add(email)
-                    usuarioActual.emails = allEmails
                 }
-                txtNoEmail.visibility = View.GONE
-                imgNoEmail.visibility = View.GONE
+                usuarioActual.emails = setMissingDataEmail(allEmails)
+                txtNoEmail.visibility = View.INVISIBLE
+                imgNoEmail.visibility = View.INVISIBLE
+            } else {
+                txtNoEmail.visibility = View.VISIBLE
+                imgNoEmail.visibility = View.VISIBLE
             }
             emailAdapter.emails.clear()
             emailAdapter.emails.addAll(allEmails)
             switchView.isChecked = false
             hideAndRefillPasswords(prevPass, emailAdapter, true)
         }catch (sql: SQLiteException){}
+    }
+
+    private fun setMissingDataEmail( allMails: ArrayList<Email> ): ArrayList<Email> {
+
+        for( i: Int in 0 until allMails.size ){ //recorrer cada email
+            val cursor = db.getCuentasById(allMails[i].nombre)
+            val listaCuentas = ArrayList<Cuenta>()
+            try { //no agrego 'if' xq si no tiene cuentas entonces no hay nada que cliquear
+                while( cursor.moveToNext() ) {
+                    val cuenta = Cuenta(
+                        cursor.getString(0),
+                        cursor.getString(1),
+                        cursor.getString(2),
+                        cursor.getString(3)
+                    )
+                    listaCuentas.add(cuenta)
+                    allMails[i].cuentas = listaCuentas
+                }
+            } catch(sqli: SQLiteException){ sqli.toString() }
+        }
+        return allMails
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

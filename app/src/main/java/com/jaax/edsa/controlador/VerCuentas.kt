@@ -3,6 +3,7 @@ package com.jaax.edsa.controlador
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.Dialog
+import android.database.sqlite.SQLiteException
 import android.os.Bundle
 import android.view.Gravity
 import android.view.View
@@ -67,6 +68,8 @@ class VerCuentas(emailElegido: Email): DialogFragment() {
         }
         listaCuentas.onItemLongClickListener = AdapterView.OnItemLongClickListener { _, view, pos, _ ->
             view?.isSelected = true
+            toast.setText("POSITION ITEM ${emailActual.cuentas.size}")
+            toast.show()
             val popupMenu = PopupMenu(this@VerCuentas.context, view)
             popupMenu.menuInflater.inflate(R.menu.opc_cuenta, popupMenu.menu)
             popupMenu.setOnMenuItemClickListener { item ->
@@ -109,11 +112,31 @@ class VerCuentas(emailElegido: Email): DialogFragment() {
                         )
                     allCuentas.add(cuenta)
                 }
+                emailActual = setMissingDataCuenta(emailActual)
                 txtNoAccount.visibility = View.GONE
                 imgNoAccount.visibility = View.GONE
             }
             cuentaAdapter = CuentaAdapter(activity!!.applicationContext, allCuentas)
             listaCuentas.adapter = cuentaAdapter
         }catch (sql: SQLException){}
+    }
+
+    private fun setMissingDataCuenta( currentEmail: Email ): Email {
+
+        val cursor = db.getCuentasById(currentEmail.nombre)
+        val listaCuentas = ArrayList<Cuenta>()
+        try { //no agrego 'if' xq si no tiene cuentas entonces no hay nada que cliquear
+            while( cursor.moveToNext() ) {
+                val cuenta = Cuenta(
+                    cursor.getString(0),
+                    cursor.getString(1),
+                    cursor.getString(2),
+                    cursor.getString(3)
+                )
+                listaCuentas.add(cuenta)
+                currentEmail.cuentas = listaCuentas
+            }
+        } catch(sqli: SQLiteException){ sqli.toString() }
+        return currentEmail
     }
 }

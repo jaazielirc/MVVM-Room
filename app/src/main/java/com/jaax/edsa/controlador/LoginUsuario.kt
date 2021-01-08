@@ -49,6 +49,7 @@ class LoginUsuario: AppCompatActivity() {
         toast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0)
         initUsuario()
         edTxtUsuario.setText( usuarioActual.nombre )
+        edTxtPsswrd.setText( usuarioActual.password )
     }
 
     override fun onResume() {
