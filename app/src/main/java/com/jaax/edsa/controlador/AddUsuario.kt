@@ -10,10 +10,11 @@ import androidx.appcompat.app.AppCompatActivity
 import com.jaax.edsa.modelo.DBHelper
 import com.jaax.edsa.modelo.Usuario
 import com.jaax.edsa.R
+import com.jaax.edsa.vista.ExitApp
 import com.jaax.edsa.vista.SupportUser
 import java.lang.NullPointerException
 
-class RegistrarUsuario: AppCompatActivity() {
+class AddUsuario: AppCompatActivity() {
     private lateinit var user: EditText
     private lateinit var psswrd: EditText
     private lateinit var keyword: EditText
@@ -34,9 +35,8 @@ class RegistrarUsuario: AppCompatActivity() {
         keyword = findViewById(R.id.usr_reg_keyword)
         btnReg = findViewById(R.id.usr_reg_btnRegistrar)
         help = findViewById(R.id.usr_reg_help)
-        db = DBHelper(this.applicationContext, DBHelper.nombreDB, null, DBHelper.version)
         toast = Toast.makeText(this.applicationContext, "txt", Toast.LENGTH_LONG)
-
+        db = DBHelper(this.applicationContext, DBHelper.nombreDB, null, DBHelper.version)
         user.setText("jaax1")
         psswrd.setText("j44x.EDSA")
         keyword.setText("deve.loper")
@@ -66,10 +66,12 @@ class RegistrarUsuario: AppCompatActivity() {
                             try {
                                 sleep(3000)
                             } finally {
-                                val intent = Intent(applicationContext, MainActivity::class.java)
-                                intent.putExtra("usuarioActual", usuario.nombre)
+                                val intent = Intent(applicationContext, LoginUsuario::class.java)
+                                intent.putExtra("usrNombre", usuario.nombre)
+                                intent.putExtra("usrPassword", usuario.password)
+                                intent.putExtra("usrKeyword", usuario.keyword)
                                 startActivity(intent)
-                                finish()
+                                this@AddUsuario.finish()
                             }
                         }
                     }
@@ -84,24 +86,10 @@ class RegistrarUsuario: AppCompatActivity() {
     }
 
     private fun registrarUsuario( user: Usuario ): Boolean{
-        val cursor = db.getAllUsuarios() //por si ya existe ese usuario
-        val listaUsrs = arrayListOf<String>()
-        var i = 0
         var insertar = false
         toast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0)
         try {
-            if( cursor.count>0 ){
-                while( cursor.moveToNext() ){
-                    listaUsrs.add(cursor.getString(0)) //llenar con usuarios si ya existen
-                    if( listaUsrs.get(i).equals(user.nombre) ){
-                        i = 0
-                        break
-                    }
-                    i++
-                }
-            } else insertar = db.insertarUsuario(user.nombre, user.password, user.keyword) //primer cuenta agregada
-            if( i != 0 ) insertar = db.insertarUsuario(user.nombre, user.password, user.keyword)
-
+            insertar = db.insertarUsuario(user.nombre, user.password, user.keyword)
         } catch (ne: NullPointerException){}
         return insertar
     }
@@ -140,9 +128,6 @@ class RegistrarUsuario: AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        super.onBackPressed()
-        val intent = Intent(this.applicationContext, MainActivity::class.java)
-        startActivity(intent)
-        this.finish()
+        ExitApp().show(supportFragmentManager, "ExitApp")
     }
 }

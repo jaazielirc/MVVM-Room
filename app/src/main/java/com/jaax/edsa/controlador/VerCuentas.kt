@@ -1,4 +1,4 @@
-package com.jaax.edsa.vista
+package com.jaax.edsa.controlador
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
@@ -13,9 +13,10 @@ import com.jaax.edsa.R
 import com.jaax.edsa.controlador.*
 import com.jaax.edsa.modelo.Cuenta
 import com.jaax.edsa.modelo.DBHelper
+import com.jaax.edsa.modelo.Email
 import java.sql.SQLException
 
-class VerCuentas(private val ID: String): DialogFragment() {
+class VerCuentas(emailElegido: Email): DialogFragment() {
     private lateinit var db: DBHelper
     private lateinit var addCuenta: FloatingActionButton
     private lateinit var listaCuentas: ListView
@@ -23,6 +24,11 @@ class VerCuentas(private val ID: String): DialogFragment() {
     private lateinit var imgNoAccount: ImageView
     private lateinit var toast: Toast
     private lateinit var cuentaAdapter: CuentaAdapter
+    private var emailActual: Email
+
+    init {
+        emailActual = emailElegido
+    }
 
     @SuppressLint("ShowToast")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -54,7 +60,7 @@ class VerCuentas(private val ID: String): DialogFragment() {
 
     private fun onClick() {
         addCuenta.setOnClickListener {
-            AddCuentaFragment(this.ID).show(
+            AddCuentaFragment(emailActual).show(
                 this@VerCuentas.activity!!.supportFragmentManager, "addAccount"
             )
             this@VerCuentas.dismiss()
@@ -66,21 +72,12 @@ class VerCuentas(private val ID: String): DialogFragment() {
             popupMenu.setOnMenuItemClickListener { item ->
                 when (item?.itemId) {
                     R.id.menu_edacc -> {
-                        val updt = UpdateCuentaFragment(
-                            this.ID,
-                            cuentaAdapter.cuentas[pos].usuario,
-                            cuentaAdapter.cuentas[pos].passwrd,
-                            cuentaAdapter.cuentas[pos].tipo
-                        )
+                        val updt = UpdateCuentaFragment(emailActual.cuentas[pos], emailActual)
                         updt.show(this@VerCuentas.activity!!.supportFragmentManager, "updateCuenta")
                         this@VerCuentas.dismiss()
                     }
                     R.id.menu_delacc -> {
-                        val del = DeleteCuentaFragment(
-                            this.ID,
-                            cuentaAdapter.cuentas[pos].usuario,
-                            cuentaAdapter.cuentas[pos].tipo,
-                        )
+                        val del = DeleteCuentaFragment(emailActual.cuentas[pos], emailActual)
                         del.show(this@VerCuentas.activity!!.supportFragmentManager, "delCuenta")
                         this@VerCuentas.dismiss()
                     }
@@ -101,11 +98,11 @@ class VerCuentas(private val ID: String): DialogFragment() {
     private fun mostrarCuentas(){
         val allCuentas = ArrayList<Cuenta>()
         try {
-            val cursor = db.getCuentasById(this.ID)
+            val cursor = db.getCuentasById(emailActual.nombre)
             if( cursor.count>0 ){
                 while(cursor.moveToNext()){
                     val cuenta = Cuenta(
-                        this.ID,
+                        emailActual.nombre,
                         cursor.getString(1),
                         cursor.getString(2),
                         cursor.getString(3)
@@ -119,26 +116,4 @@ class VerCuentas(private val ID: String): DialogFragment() {
             listaCuentas.adapter = cuentaAdapter
         }catch (sql: SQLException){}
     }
-    /*private fun refreshListAccounts(){
-        val allCuentas = ArrayList<Cuenta>()
-        try {
-            val cursor = db.getCuentasById(this.ID)
-            if( cursor.count>0 ){
-                while(cursor.moveToNext()){
-                    val cuenta = Cuenta(
-                        this.ID,
-                        cursor.getString(1),
-                        cursor.getString(2),
-                        cursor.getString(3)
-                    )
-                    allCuentas.add(cuenta)
-                }
-                txtNoAccount.visibility = View.GONE
-                imgNoAccount.visibility = View.GONE
-            }
-            cuentaAdapter.cuentas.clear()
-            cuentaAdapter.cuentas.addAll(allCuentas)
-            cuentaAdapter.notifyDataSetChanged()
-        }catch (sql: SQLException){}
-    }*/
 }

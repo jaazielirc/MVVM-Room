@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.jaax.edsa.R
-import com.jaax.edsa.controlador.MainActivity
+import com.jaax.edsa.controlador.AddUsuario
 
 class IntroOpcion1: Fragment() {
     private lateinit var btnTutorial: Button
@@ -51,7 +51,7 @@ class IntroOpcion1: Fragment() {
                 .addToBackStack("intro2")
                 .commit()
         } else {
-            val intent = Intent(activity!!.applicationContext, MainActivity::class.java)
+            val intent = Intent(activity!!.applicationContext, AddUsuario::class.java)
             startActivity(intent)
             manager.popBackStack("intro1", FragmentManager.POP_BACK_STACK_INCLUSIVE)
             activity!!.finish()

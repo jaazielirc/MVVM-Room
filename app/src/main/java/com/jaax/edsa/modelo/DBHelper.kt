@@ -13,8 +13,8 @@ class DBHelper (
     version: Int
 ): SQLiteOpenHelper(context, nombre, factory, version) {
 
-    private val db: SQLiteDatabase = this.writableDatabase
-    private val cv: ContentValues = ContentValues()
+    private lateinit var db: SQLiteDatabase
+    private lateinit var cv: ContentValues
     private var resultInsertar = 0L
     private var resultActualizar = 0
     private var resultEliminar = 0
@@ -74,6 +74,8 @@ class DBHelper (
 
     //--------- INSERTAR ---------//
     fun insertarUsuario(nombre: String, psswrd: String, keyword: String): Boolean {
+        db = this.writableDatabase
+        cv = ContentValues()
         cv.put(usuarioColumna1, nombre) //ID
         cv.put(usuarioColumna2, psswrd)
         cv.put(usuarioColumna3, keyword)
@@ -84,6 +86,8 @@ class DBHelper (
     }
 
     fun insertarEmail(id: String, nombre: String, psswrd: String): Boolean {
+        db = this.writableDatabase
+        cv = ContentValues()
         cv.put(emailColumna1, id) //debe ser el nombre de usuario
         cv.put(emailColumna2, nombre)
         cv.put(emailColumna3, psswrd)
@@ -94,6 +98,8 @@ class DBHelper (
     }
 
     fun insertarCuenta(id: String, nombre: String, psswrd: String, tipo: String): Boolean {
+        db = this.writableDatabase
+        cv = ContentValues()
         cv.put(cuentaColumna1, id)
         cv.put(cuentaColumna2, nombre)
         cv.put(cuentaColumna3, psswrd)
@@ -106,24 +112,30 @@ class DBHelper (
 
     //--------- LEER ---------//
     fun getAllUsuarios(): Cursor {
+        db = this.writableDatabase
         return db.rawQuery("SELECT * FROM $tablaUsuario", null)
     }
 
-    fun getUsuarioById(ID: String): Cursor {
+    /*fun getUsuarioById(ID: String): Cursor {
+        db = this.writableDatabase
         return db.rawQuery("SELECT * FROM $tablaUsuario WHERE $usuarioColumna1 =?", arrayOf(ID))
-    }
+    }*/
 
     fun getEmailsById(ID: String): Cursor { //datos de email por usuario
+        db = this.writableDatabase
         return db.rawQuery("SELECT * FROM $tablaEmail WHERE $emailColumna1 =?", arrayOf(ID))
     }
     fun getDatosEmailById(ID: String, nombre: String): Cursor { //datos de email individuales
+        db = this.writableDatabase
         return db.rawQuery("SELECT * FROM $tablaEmail WHERE $emailColumna1 =? AND $emailColumna2 =?", arrayOf(ID, nombre))
     }
 
     fun getCuentasById(ID: String): Cursor {
+        db = this.writableDatabase
         return db.rawQuery("SELECT * FROM $tablaCuenta WHERE $cuentaColumna1 =?", arrayOf(ID))
     }
     fun getDatosCuentaById(ID: String, tipo: String): Cursor {
+        db = this.writableDatabase
         return db.rawQuery(
             "SELECT * FROM $tablaCuenta WHERE $cuentaColumna1 =? AND $cuentaColumna4 =?", arrayOf(ID, tipo)
         )
@@ -134,6 +146,8 @@ class DBHelper (
         nombreActual: String,
         psswrdNuevo: String,
         keyActual: String): Boolean {
+        db = this.writableDatabase
+        cv = ContentValues()
         cv.put(usuarioColumna2, psswrdNuevo)
 
         resultActualizar = db.update(
@@ -148,6 +162,8 @@ class DBHelper (
         nombreNuevo: String,
         psswrdNuevo: String,
     ): Boolean {
+        db = this.writableDatabase
+        cv = ContentValues()
         cv.put(emailColumna2, nombreNuevo)
         cv.put(emailColumna3, psswrdNuevo)
 
@@ -167,6 +183,8 @@ class DBHelper (
         tipoActual: String,
         tipoNuevo: String
     ): Boolean {
+        db = this.writableDatabase
+        cv = ContentValues()
         cv.put(cuentaColumna2, nombreNuevo)
         cv.put(cuentaColumna3, psswrdNuevo)
         cv.put(cuentaColumna4, tipoNuevo)
@@ -180,6 +198,8 @@ class DBHelper (
     }
 
     fun updateChildIdPerParentId(idActual: String, newId: String, table: Int): Boolean{
+        db = this.writableDatabase
+        cv = ContentValues()
         when(table){
             0 -> {
                 cv.put(cuentaColumna1, newId)
@@ -202,14 +222,17 @@ class DBHelper (
                 "$usuarioColumna3 =?", arrayOf(nombre, psswrd, keyword))
     }*/
     fun delEmail(id: String, nombre: String): Boolean{
+        db = this.writableDatabase
         resultEliminar = db.delete(tablaEmail, "$emailColumna1 =? AND $emailColumna2 =?", arrayOf(id, nombre))
         return resultEliminar != 0
     }
     fun delCuenta( id: String, tipo: String ): Boolean{
+        db = this.writableDatabase
         resultEliminar = db.delete(tablaCuenta, "$cuentaColumna1 =? AND $cuentaColumna4 =?", arrayOf(id, tipo))
         return resultEliminar != 0
     }
     fun truncateTablePerParentDeleted(idParent: String, table: Int): Boolean{
+        db = this.writableDatabase
         when(table){
             0 -> { resultEliminar = db.delete(tablaCuenta, "$cuentaColumna1 =?", arrayOf(idParent)) }
             1 -> { resultEliminar = db.delete(tablaEmail, "$emailColumna1 =?", arrayOf(idParent)) }

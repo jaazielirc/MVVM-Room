@@ -12,10 +12,11 @@ import androidx.fragment.app.DialogFragment
 import com.jaax.edsa.modelo.DBHelper
 import com.jaax.edsa.modelo.Email
 import com.jaax.edsa.R
+import com.jaax.edsa.modelo.Usuario
 import java.lang.ClassCastException
 import java.sql.SQLException
 
-class AddMailFragment(private val ID: String): DialogFragment(){
+class AddMailFragment(usuarioPadre: Usuario): DialogFragment(){
     private lateinit var db: DBHelper
     private lateinit var toast: Toast
     private lateinit var email: Email
@@ -23,6 +24,11 @@ class AddMailFragment(private val ID: String): DialogFragment(){
     private lateinit var edTxtPsswrd: EditText
     private lateinit var btnAgregar: Button
     private lateinit var callBack: OnCallbackReceivedAdd
+    private var usuario: Usuario
+
+    init {
+        this.usuario = usuarioPadre
+    }
 
     @SuppressLint("ShowToast")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -58,7 +64,7 @@ class AddMailFragment(private val ID: String): DialogFragment(){
         btnAgregar.setOnClickListener {
             val edTextUser = edTxtEmail.text.toString()
             val edTextPass = edTxtPsswrd.text.toString()
-            email = Email(this.ID, edTextUser, edTextPass, ArrayList())
+            email = Email(usuario.nombre, edTextUser, edTextPass, ArrayList())
             val acceso = datosValidos(email.nombre, email.passwrd)
 
             if(acceso){

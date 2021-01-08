@@ -3,7 +3,6 @@ package com.jaax.edsa.controlador
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.Dialog
-import android.database.sqlite.SQLiteException
 import android.os.Bundle
 import android.view.Gravity
 import android.widget.Button
@@ -18,11 +17,9 @@ import com.jaax.edsa.R
 import java.lang.ClassCastException
 import java.sql.SQLException
 
-class UpdateMailFragment(private val ID: String): DialogFragment(){
+class UpdateMailFragment( emailForUpdate: Email, usrForKeyword: Usuario): DialogFragment(){
     private lateinit var db: DBHelper
     private lateinit var toast: Toast
-    private lateinit var email: Email
-    private lateinit var usuario: Usuario
     private lateinit var edTxtEmail: EditText
     private lateinit var edTxtPsswrd: EditText
     private lateinit var edTxtKeyword: EditText
@@ -32,6 +29,13 @@ class UpdateMailFragment(private val ID: String): DialogFragment(){
     private lateinit var bundleN: String
     private lateinit var bundleP: String
     private lateinit var callBack: OnCallbackReceivedEdit
+    private var email: Email
+    private var usuario: Usuario
+
+    init {
+        this.email = emailForUpdate
+        this.usuario = usrForKeyword
+    }
 
     @SuppressLint("ShowToast")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -74,9 +78,6 @@ class UpdateMailFragment(private val ID: String): DialogFragment(){
             bundleP = arguments?.getString("bundleEmailPsswrd")!!
             edTxtEmail.setText( bundleN )
             edTxtPsswrd.setText( bundleP )
-
-            email = Email(this.ID, bundleN, bundleP, ArrayList())
-            usuario = getDatosUsuario(email.ID)
         }
     }
 
@@ -125,22 +126,6 @@ class UpdateMailFragment(private val ID: String): DialogFragment(){
                 edTxtPsswrd.isEnabled = false
             }
         }
-    }
-
-    private fun getDatosUsuario(iduser: String): Usuario {
-        val cursor = db.getUsuarioById(iduser)
-        val usr = Usuario("?", "?", "?", ArrayList())
-        try {
-            if( cursor.count>0 ){ //si existe el usuario
-                while( cursor.moveToNext() ){
-                    usr.nombre = cursor.getString(0)
-                    usr.password = cursor.getString(1)
-                    usr.keyword = cursor.getString(2)
-                }
-                return usr
-            }
-        }catch (exc: SQLiteException){}
-        return usr
     }
 
     private fun modificarEmail(emailAddress: Email, newEmailAddrss: Email): Boolean{

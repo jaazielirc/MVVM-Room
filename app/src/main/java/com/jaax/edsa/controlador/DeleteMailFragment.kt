@@ -6,48 +6,70 @@ import android.app.Dialog
 import android.database.sqlite.SQLiteException
 import android.os.Bundle
 import android.view.Gravity
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.jaax.edsa.modelo.DBHelper
 import com.jaax.edsa.modelo.Email
 import com.jaax.edsa.R
+import com.jaax.edsa.modelo.Usuario
 import java.lang.ClassCastException
 
-class DeleteMailFragment( private val ID: String, private val nombre: String ): DialogFragment(){
+class DeleteMailFragment( emailForDelete: Email, usrForKeyword: Usuario): DialogFragment(){
     private lateinit var db: DBHelper
     private lateinit var toast: Toast
-    private lateinit var email: Email
+    private lateinit var txtEmail: TextView
+    private lateinit var keyword: EditText
+    private lateinit var btnDelete: Button
     private lateinit var callBack: OnCallbackReceivedDel
+    private var email: Email
+    private var usuario: Usuario
 
-    @SuppressLint("ShowToast")
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        db = DBHelper(activity!!.applicationContext, DBHelper.nombreDB, null, DBHelper.version)
-        toast = Toast.makeText(activity!!.applicationContext, "txt", Toast.LENGTH_SHORT)
-        toast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0)
-        email = Email(ID, nombre, "", ArrayList())
-        val msj = "También se eliminarán las cuentas asociadas"
-        val builder = AlertDialog.Builder(activity)
-        builder
-            .setTitle("¿Eliminar ${email.nombre}?")
-            .setMessage(msj)
-            .setIcon(R.drawable.baseline_delete_black_18dp)
-            .setPositiveButton("Eliminar") { _, _ ->
-                val delete = eliminarEmail(email)
-                if( delete ){
-                    toast.setText("Email eliminado")
-                    toast.show()
-                } else {
-                    toast.setText("Error al eliminar\nIntenta nuevamente")
-                    toast.show()
-                }
-            }
-            .setNegativeButton("Cancelar") {_, _ -> dismiss() }
-
-        return builder.create()
+    init {
+        this.email = emailForDelete
+        this.usuario = usrForKeyword
     }
 
     interface OnCallbackReceivedDel {
         fun refreshByDeleting()
+    }
+
+    @SuppressLint("ShowToast")
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        val inflater = activity!!.layoutInflater
+        val view = inflater.inflate(R.layout.edit_account, null)
+        val builder = AlertDialog.Builder(activity)
+
+        txtEmail = view.findViewById(R.id.deletequestion)
+        keyword = view.findViewById(R.id.email_del_keyword)
+        btnDelete = view.findViewById(R.id.email_del_btnEliminar)
+        db = DBHelper(activity!!.applicationContext, DBHelper.nombreDB, null, DBHelper.version)
+        toast = Toast.makeText(activity!!.applicationContext, "txt", Toast.LENGTH_SHORT)
+        toast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0)
+        txtEmail.append("\n${email.nombre}?")
+        builder.setView(view)
+        return builder.create()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        btnDelete.setOnClickListener {
+            val keyTyped = keyword.text.toString()
+            if( usuario.keyword==keyTyped ){
+               val deleteOk = eliminarEmail(email)
+               if( deleteOk ){
+                   toast.setText("Email eliminado")
+                   toast.show()
+                   this.dismiss()
+               } else {
+                   toast.setText("Error al eliminar")
+                   toast.show()
+                   this.dismiss()
+               }
+            }
+        }
     }
 
     override fun onDestroy() {

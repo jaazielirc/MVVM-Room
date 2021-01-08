@@ -1,7 +1,6 @@
-package com.jaax.edsa.vista
+package com.jaax.edsa.controlador
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.database.sqlite.SQLiteException
 import android.os.Bundle
 import android.view.Gravity
@@ -17,6 +16,8 @@ import com.jaax.edsa.controlador.*
 import com.jaax.edsa.modelo.DBHelper
 import com.jaax.edsa.modelo.Email
 import com.jaax.edsa.R
+import com.jaax.edsa.modelo.Usuario
+import com.jaax.edsa.vista.ExitApp
 
 class VerEmails: AppCompatActivity(),
     AddMailFragment.OnCallbackReceivedAdd,
@@ -33,8 +34,17 @@ class VerEmails: AppCompatActivity(),
     private lateinit var prevPass: ArrayList<String>
     private lateinit var switchView: SwitchCompat
     private lateinit var swipeRefresh: SwipeRefreshLayout
+    private lateinit var usuarioActual: Usuario
 
-    private var usuarioActual = "abc123"
+    private fun initUsuarioLogueado(){
+        val datosUsuario = this.intent.extras
+        usuarioActual = Usuario(
+            datosUsuario?.getString("Login_usrNombre")!!,
+            datosUsuario.getString("Login_usrPassword")!!,
+            datosUsuario.getString("Login_usrKeyword")!!,
+            ArrayList() //en mostrar emails se actualizan este valor
+        )
+    }
 
     @SuppressLint("ShowToast")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,14 +60,14 @@ class VerEmails: AppCompatActivity(),
         toast = Toast.makeText(this.applicationContext, "txt", Toast.LENGTH_LONG)
         toast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0)
         prevPass = ArrayList(0)
+
+        initUsuarioLogueado()
     }
 
     override fun onStart() {
         super.onStart()
-        val intent = intent.extras
-        if( intent != null ) usuarioActual = intent.getString("usuarioActual")!!
         mostrarEmails()
-        supportActionBar?.title = "EDSA: $usuarioActual"
+        supportActionBar?.title = "Emails de: ${this.usuarioActual.nombre}"
     }
 
     override fun onResume() {
@@ -82,13 +92,13 @@ class VerEmails: AppCompatActivity(),
                 popupMenu.setOnMenuItemClickListener { item ->
                     when (item?.itemId) {
                         R.id.menu_cuentas -> {
-                            VerCuentas(emailAdapter.emails[pos].nombre).show(this@VerEmails.supportFragmentManager, "verCuentas")
+                            VerCuentas(usuarioActual.emails[pos]).show(this@VerEmails.supportFragmentManager, "verCuentas")
                         }
                         R.id.menu_editmail -> {
-                            val updt = UpdateMailFragment(usuarioActual)
+                            val updt = UpdateMailFragment(usuarioActual.emails[pos], usuarioActual)
                             val bundle = Bundle()
-                            val bundleNombre = emailAdapter.emails[pos].nombre
-                            val bundlePsswrd = emailAdapter.emails[pos].passwrd
+                            val bundleNombre = usuarioActual.emails[pos].nombre
+                            val bundlePsswrd = usuarioActual.emails[pos].passwrd
                             updt.arguments = bundle
                             bundle.putString("bundleEmailNombre", bundleNombre)
                             bundle.putString("bundleEmailPsswrd", bundlePsswrd)
@@ -96,8 +106,8 @@ class VerEmails: AppCompatActivity(),
                         }
                         R.id.menu_delemail -> {
                             DeleteMailFragment(
-                                emailAdapter.emails[pos].ID,
-                                emailAdapter.emails[pos].nombre
+                                usuarioActual.emails[pos],
+                                usuarioActual
                             ).show(this@VerEmails.supportFragmentManager, "deleteEmail")
                         }
                     }
@@ -116,17 +126,20 @@ class VerEmails: AppCompatActivity(),
 
     private fun mostrarEmails() {
         val allEmails = ArrayList<Email>()
+        var i = 0
         try {
-            val cursor = db.getEmailsById(this.usuarioActual)
+            val cursor = db.getEmailsById(usuarioActual.nombre)
             if( cursor.count>0 ){
                 while(cursor.moveToNext()){
+                    i++
                     val email = Email(
-                        this.usuarioActual,
+                        usuarioActual.nombre,
                         cursor.getString(1),
                         cursor.getString(2),
                         ArrayList()
                     )
                     allEmails.add(email)
+                    usuarioActual.emails = allEmails
                 }
                 txtNoEmail.visibility = View.GONE
                 imgNoEmail.visibility = View.GONE
@@ -140,16 +153,19 @@ class VerEmails: AppCompatActivity(),
     private fun refreshListEmails(){
         val allEmails = ArrayList<Email>()
         try {
-            val cursor = db.getEmailsById(this.usuarioActual)
+            val cursor = db.getEmailsById(usuarioActual.nombre)
+            var i = 0
             if( cursor.count>0 ){
                 while(cursor.moveToNext()){
+                    i++
                     val email = Email(
-                        this.usuarioActual,
+                        usuarioActual.nombre,
                         cursor.getString(1),
                         cursor.getString(2),
                         ArrayList()
                     )
                     allEmails.add(email)
+                    usuarioActual.emails = allEmails
                 }
                 txtNoEmail.visibility = View.GONE
                 imgNoEmail.visibility = View.GONE
@@ -211,9 +227,6 @@ class VerEmails: AppCompatActivity(),
     override fun refreshByDeleting() { refreshListEmails() }
 
     override fun onBackPressed() {
-        super.onBackPressed()
-        val intent = Intent(this.applicationContext, MainActivity::class.java)
-        startActivity(intent)
-        this.finish()
+        ExitApp().show(supportFragmentManager, "ExitApp")
     }
 }

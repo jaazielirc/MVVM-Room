@@ -12,10 +12,9 @@ import android.widget.Toast
 import com.jaax.edsa.modelo.DBHelper
 import com.jaax.edsa.modelo.Usuario
 import com.jaax.edsa.R
-import com.jaax.edsa.vista.VerEmails
 import java.lang.NullPointerException
 
-class MainActivity : AppCompatActivity() {
+class LoginUsuario: AppCompatActivity() {
     private lateinit var txtForPsswrd: TextView
     private lateinit var txtNewUser: TextView
     private lateinit var btnAcceder: Button
@@ -23,12 +22,22 @@ class MainActivity : AppCompatActivity() {
     private lateinit var edTxtPsswrd: EditText
     private lateinit var db: DBHelper
     private lateinit var toast: Toast
-    private var usuarioActual = "abc123"
+    private lateinit var usuarioActual: Usuario
+
+    private fun initUsuario() {
+        val datosUsuario = this.intent.extras
+        usuarioActual = Usuario(
+            datosUsuario?.getString("usrNombre")!!,
+            datosUsuario.getString("usrPassword")!!,
+            datosUsuario.getString("usrKeyword")!!,
+            ArrayList()
+        )
+    }
 
     @SuppressLint("ShowToast")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.login_usuario)
 
         edTxtUsuario = findViewById(R.id.main_loginUsername)
         edTxtPsswrd = findViewById(R.id.main_loginPassword)
@@ -38,18 +47,10 @@ class MainActivity : AppCompatActivity() {
         db = DBHelper(this.applicationContext, DBHelper.nombreDB, null, DBHelper.version)
         toast = Toast.makeText(this.applicationContext, "txt", Toast.LENGTH_LONG)
         toast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0)
+        initUsuario()
 
-        edTxtUsuario.setText("jaax1")
         edTxtPsswrd.setText("j44x.EDSA")
-    }
-
-    override fun onStart() {
-        super.onStart()
-        val intent = intent.extras
-        if( intent != null ){
-            this.usuarioActual = intent.getString("usuarioActual")!!
-            edTxtUsuario.setText( this.usuarioActual )
-        }
+        edTxtUsuario.setText( usuarioActual.nombre )
     }
 
     override fun onResume() {
@@ -57,25 +58,31 @@ class MainActivity : AppCompatActivity() {
         btnAcceder.setOnClickListener {
             val usr = edTxtUsuario.text.toString()
             val pss = edTxtPsswrd.text.toString()
-            val usuario = Usuario(usr, pss, "", ArrayList())
-            val acceso = verificarLogin( usuario.nombre, usuario.password )
+            usuarioActual.nombre = usr
+            usuarioActual.password = pss
+
+            val acceso = verificarLogin( usuarioActual.nombre, usuarioActual.password )
 
             if( acceso ){
                 val intent = Intent(this.applicationContext, VerEmails::class.java)
-                intent.putExtra("usuarioActual", usr)
+                toast.setText("Bienvenid@")
+                toast.show()
+                intent.putExtra("Login_usrNombre", usuarioActual.nombre)
+                intent.putExtra("Login_usrPassword", usuarioActual.password)
+                intent.putExtra("Login_usrKeyword", usuarioActual.keyword)
                 startActivity(intent)
                 this.finish()
             } else {
-                toast.setText("Usuario no encontrado")
+                toast.setText("Revisa tus datos")
                 toast.show()
             }
         }
 
-        txtNewUser.setOnClickListener {
-            val intent = Intent(this.applicationContext, RegistrarUsuario::class.java)
+        /*txtNewUser.setOnClickListener {
+            val intent = Intent(this.applicationContext, AddUsuario::class.java)
             startActivity(intent)
             this.finish()
-        }
+        }*/
 
         txtForPsswrd.setOnClickListener {
             val intent = Intent(this.applicationContext, ActualizarPssUsuario::class.java)
@@ -87,32 +94,23 @@ class MainActivity : AppCompatActivity() {
     private fun verificarLogin( usuario: String, psswrd: String ): Boolean{
         try {
             val cursor = db.getAllUsuarios()
-            var i = 0
+
             if( usuario=="" || psswrd=="" ){
                 toast.setText("Uno o más campos están vacíos")
                 toast.show()
                 return false
             } else {
-                if( cursor.count>0 ){
-                    val allUsers = arrayListOf<String>()
-                    val allPsswrd = arrayListOf<String>()
+                if( cursor.count>0 ){ //debería existir sólo 1 usuario si ya se registró
                     while(cursor.moveToNext()){
-                        allUsers.add(cursor.getString(0))
-                        allPsswrd.add(cursor.getString(1))
-                        if( allUsers.get(i).equals(usuario) && allPsswrd.get(i).equals(psswrd) ){
-                            this.usuarioActual = usuario
-                            return true
-                        }
-                        i++
+                        //sólo tendrá un valor porque sólo se puede registrar un usuario por app
+                        val usrYaRegistrado = cursor.getString(0)
+                        val pssYaRegistrada = cursor.getString(1)
+
+                        return (usrYaRegistrado==usuario && pssYaRegistrada==psswrd)
                     }
                 } else return false
             }
         } catch (excp: NullPointerException){}
         return false
-    }
-
-    override fun onBackPressed() {
-        super.onBackPressed()
-        this.finish()
     }
 }

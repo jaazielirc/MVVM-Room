@@ -11,23 +11,25 @@ import androidx.fragment.app.DialogFragment
 import com.jaax.edsa.R
 import com.jaax.edsa.modelo.Cuenta
 import com.jaax.edsa.modelo.DBHelper
-import com.jaax.edsa.vista.VerCuentas
+import com.jaax.edsa.modelo.Email
 
-class DeleteCuentaFragment(
-    private val ID: String,
-    private val user: String,
-    private val type: String ): DialogFragment() {
+class DeleteCuentaFragment(cuentaForDelete: Cuenta, emailForReference: Email): DialogFragment() {
 
     private lateinit var db: DBHelper
     private lateinit var toast: Toast
-    private lateinit var cuenta: Cuenta
+    private var cuenta: Cuenta
+    private var email: Email
+
+    init {
+        this.cuenta = cuentaForDelete
+        this.email = emailForReference
+    }
 
     @SuppressLint("ShowToast")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         db = DBHelper(activity!!.applicationContext, DBHelper.nombreDB, null, DBHelper.version)
         toast = Toast.makeText(activity!!.applicationContext, "txt", Toast.LENGTH_SHORT)
         toast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0)
-        cuenta = Cuenta(this.ID, this.user, "", this.type)
 
         val builder = AlertDialog.Builder(activity)
         builder
@@ -49,7 +51,7 @@ class DeleteCuentaFragment(
     }
 
     private fun eliminarCuenta(delCuenta: Cuenta): Boolean {
-        val cursor = db.getDatosCuentaById(this.ID, this.type) //debe haber sólo 1 email si existe
+        val cursor = db.getDatosCuentaById(delCuenta.ID, delCuenta.tipo) //debe haber sólo 1 email si existe
         var eliminar = false
         try {
             if(cursor.count>0){
@@ -67,7 +69,7 @@ class DeleteCuentaFragment(
 
     override fun onDestroy() {
         super.onDestroy()
-        VerCuentas(this.ID).show(
+        VerCuentas(email).show(
             this@DeleteCuentaFragment.activity!!.supportFragmentManager, "delCuenta"
         )
     }

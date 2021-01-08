@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.jaax.edsa.R
-import com.jaax.edsa.controlador.MainActivity
+import com.jaax.edsa.controlador.AddUsuario
 
 class IntroOpcion6: Fragment() {
     private lateinit var btnPrevious: Button
@@ -42,7 +42,7 @@ class IntroOpcion6: Fragment() {
 
     private fun gotoNextFragment( go: Boolean ){
         if( go ){
-            val intent = Intent(activity!!.applicationContext, MainActivity::class.java)
+            val intent = Intent(activity!!.applicationContext, AddUsuario::class.java)
             startActivity(intent)
             manager.popBackStack("intro6", FragmentManager.POP_BACK_STACK_INCLUSIVE)
             activity!!.finish()

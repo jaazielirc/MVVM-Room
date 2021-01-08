@@ -13,9 +13,9 @@ import androidx.fragment.app.DialogFragment
 import com.jaax.edsa.R
 import com.jaax.edsa.modelo.Cuenta
 import com.jaax.edsa.modelo.DBHelper
-import com.jaax.edsa.vista.VerCuentas
+import com.jaax.edsa.modelo.Email
 
-class AddCuentaFragment(private val ID: String): DialogFragment() {
+class AddCuentaFragment(emailPadre: Email): DialogFragment() {
     private lateinit var db: DBHelper
     private lateinit var toast: Toast
     private lateinit var cuenta: Cuenta
@@ -23,6 +23,11 @@ class AddCuentaFragment(private val ID: String): DialogFragment() {
     private lateinit var edTxtPsswrd: EditText
     private lateinit var edTxtTipo: EditText
     private lateinit var btnAgregar: Button
+    private var email: Email
+
+    init {
+        this.email = emailPadre
+    }
 
     @SuppressLint("ShowToast")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -37,7 +42,7 @@ class AddCuentaFragment(private val ID: String): DialogFragment() {
         db = DBHelper(activity!!.applicationContext, DBHelper.nombreDB, null, DBHelper.version)
         toast = Toast.makeText(activity!!.applicationContext, "txt", Toast.LENGTH_SHORT)
         toast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0)
-        edTxtUser.setText(this.ID)
+        edTxtUser.setText(email.nombre)
         builder.setView(view)
 
         return builder.create()
@@ -49,7 +54,7 @@ class AddCuentaFragment(private val ID: String): DialogFragment() {
             val user = edTxtUser.text.toString()
             val pass = edTxtPsswrd.text.toString()
             val type = edTxtTipo.text.toString()
-            cuenta = Cuenta(this.ID, user, pass, type)
+            cuenta = Cuenta(email.nombre, user, pass, type)
             val acceso = datosValidos(cuenta.usuario, cuenta.tipo)
 
             if( acceso ){
@@ -118,7 +123,7 @@ class AddCuentaFragment(private val ID: String): DialogFragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-        VerCuentas(this.ID).show(
+        VerCuentas(email).show(
             this@AddCuentaFragment.activity!!.supportFragmentManager, "verCuentas"
         )
     }

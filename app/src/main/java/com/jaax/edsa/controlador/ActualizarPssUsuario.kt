@@ -65,7 +65,7 @@ class ActualizarPssUsuario: AppCompatActivity() {
                             try {
                                 sleep(3000)
                             } finally {
-                                val intent = Intent(applicationContext, MainActivity::class.java)
+                                val intent = Intent(applicationContext, LoginUsuario::class.java)
                                 intent.putExtra("usuarioActual", usuario.nombre)
                                 startActivity(intent)
                                 finish()
@@ -90,7 +90,7 @@ class ActualizarPssUsuario: AppCompatActivity() {
                 while( cursor.moveToNext() ){
                     listUsrs.add(cursor.getString(0))
                     listKeys.add(cursor.getString(2))
-                    if( listUsrs.get(i).equals(user.nombre) && listKeys.get(i).equals(user.keyword) ){
+                    if( listUsrs[i]==user.nombre && listKeys[i]==user.keyword ){
                         update = db.updtDatosUsuario(user.nombre, user.password, user.keyword)
                         break
                     }
@@ -155,7 +155,7 @@ class ActualizarPssUsuario: AppCompatActivity() {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        val intent = Intent(this.applicationContext, MainActivity::class.java)
+        val intent = Intent(this.applicationContext, LoginUsuario::class.java)
         startActivity(intent)
         this.finish()
     }

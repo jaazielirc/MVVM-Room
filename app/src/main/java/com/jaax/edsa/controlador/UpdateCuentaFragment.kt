@@ -13,18 +13,13 @@ import androidx.fragment.app.DialogFragment
 import com.jaax.edsa.R
 import com.jaax.edsa.modelo.Cuenta
 import com.jaax.edsa.modelo.DBHelper
-import com.jaax.edsa.vista.VerCuentas
+import com.jaax.edsa.modelo.Email
 import java.sql.SQLException
 
-class UpdateCuentaFragment(
-    private val ID: String,
-    private val user: String,
-    private val psswrd: String,
-    private val type: String ): DialogFragment() {
+class UpdateCuentaFragment(cuentaForUpdate: Cuenta, emailForReference: Email): DialogFragment() {
 
     private lateinit var db: DBHelper
     private lateinit var toast: Toast
-    private lateinit var cuenta: Cuenta
     private lateinit var edTxtUsuario: EditText
     private lateinit var edTxtPsswrd: EditText
     private lateinit var edTxtTipo: EditText
@@ -32,6 +27,13 @@ class UpdateCuentaFragment(
     private lateinit var toggleUser: ToggleButton
     private lateinit var togglePsswrd: ToggleButton
     private lateinit var toggleTipo: ToggleButton
+    private var cuenta: Cuenta
+    private var email: Email
+
+    init {
+        this.cuenta = cuentaForUpdate
+        this.email = emailForReference
+    }
 
     @SuppressLint("ShowToast")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -60,8 +62,6 @@ class UpdateCuentaFragment(
     }
 
     private fun initDatos() {
-        cuenta = Cuenta(this.ID, this.user, this.psswrd, this.type)
-
         edTxtUsuario.setText( cuenta.usuario )
         edTxtPsswrd.setText( cuenta.passwrd )
         edTxtTipo.setText( cuenta.tipo )
@@ -72,7 +72,7 @@ class UpdateCuentaFragment(
             val edTextUser = edTxtUsuario.text.toString()
             val edTextPass = edTxtPsswrd.text.toString()
             val edTextType = edTxtTipo.text.toString()
-            val newCuenta = Cuenta( this.ID, edTextUser, edTextPass, edTextType )
+            val newCuenta = Cuenta( cuenta.ID, edTextUser, edTextPass, edTextType )
 
             /*Log.i("OrigiEmail", "${email.ID} - ${email.nombre} - ${email.passwrd}")
             Log.i("ModifEmail", "${newEmail.ID} - ${newEmail.nombre} - ${newEmail.passwrd}")*/
@@ -180,7 +180,7 @@ class UpdateCuentaFragment(
 
     override fun onDestroy() {
         super.onDestroy()
-        VerCuentas(this.ID).show(
+        VerCuentas(email).show(
             this@UpdateCuentaFragment.activity!!.supportFragmentManager, "updateCuentas"
         )
     }

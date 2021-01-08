@@ -39,7 +39,7 @@
         android:id="@+id/intro_goto_registro"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="Saltar a mi registro"
+        android:text="Registrarme ahora"
         android:textAllCaps="false"
         android:textColor="@color/txt_pressed_user_style"
         android:background="@drawable/btn_goto_style"

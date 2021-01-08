@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    tools:context=".controlador.MainActivity">
+    tools:context=".controlador.LoginUsuario">
 
     <ImageView
         android:id="@+id/main_imgedsa"
@@ -75,6 +75,7 @@
         android:layout_centerHorizontal="true"
         android:gravity="center_horizontal"
         android:text="Nuevo usuario"
+        android:visibility="gone"
         android:textColor="@color/txt_pressed_user_style"
         android:textSize="20sp" />
 
