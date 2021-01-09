@@ -30,6 +30,7 @@
             android:textColor="@color/kolaloka"
             android:layout_gravity="center"
             android:singleLine="true"
+            android:hint="Usuario"
             android:inputType="textVisiblePassword"/>
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -49,7 +50,8 @@
             android:textColor="@color/kolaloka"
             android:layout_gravity="center"
             android:singleLine="true"
-            android:inputType="textPassword"/>
+            android:hint="Contraseña"
+            android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button

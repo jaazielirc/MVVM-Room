@@ -15,6 +15,7 @@ import com.jaax.edsa.controlador.*
 import com.jaax.edsa.modelo.Cuenta
 import com.jaax.edsa.modelo.DBHelper
 import com.jaax.edsa.modelo.Email
+import java.lang.ClassCastException
 import java.sql.SQLException
 
 class VerCuentas(emailElegido: Email): DialogFragment() {
@@ -25,10 +26,15 @@ class VerCuentas(emailElegido: Email): DialogFragment() {
     private lateinit var imgNoAccount: ImageView
     private lateinit var toast: Toast
     private lateinit var cuentaAdapter: CuentaAdapter
+    private lateinit var callBack: OnCallbackReceivedView
     private var emailActual: Email
 
     init {
         emailActual = emailElegido
+    }
+
+    interface OnCallbackReceivedView {
+        fun refreshByViewing()
     }
 
     @SuppressLint("ShowToast")
@@ -57,6 +63,14 @@ class VerCuentas(emailElegido: Email): DialogFragment() {
     override fun onResume() {
         super.onResume()
         onClick()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        try{
+            callBack = context as OnCallbackReceivedView
+        }catch (cce: ClassCastException){cce.printStackTrace()}
+        callBack.refreshByViewing()
     }
 
     private fun onClick() {
