@@ -1,6 +1,7 @@
 package com.jaax.edsa.controlador
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.database.sqlite.SQLiteException
 import android.os.Bundle
 import android.view.Gravity
@@ -18,7 +19,7 @@ import com.jaax.edsa.modelo.Email
 import com.jaax.edsa.R
 import com.jaax.edsa.modelo.Cuenta
 import com.jaax.edsa.modelo.Usuario
-import com.jaax.edsa.vista.ExitApp
+import com.jaax.edsa.vista.NotificationService
 
 class VerEmails: AppCompatActivity(),
     AddMailFragment.OnCallbackReceivedAdd,
@@ -266,7 +267,9 @@ class VerEmails: AppCompatActivity(),
     override fun refreshByDeleting() { refreshListEmails() }
     override fun refreshByViewing() { refreshListEmails() }
 
-    override fun onBackPressed() {
-        ExitApp().show(supportFragmentManager, "ExitApp")
+    override fun onDestroy() {
+        super.onDestroy()
+        val service = Intent(this, NotificationService::class.java)
+        startService(service)
     }
 }

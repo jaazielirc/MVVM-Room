@@ -9,6 +9,8 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.app.RemoteInput
 import com.jaax.edsa.R
+import com.jaax.edsa.modelo.DBHelper
+import com.jaax.edsa.modelo.Usuario
 
 class GestorNotificaciones(private val context: Context) {
     //variables estaticas publicas y privadas
@@ -19,7 +21,7 @@ class GestorNotificaciones(private val context: Context) {
         //SOLO DISPONIBLE EN ANDROID 8 O MAYOR
         const val CHANNEL = "findEmails"
 
-        //
+        //parametros de la notificacion
         const val NOTIFICATION_ID = 1000
         const val MESSAGE_ID = 0
         const val REPLY_ACTION = "replyGestorNotificaciones"

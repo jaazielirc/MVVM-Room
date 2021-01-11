@@ -13,7 +13,6 @@ import android.widget.Toast
 import com.jaax.edsa.modelo.DBHelper
 import com.jaax.edsa.modelo.Usuario
 import com.jaax.edsa.R
-import com.jaax.edsa.vista.NotificationService
 import java.lang.NullPointerException
 
 class LoginUsuario: AppCompatActivity() {
@@ -63,7 +62,6 @@ class LoginUsuario: AppCompatActivity() {
             usuarioActual.nombre = usr
             usuarioActual.password = pss
 
-
             val acceso = verificarLogin( usuarioActual.nombre, usuarioActual.password )
             if( acceso ){
                 toast.setText("Bienvenid@")
@@ -74,6 +72,7 @@ class LoginUsuario: AppCompatActivity() {
                 intent.putExtra("Login_usrPassword", usuarioActual.password)
                 intent.putExtra("Login_usrKeyword", usuarioActual.keyword)
                 startActivity(intent)
+                this.finish()
             } else {
                 toast.setText("Revisa tus datos")
                 toast.show()
@@ -117,11 +116,5 @@ class LoginUsuario: AppCompatActivity() {
             }
         } catch (excp: NullPointerException){}
         return false
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        val service = Intent(this, NotificationService::class.java)
-        startService(service)
     }
 }
