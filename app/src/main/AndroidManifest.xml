@@ -27,14 +27,20 @@
             android:theme="@style/AppTheme">
         </activity>
         <activity android:name=".controlador.VerEmails"
-            android:theme="@style/EmailsStyle"
-            android:allowEmbedded="true"
-            android:documentLaunchMode="always"
-            android:resizeableActivity="true">
+            android:theme="@style/EmailsStyle">
         </activity>
         <activity android:name=".vista.Introduccion"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
+        <service android:name=".vista.NotificationService"
+            android:enabled="true"
+            android:exported="false"
+            android:label="service-search-email"
+            android:process=":remote">
+        </service>
+        <receiver android:name=".vista.NotificationReceiverO"
+            android:enabled="true"
+            android:exported="false">
+        </receiver>
     </application>
-
 </manifest>

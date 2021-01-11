@@ -3,13 +3,9 @@ package com.jaax.edsa.controlador
 import android.annotation.SuppressLint
 import android.app.*
 import android.content.Intent
-import android.net.Uri
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.Settings
 import android.view.Gravity
-import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -17,10 +13,7 @@ import android.widget.Toast
 import com.jaax.edsa.modelo.DBHelper
 import com.jaax.edsa.modelo.Usuario
 import com.jaax.edsa.R
-import com.jaax.edsa.vista.GestorNotificaciones
-import com.nex3z.notificationbadge.NotificationBadge
-import com.txusballesteros.bubbles.BubbleLayout
-import com.txusballesteros.bubbles.BubblesManager
+import com.jaax.edsa.vista.NotificationService
 import java.lang.NullPointerException
 
 class LoginUsuario: AppCompatActivity() {
@@ -32,9 +25,8 @@ class LoginUsuario: AppCompatActivity() {
     private lateinit var db: DBHelper
     private lateinit var toast: Toast
     private lateinit var usuarioActual: Usuario
-    private lateinit var bubbleManager: BubblesManager
 
-    private fun initUsuario() {
+    private fun init() {
         val datosUsuario = this.intent.extras
         usuarioActual = Usuario(
             datosUsuario?.getString("usrNombre")!!,
@@ -42,10 +34,8 @@ class LoginUsuario: AppCompatActivity() {
             datosUsuario.getString("usrKeyword")!!,
             ArrayList()
         )
-    }
-
-    companion object {
-        const val PERMISO = 1000
+        //val notificationManager = this.getSystemService(NOTIFICATION_SERVICE) as NotificationManager?
+        //notificationManager?.cancel(GestorNotificaciones.NOTIFICATION_ID)
     }
 
     @SuppressLint("ShowToast")
@@ -61,11 +51,8 @@ class LoginUsuario: AppCompatActivity() {
         db = DBHelper(this.applicationContext, DBHelper.nombreDB, null, DBHelper.version)
         toast = Toast.makeText(this.applicationContext, "txt", Toast.LENGTH_SHORT)
         toast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0)
-        initUsuario()
-        edTxtUsuario.setText( usuarioActual.nombre )
-        bubbleManager = BubblesManager.Builder( this )
-            .setInitializationCallback { launchBubble() }
-            .build()
+        init()
+        edTxtUsuario.setText(usuarioActual.nombre)
     }
 
     override fun onResume() {
@@ -76,32 +63,17 @@ class LoginUsuario: AppCompatActivity() {
             usuarioActual.nombre = usr
             usuarioActual.password = pss
 
-            val acceso = verificarLogin( usuarioActual.nombre, usuarioActual.password )
 
+            val acceso = verificarLogin( usuarioActual.nombre, usuarioActual.password )
             if( acceso ){
                 toast.setText("Bienvenid@")
                 toast.show()
                 edTxtPsswrd.setText("")
-                launchBubble()
-                if( Build.VERSION.SDK_INT >= 23 ){
-                    if( !Settings.canDrawOverlays(this) ){
-                        val intent =  Intent(
-                            Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-                            Uri.parse("package:$packageName")
-                        )
-                        startActivityForResult(intent, PERMISO)
-
-                    }
-                } else {
-                    val intent = Intent(this, Service::class.java)
-                    startService(intent)
-                }
-                bubbleEmails()
-                /*val intent = Intent(this@LoginUsuario, VerEmails::class.java)
+                val intent = Intent(this@LoginUsuario, VerEmails::class.java)
                 intent.putExtra("Login_usrNombre", usuarioActual.nombre)
                 intent.putExtra("Login_usrPassword", usuarioActual.password)
                 intent.putExtra("Login_usrKeyword", usuarioActual.keyword)
-                startActivity(intent)*/
+                startActivity(intent)
             } else {
                 toast.setText("Revisa tus datos")
                 toast.show()
@@ -147,29 +119,9 @@ class LoginUsuario: AppCompatActivity() {
         return false
     }
 
-    private fun bubbleEmails(){
-        val bubbleManager = BubblesManager.Builder( this )
-            .setInitializationCallback {
-                launchBubble()
-            }
-            .build()
-
-        bubbleManager.initialize()
-    }
-
-    private fun launchBubble() {
-        val bubbleLayout = LayoutInflater.from(this@LoginUsuario)
-            .inflate(R.layout.new_bubble_layout, null) as BubbleLayout
-
-        val badge = bubbleLayout.findViewById<NotificationBadge>(R.id.badge)
-        badge.setText("!")
-
-        bubbleLayout.setOnBubbleClickListener {
-            toast.setText("bubbleeeeee")
-            toast.show()
-        }
-
-        bubbleLayout.setShouldStickToWall(true)
-        bubbleManager.addBubble(bubbleLayout, 60, 20)
+    override fun onDestroy() {
+        super.onDestroy()
+        val service = Intent(this, NotificationService::class.java)
+        startService(service)
     }
 }
