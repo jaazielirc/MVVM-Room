@@ -1,64 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/funciona_title"
+        android:id="@+id/notify_txt1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/funciona_txt1"
+        android:text="@string/notify_txt1"
         android:textColor="@color/blanco"
-        android:textSize="37sp"
+        android:textSize="23sp"
+        android:gravity="start"
         android:layout_marginTop="15dp"
-        android:gravity="center"/>
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"/>
+
+    <ImageView
+        android:id="@+id/notify_img1"
+        android:layout_width="290dp"
+        android:layout_height="220dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/edsa_search_1"
+        android:layout_below="@id/notify_txt1"/>
 
     <TextView
-        android:id="@+id/funciona_txt2"
+        android:id="@+id/notify_txt2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/funciona_txt2"
+        android:text="@string/notify_txt2"
         android:textColor="@color/blanco"
         android:textSize="23sp"
         android:gravity="start"
         android:layout_marginTop="15dp"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
-        android:layout_below="@id/funciona_title"/>
+        android:layout_below="@id/notify_img1"/>
 
     <ImageView
-        android:id="@+id/funciona_img1"
-        android:layout_width="200dp"
-        android:layout_height="100dp"
+        android:id="@+id/notify_img2"
+        android:layout_width="290dp"
+        android:layout_height="200dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:src="@drawable/edsa_tutorial_1"
-        android:layout_below="@id/funciona_txt2"/>
-
-    <TextView
-        android:id="@+id/funciona_txt3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/funciona_txt3"
-        android:textColor="@color/blanco"
-        android:textSize="23sp"
-        android:gravity="start"
-        android:layout_marginTop="15dp"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
-        android:layout_below="@id/funciona_img1"/>
-
-    <ImageView
-        android:id="@+id/funciona_img2"
-        android:layout_width="230dp"
-        android:layout_height="130dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:src="@drawable/edsa_tutorial_2"
-        android:layout_below="@id/funciona_txt3"/>
+        android:src="@drawable/edsa_search_2"
+        android:layout_below="@id/notify_txt2"/>
 
     <Button
-        android:id="@+id/funciona_previous"
+        android:id="@+id/notify_previous"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:text="@string/retroceder"
@@ -80,7 +70,7 @@
         android:textColor="@color/negro" />
 
     <Button
-        android:id="@+id/funciona_next"
+        android:id="@+id/notify_next"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:text="@string/avanzar"
@@ -92,5 +82,4 @@
         android:layout_alignStart="@id/separacion"
         android:layout_marginStart="50dp"
         android:layout_marginBottom="40dp"/>
-
 </RelativeLayout>

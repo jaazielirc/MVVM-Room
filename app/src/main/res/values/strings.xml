@@ -22,6 +22,11 @@
     <string name="funcionb_txt2">d) Haz clic en agregar cuenta</string>
     <string name="funcionc_txt1">e) Completa el formulario</string>
     <string name="funcionc_txt2">Puedes editar o eliminar la cuenta recién agregada</string>
+    <string name="notify_txt1">f) Para búsqueda rápida puedes usar la barra de notificaciones</string>
+    <string name="notify_txt2">Ingresa un email que ya hayas agregado antes</string>
+    <string name="notify_txt3">Una nueva notificación aparecerá con los datos del email</string>
+    <string name="notify_txt4">g) Para buscar una cuenta asociada al email, sólo agrega "~" seguido del tipo de cuenta</string>
+    <string name="notify_txt5">Una nueva notificación aparecerá con los datos de la cuenta</string>
     <string name="goto_txt1">¡ Felicidades !</string>
     <string name="goto_txt2">
         Has concluido el tutorial\n\n

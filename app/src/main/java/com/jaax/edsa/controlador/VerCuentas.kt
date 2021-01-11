@@ -82,8 +82,6 @@ class VerCuentas(emailElegido: Email): DialogFragment() {
         }
         listaCuentas.onItemLongClickListener = AdapterView.OnItemLongClickListener { _, view, pos, _ ->
             view?.isSelected = true
-            toast.setText("POSITION ITEM ${emailActual.cuentas.size}")
-            toast.show()
             val popupMenu = PopupMenu(this@VerCuentas.context, view)
             popupMenu.menuInflater.inflate(R.menu.opc_cuenta, popupMenu.menu)
             popupMenu.setOnMenuItemClickListener { item ->
