@@ -3,9 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.jaax.edsa">
 
+<<<<<<< HEAD
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+=======
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+>>>>>>> devjaax
     <application
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -13,27 +17,49 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".controlador.SplashScreen"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".controlador.LoginUsuario"
+        <activity
+            android:name=".controlador.LoginUsuario"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
-        <activity android:name=".controlador.AddUsuario"
+        <activity
+            android:name=".controlador.AddUsuario"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme">
         </activity>
-        <activity android:name=".controlador.UpdateUsuario"
+        <activity
+            android:name=".controlador.UpdateUsuario"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme">
         </activity>
-        <activity android:name=".controlador.VerEmails"
+        <activity
+            android:name=".controlador.VerEmails"
+            android:screenOrientation="portrait"
             android:theme="@style/EmailsStyle">
         </activity>
-        <activity android:name=".vista.Introduccion"
+        <activity
+            android:name=".vista.Introduccion"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
+        <service
+            android:name=".vista.NotificationService"
+            android:enabled="true"
+            android:exported="false"
+            android:label="service-search-email"
+            android:process=":remote">
+        </service>
+        <receiver
+            android:name=".vista.NotificationReceiverO"
+            android:enabled="true"
+            android:exported="false">
+        </receiver>
     </application>
-
 </manifest>

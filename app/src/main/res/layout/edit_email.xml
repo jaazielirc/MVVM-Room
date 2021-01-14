@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<LinearLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:padding="10dp"
     android:orientation="vertical"
-    android:background="@drawable/bckgrnd_email_options"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:background="@drawable/bckgrnd_email_options">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -31,7 +32,7 @@
                 android:ems="10"
                 android:focusable="true"
                 android:selectAllOnFocus="true"
-                android:hint="Correo electrónico"
+                android:hint="@string/correo_electr_nico"
                 android:textColorHint="@color/agtive"
                 android:textSize="20sp"
                 android:enabled="false"
@@ -68,7 +69,7 @@
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:ems="10"
-                android:hint="Contraseña"
+                android:hint="@string/contrase_a"
                 android:inputType="textPassword|text"
                 android:singleLine="true"
                 android:enabled="false"
@@ -91,7 +92,7 @@
             android:layout_width="250dp"
             android:layout_height="50dp"
             android:ems="10"
-            android:hint="Palabra secreta"
+            android:hint="@string/palabra_secreta"
             android:textColorHint="@color/agtive"
             android:textSize="20sp"
             android:textColor="@color/mamey"
@@ -104,7 +105,7 @@
         android:id="@+id/edmail_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=" Guardar cambios "
+        android:text="@string/guardar_cambios"
         android:textAllCaps="false"
         android:textColor="@color/txt_pressed_email_style"
         android:textSize="30sp"

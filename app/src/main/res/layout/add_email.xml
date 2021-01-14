@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<RelativeLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:padding="10dp"
     android:background="@drawable/bckgrnd_email_options">
 
@@ -15,7 +16,7 @@
             android:layout_width="250dp"
             android:layout_height="50dp"
             android:ems="10"
-            android:hint="Correo electrónico"
+            android:hint="@string/correo_electr_nico"
             android:textColorHint="@color/agtive"
             android:textSize="20sp"
             android:textColor="@color/mamey"
@@ -39,7 +40,7 @@
             android:layout_height="50dp"
             android:layout_gravity="center_horizontal"
             android:ems="10"
-            android:hint="Contraseña"
+            android:hint="@string/contrase_a"
             android:inputType="textPassword|text"
             android:singleLine="true"
             android:textColor="@color/mamey"
@@ -51,7 +52,7 @@
         android:id="@+id/addmail_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=" Agregar "
+        android:text="@string/agregar"
         android:textAllCaps="false"
         android:textColor="@color/txt_pressed_email_style"
         android:textSize="30sp"

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="16dp"
@@ -9,7 +10,7 @@
         android:id="@+id/deletequestion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Eliminar:"
+        android:text="@string/eliminar"
         android:textSize="25sp"
         android:gravity="center"
         android:textColor="@color/negro"/>
@@ -28,7 +29,7 @@
         android:id="@+id/alldeletedbyemail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="También se eliminarán las cuentas asociadas"
+        android:text="@string/cuentas_asociadas"
         android:layout_below="@id/imgdel"
         android:textColor="@color/rojo"
         android:textSize="20sp"
@@ -46,7 +47,7 @@
             android:layout_width="250dp"
             android:layout_height="50dp"
             android:ems="10"
-            android:hint="Palabra Secreta"
+            android:hint="@string/palabra_secreta"
             android:textColorHint="@color/azulCielo"
             android:textSize="20sp"
             android:textColor="@color/blanco"
@@ -59,7 +60,7 @@
         android:id="@+id/email_del_btnEliminar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=" Eliminar "
+        android:text="@string/eliminar"
         android:textAllCaps="false"
         android:textColor="@color/txt_pressed_user_style"
         android:textSize="30sp"

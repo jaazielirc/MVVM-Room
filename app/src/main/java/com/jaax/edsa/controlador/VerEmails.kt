@@ -1,6 +1,7 @@
 package com.jaax.edsa.controlador
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.database.sqlite.SQLiteException
 import android.os.Bundle
 import android.view.Gravity
@@ -18,12 +19,13 @@ import com.jaax.edsa.modelo.Email
 import com.jaax.edsa.R
 import com.jaax.edsa.modelo.Cuenta
 import com.jaax.edsa.modelo.Usuario
-import com.jaax.edsa.vista.ExitApp
+import com.jaax.edsa.vista.NotificationService
 
 class VerEmails: AppCompatActivity(),
     AddMailFragment.OnCallbackReceivedAdd,
     UpdateMailFragment.OnCallbackReceivedEdit,
-    DeleteMailFragment.OnCallbackReceivedDel {
+    DeleteMailFragment.OnCallbackReceivedDel,
+    VerCuentas.OnCallbackReceivedView {
 
     private lateinit var db: DBHelper
     private lateinit var addEmail: FloatingActionButton
@@ -78,10 +80,12 @@ class VerEmails: AppCompatActivity(),
 
     private fun onClick(){
         addEmail.setOnClickListener {
+            addEmail.visibility = View.INVISIBLE
             AddMailFragment(usuarioActual).show(
                 supportFragmentManager,
                 "agregarEmailNuevo"
-            )}
+            )
+        }
         swipeRefresh.setOnRefreshListener {
             refreshListEmails()
             swipeRefresh.isRefreshing = false
@@ -93,9 +97,11 @@ class VerEmails: AppCompatActivity(),
                 popupMenu.setOnMenuItemClickListener { item ->
                     when (item?.itemId) {
                         R.id.menu_cuentas -> {
+
                             VerCuentas(usuarioActual.emails[pos]).show(this@VerEmails.supportFragmentManager, "verCuentas")
                         }
                         R.id.menu_editmail -> {
+                            addEmail.visibility = View.INVISIBLE
                             val updt = UpdateMailFragment(usuarioActual.emails[pos], usuarioActual)
                             val bundle = Bundle()
                             val bundleNombre = usuarioActual.emails[pos].nombre
@@ -106,6 +112,7 @@ class VerEmails: AppCompatActivity(),
                             updt.show(this@VerEmails.supportFragmentManager, "updateEmail")
                         }
                         R.id.menu_delemail -> {
+                            addEmail.visibility = View.INVISIBLE
                             DeleteMailFragment(
                                 usuarioActual.emails[pos],
                                 usuarioActual
@@ -152,6 +159,7 @@ class VerEmails: AppCompatActivity(),
     }
 
     private fun refreshListEmails(){
+        addEmail.visibility = View.VISIBLE
         val allEmails = ArrayList<Email>()
         try {
             val cursor = db.getEmailsById(usuarioActual.nombre)
@@ -216,10 +224,17 @@ class VerEmails: AppCompatActivity(),
             }
             override fun onQueryTextChange(newText: String?): Boolean {
                 emailAdapter.getFilter().filter(newText)
+                refreshListEmails()
                 emailAdapter.notifyDataSetChanged()
                 return true
             }
         })
+
+        searchView.setOnCloseListener {
+            refreshListEmails()
+            searchView.onActionViewCollapsed()
+            true
+        }
 
         switchView.setOnClickListener {
             if(switchView.isChecked){
@@ -250,8 +265,11 @@ class VerEmails: AppCompatActivity(),
     override fun refreshByAdding() { refreshListEmails() }
     override fun refreshByEditing() { refreshListEmails() }
     override fun refreshByDeleting() { refreshListEmails() }
+    override fun refreshByViewing() { refreshListEmails() }
 
-    override fun onBackPressed() {
-        ExitApp().show(supportFragmentManager, "ExitApp")
+    override fun onDestroy() {
+        super.onDestroy()
+        val service = Intent(this, NotificationService::class.java)
+        startService(service)
     }
 }

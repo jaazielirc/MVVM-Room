@@ -1,50 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <ImageView
         android:id="@+id/intro_imgedsa"
-        android:layout_width="300dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="55dp"
+        android:contentDescription="@string/app_name"
         android:src="@drawable/edsalogo"
-        android:contentDescription="@string/app_name" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/welcome"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="¡Hola!\nElige una opción"
+        android:layout_below="@id/intro_imgedsa"
+        android:gravity="center"
+        android:text="@string/hola_nelige_una_opci_n"
         android:textColor="@color/blanco"
         android:textSize="30sp"
-        android:gravity="center"
-        android:layout_below="@id/intro_imgedsa"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/intro_goto_tutorial"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="Tomar el tutorial"
+        android:layout_above="@id/intro_goto_registro"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="249dp"
+        android:background="@drawable/btn_goto_style"
+        android:elevation="5dp"
+        android:text="@string/tomar_el_tutorial"
         android:textAllCaps="false"
         android:textColor="@color/txt_pressed_user_style"
-        android:background="@drawable/btn_goto_style"
-        android:layout_above="@id/intro_goto_registro"
-        android:layout_marginBottom="50dp"
-        android:elevation="5dp"
-        android:layout_centerHorizontal="true"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/intro_imgedsa"
+        app:layout_constraintVertical_bias="0.213" />
 
     <Button
         android:id="@+id/intro_goto_registro"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="Registrarme ahora"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="64dp"
+        android:background="@drawable/btn_goto_style"
+        android:elevation="5dp"
+        android:text="@string/registrarme_ahora"
         android:textAllCaps="false"
         android:textColor="@color/txt_pressed_user_style"
-        android:background="@drawable/btn_goto_style"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="70dp"
-        android:elevation="5dp"
-        android:layout_centerHorizontal="true"/>
-</RelativeLayout>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/intro_goto_tutorial" />
+</androidx.constraintlayout.widget.ConstraintLayout>

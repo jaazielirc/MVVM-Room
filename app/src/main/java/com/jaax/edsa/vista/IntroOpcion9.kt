@@ -1,5 +1,6 @@
 package com.jaax.edsa.vista
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,8 +10,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.jaax.edsa.R
+import com.jaax.edsa.controlador.AddUsuario
 
-class IntroOpcion6: Fragment() {
+class IntroOpcion9: Fragment() {
     private lateinit var btnPrevious: Button
     private lateinit var btnNext: Button
     private lateinit var transaction: FragmentTransaction
@@ -22,14 +24,14 @@ class IntroOpcion6: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.intro_6_search_a, container, false)
+        return inflater.inflate(R.layout.intro_9_goto_main, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         manager = activity!!.supportFragmentManager
-        btnPrevious = activity!!.findViewById(R.id.notify_previous)
-        btnNext = activity!!.findViewById(R.id.notify_next)
+        btnPrevious = activity!!.findViewById(R.id.goto_previous)
+        btnNext = activity!!.findViewById(R.id.goto_next)
     }
 
     override fun onResume() {
@@ -40,22 +42,18 @@ class IntroOpcion6: Fragment() {
 
     private fun gotoNextFragment( go: Boolean ){
         if( go ){
-            transaction = manager.beginTransaction()
-            fragment = IntroOpcion7()
-
+            val intent = Intent(activity!!.applicationContext, AddUsuario::class.java)
+            startActivity(intent)
             manager.popBackStack("intro6", FragmentManager.POP_BACK_STACK_INCLUSIVE)
-            transaction
-                .replace(R.id.intro_base_for_fragments, fragment)
-                .addToBackStack("intro7")
-                .commit()
+            activity!!.finish()
         } else {
             transaction = manager.beginTransaction()
-            fragment = IntroOpcion5()
+            fragment = IntroOpcion8()
 
-            manager.popBackStack("intro6", FragmentManager.POP_BACK_STACK_INCLUSIVE)
+            manager.popBackStack("intro9", FragmentManager.POP_BACK_STACK_INCLUSIVE)
             transaction
                 .replace(R.id.intro_base_for_fragments, fragment)
-                .addToBackStack("intro5")
+                .addToBackStack("intro8")
                 .commit()
         }
     }

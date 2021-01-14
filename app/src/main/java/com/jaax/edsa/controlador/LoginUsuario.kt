@@ -1,6 +1,7 @@
 package com.jaax.edsa.controlador
 
 import android.annotation.SuppressLint
+import android.app.*
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -16,7 +17,6 @@ import java.lang.NullPointerException
 
 class LoginUsuario: AppCompatActivity() {
     private lateinit var txtForPsswrd: TextView
-    private lateinit var txtNewUser: TextView
     private lateinit var btnAcceder: Button
     private lateinit var edTxtUsuario: EditText
     private lateinit var edTxtPsswrd: EditText
@@ -24,7 +24,7 @@ class LoginUsuario: AppCompatActivity() {
     private lateinit var toast: Toast
     private lateinit var usuarioActual: Usuario
 
-    private fun initUsuario() {
+    private fun init() {
         val datosUsuario = this.intent.extras
         usuarioActual = Usuario(
             datosUsuario?.getString("usrNombre")!!,
@@ -32,6 +32,8 @@ class LoginUsuario: AppCompatActivity() {
             datosUsuario.getString("usrKeyword")!!,
             ArrayList()
         )
+        //val notificationManager = this.getSystemService(NOTIFICATION_SERVICE) as NotificationManager?
+        //notificationManager?.cancel(GestorNotificaciones.NOTIFICATION_ID)
     }
 
     @SuppressLint("ShowToast")
@@ -43,13 +45,11 @@ class LoginUsuario: AppCompatActivity() {
         edTxtPsswrd = findViewById(R.id.main_loginPassword)
         btnAcceder = findViewById(R.id.main_btnAcceder)
         txtForPsswrd = findViewById(R.id.main_forgotPassword)
-        txtNewUser = findViewById(R.id.main_newuser)
         db = DBHelper(this.applicationContext, DBHelper.nombreDB, null, DBHelper.version)
         toast = Toast.makeText(this.applicationContext, "txt", Toast.LENGTH_SHORT)
         toast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0)
-        initUsuario()
-        edTxtUsuario.setText( usuarioActual.nombre )
-        edTxtPsswrd.setText( usuarioActual.password )
+        init()
+        edTxtUsuario.setText(usuarioActual.nombre)
     }
 
     override fun onResume() {
@@ -61,11 +61,11 @@ class LoginUsuario: AppCompatActivity() {
             usuarioActual.password = pss
 
             val acceso = verificarLogin( usuarioActual.nombre, usuarioActual.password )
-
             if( acceso ){
-                val intent = Intent(this.applicationContext, VerEmails::class.java)
                 toast.setText("Bienvenid@")
                 toast.show()
+                edTxtPsswrd.setText("")
+                val intent = Intent(this@LoginUsuario, VerEmails::class.java)
                 intent.putExtra("Login_usrNombre", usuarioActual.nombre)
                 intent.putExtra("Login_usrPassword", usuarioActual.password)
                 intent.putExtra("Login_usrKeyword", usuarioActual.keyword)

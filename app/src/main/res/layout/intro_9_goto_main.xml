@@ -1,75 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/funcionb_txt2"
+        android:id="@+id/goto_txt1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:gravity="start"
+        android:gravity="center"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
-        android:text="@string/funcionb_txt1"
+        android:text="@string/goto_txt1"
         android:textColor="@color/blanco"
-        android:textSize="23sp"
+        android:textSize="50sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/goto_txt2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/goto_img1"
+        android:layout_marginTop="50dp"
+        android:gravity="center"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:text="@string/goto_txt2"
+        android:textColor="@color/blanco"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/goto_txt1" />
+
     <ImageView
-        android:id="@+id/funcionb_img1"
+        android:id="@+id/goto_img1"
         android:layout_width="wrap_content"
-        android:layout_height="130dp"
-        android:layout_below="@id/funcionb_txt2"
+        android:layout_height="220dp"
+        android:layout_below="@id/goto_txt1"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:contentDescription="@string/app_name"
-        android:src="@drawable/edsa_tutorial_3"
+        android:src="@drawable/hugmoji"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/funcionb_txt2" />
-
-    <TextView
-        android:id="@+id/funcionb_txt3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/funcionb_img1"
-        android:layout_marginTop="15dp"
-        android:gravity="start"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
-        android:text="@string/funcionb_txt2"
-        android:textColor="@color/blanco"
-        android:textSize="23sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/funcionb_img1" />
-
-    <ImageView
-        android:id="@+id/funcionb_img2"
-        android:layout_width="230dp"
-        android:layout_height="130dp"
-        android:layout_below="@id/funcionb_txt3"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
-        android:contentDescription="@string/app_name"
-        android:src="@drawable/edsa_tutorial_4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/funcionb_txt3" />
+        app:layout_constraintTop_toBottomOf="@+id/goto_txt2" />
 
     <Button
-        android:id="@+id/funcionb_previous"
+        android:id="@+id/goto_previous"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="60dp"
-        android:layout_marginTop="70dp"
-        android:layout_marginBottom="62dp"
+        android:layout_marginTop="101dp"
+        android:layout_marginBottom="152dp"
         android:background="@drawable/btn_previous_style"
         android:elevation="5dp"
         android:text="@string/retroceder"
@@ -77,23 +65,23 @@
         android:textColor="@color/txt_pressed_user_style"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/funcionb_img2" />
+        app:layout_constraintTop_toBottomOf="@+id/goto_img1" />
 
     <Button
-        android:id="@+id/funcionb_next"
+        android:id="@+id/goto_next"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="101dp"
         android:layout_marginEnd="60dp"
-        android:layout_marginBottom="62dp"
+        android:layout_marginBottom="152dp"
         android:background="@drawable/btn_next_style"
         android:elevation="5dp"
-        android:text="@string/avanzar"
+        android:text="@string/registrarme"
         android:textAllCaps="false"
         android:textColor="@color/txt_pressed_user_style"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/funcionb_img2" />
+        app:layout_constraintTop_toBottomOf="@+id/goto_img1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

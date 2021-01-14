@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="4dp"
@@ -12,70 +14,90 @@
         android:id="@+id/linear1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@drawable/baseline_person_black_18dp"/>
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/baseline_person_black_18dp" />
+
         <TextView
             android:id="@+id/adapter_user"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="usuario"
-            android:textSize="20sp"
             android:layout_marginStart="10dp"
-            android:textColor="@color/mamey"
             android:focusable="false"
-            android:focusableInTouchMode="false"/>
+            android:focusableInTouchMode="false"
+            android:text="@string/usuario"
+            android:textColor="@color/mamey"
+            android:textSize="20sp" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linear2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/linear1"
         android:orientation="horizontal"
-        android:layout_below="@id/linear1">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linear1">
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@drawable/baseline_vpn_key_black_18dp"/>
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/baseline_vpn_key_black_18dp" />
+
         <TextView
             android:id="@+id/adapter_pass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="password"
-            android:textSize="20sp"
-            android:textColor="@color/naranja"
             android:layout_marginStart="10dp"
-            android:focusable="false"
             android:layout_marginTop="3dp"
-            android:focusableInTouchMode="false"/>
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:text="@string/contrase_a"
+            android:textColor="@color/naranja"
+            android:textSize="20sp" />
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/linear3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/linear2"
         android:orientation="horizontal"
-        android:layout_below="@id/linear2">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linear2">
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@drawable/baseline_folder_shared_black_18dp"/>
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/baseline_folder_shared_black_18dp" />
+
         <TextView
             android:id="@+id/adapter_tipo"
-            android:background="@color/lila_claro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="tipo"
-            android:textSize="20sp"
             android:layout_marginStart="10dp"
-            android:textColor="@color/azulRey"
             android:layout_marginTop="3dp"
+            android:background="@color/azulCSuave"
             android:focusable="false"
-            android:focusableInTouchMode="false"/>
+            android:focusableInTouchMode="false"
+            android:text="@string/tipo_de_cuenta"
+            android:textColor="@color/azulRey"
+            android:textSize="20sp" />
     </LinearLayout>
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

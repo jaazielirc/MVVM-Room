@@ -10,7 +10,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.jaax.edsa.R
 
-class IntroOpcion6: Fragment() {
+class IntroOpcion7: Fragment() {
     private lateinit var btnPrevious: Button
     private lateinit var btnNext: Button
     private lateinit var transaction: FragmentTransaction
@@ -22,7 +22,7 @@ class IntroOpcion6: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.intro_6_search_a, container, false)
+        return inflater.inflate(R.layout.intro_7_search_b, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -41,21 +41,21 @@ class IntroOpcion6: Fragment() {
     private fun gotoNextFragment( go: Boolean ){
         if( go ){
             transaction = manager.beginTransaction()
-            fragment = IntroOpcion7()
+            fragment = IntroOpcion8()
 
-            manager.popBackStack("intro6", FragmentManager.POP_BACK_STACK_INCLUSIVE)
+            manager.popBackStack("intro7", FragmentManager.POP_BACK_STACK_INCLUSIVE)
             transaction
                 .replace(R.id.intro_base_for_fragments, fragment)
-                .addToBackStack("intro7")
+                .addToBackStack("intro8")
                 .commit()
         } else {
             transaction = manager.beginTransaction()
-            fragment = IntroOpcion5()
+            fragment = IntroOpcion6()
 
-            manager.popBackStack("intro6", FragmentManager.POP_BACK_STACK_INCLUSIVE)
+            manager.popBackStack("intro7", FragmentManager.POP_BACK_STACK_INCLUSIVE)
             transaction
                 .replace(R.id.intro_base_for_fragments, fragment)
-                .addToBackStack("intro5")
+                .addToBackStack("intro6")
                 .commit()
         }
     }

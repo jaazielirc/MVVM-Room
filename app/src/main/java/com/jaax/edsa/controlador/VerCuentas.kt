@@ -15,6 +15,7 @@ import com.jaax.edsa.controlador.*
 import com.jaax.edsa.modelo.Cuenta
 import com.jaax.edsa.modelo.DBHelper
 import com.jaax.edsa.modelo.Email
+import java.lang.ClassCastException
 import java.sql.SQLException
 
 class VerCuentas(emailElegido: Email): DialogFragment() {
@@ -25,10 +26,15 @@ class VerCuentas(emailElegido: Email): DialogFragment() {
     private lateinit var imgNoAccount: ImageView
     private lateinit var toast: Toast
     private lateinit var cuentaAdapter: CuentaAdapter
+    private lateinit var callBack: OnCallbackReceivedView
     private var emailActual: Email
 
     init {
         emailActual = emailElegido
+    }
+
+    interface OnCallbackReceivedView {
+        fun refreshByViewing()
     }
 
     @SuppressLint("ShowToast")
@@ -59,6 +65,14 @@ class VerCuentas(emailElegido: Email): DialogFragment() {
         onClick()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        try{
+            callBack = context as OnCallbackReceivedView
+        }catch (cce: ClassCastException){cce.printStackTrace()}
+        callBack.refreshByViewing()
+    }
+
     private fun onClick() {
         addCuenta.setOnClickListener {
             AddCuentaFragment(emailActual).show(
@@ -68,8 +82,6 @@ class VerCuentas(emailElegido: Email): DialogFragment() {
         }
         listaCuentas.onItemLongClickListener = AdapterView.OnItemLongClickListener { _, view, pos, _ ->
             view?.isSelected = true
-            toast.setText("POSITION ITEM ${emailActual.cuentas.size}")
-            toast.show()
             val popupMenu = PopupMenu(this@VerCuentas.context, view)
             popupMenu.menuInflater.inflate(R.menu.opc_cuenta, popupMenu.menu)
             popupMenu.setOnMenuItemClickListener { item ->
