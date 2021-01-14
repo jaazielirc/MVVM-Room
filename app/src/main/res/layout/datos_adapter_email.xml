@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:padding="4dp"
     android:paddingStart="10dp"
     android:paddingEnd="10dp"
@@ -12,46 +14,57 @@
         android:id="@+id/linear1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@drawable/baseline_person_black_18dp"/>
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/baseline_person_black_18dp" />
+
         <TextView
             android:id="@+id/adapter_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="email"
-            android:textSize="20sp"
             android:layout_marginStart="10dp"
-            android:textColor="@color/negro"
             android:focusable="false"
-            android:focusableInTouchMode="false"/>
+            android:focusableInTouchMode="false"
+            android:text="@string/correo_electr_nico"
+            android:textColor="@color/negro"
+            android:textSize="20sp" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linear2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/linear1"
         android:orientation="horizontal"
-        android:layout_below="@id/linear1">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linear1">
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@drawable/baseline_vpn_key_black_18dp"/>
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/baseline_vpn_key_black_18dp" />
+
         <TextView
             android:id="@+id/adapter_psswrd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="password"
-            android:textSize="20sp"
-            android:textColor="@color/negro"
             android:layout_marginStart="10dp"
-            android:focusable="false"
             android:layout_marginTop="3dp"
-            android:focusableInTouchMode="false"/>
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:text="@string/contrase_a"
+            android:textColor="@color/negro"
+            android:textSize="20sp" />
     </LinearLayout>
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

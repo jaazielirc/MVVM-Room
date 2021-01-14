@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<LinearLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:padding="10dp"
     android:orientation="vertical"
-    android:background="@drawable/bckgrnd_account_options"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:background="@drawable/bckgrnd_account_options">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -33,7 +34,6 @@
             android:ems="10"
             android:focusable="true"
             android:selectAllOnFocus="true"
-            android:hint="Usuario ó email"
             android:textSize="20sp"
             android:enabled="false"
             android:textColor="@color/negro"
@@ -70,7 +70,7 @@
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:ems="10"
-                android:hint="Contraseña"
+                android:hint="@string/contrase_a"
                 android:inputType="textPassword|text"
                 android:singleLine="true"
                 android:enabled="false"
@@ -107,7 +107,7 @@
                 android:ems="10"
                 android:focusable="true"
                 android:selectAllOnFocus="true"
-                android:hint="Tipo de cuenta (YT, FB, etc)"
+                android:hint="@string/tipo_cuenta_ex"
                 android:textColorHint="@color/agtive"
                 android:textSize="20sp"
                 android:enabled="false"
@@ -122,7 +122,7 @@
         android:id="@+id/edacc_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=" Guardar cambios "
+        android:text="@string/guardar_cambios"
         android:textAllCaps="false"
         android:textColor="@color/txt_pressed_account_style"
         android:textSize="30sp"

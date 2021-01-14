@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -8,56 +9,62 @@
         android:id="@+id/notify_txt3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="150dp"
+        android:gravity="start"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
         android:text="@string/notify_txt3"
         android:textColor="@color/blanco"
         android:textSize="23sp"
-        android:gravity="start"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="150dp"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/notify_img3"
         android:layout_width="wrap_content"
         android:layout_height="220dp"
-        android:src="@drawable/edsa_search_3"
         android:layout_below="@id/notify_txt3"
-        android:layout_margin="20dp"/>
+        android:layout_margin="20dp"
+        android:layout_marginTop="50dp"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/edsa_search_3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/notify_txt3" />
 
     <Button
         android:id="@+id/notify_previous"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="190dp"
+        android:layout_marginBottom="111dp"
+        android:background="@drawable/btn_previous_style"
+        android:elevation="5dp"
         android:text="@string/retroceder"
         android:textAllCaps="false"
         android:textColor="@color/txt_pressed_user_style"
-        android:background="@drawable/btn_previous_style"
-        android:elevation="5dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignEnd="@id/separacion"
-        android:layout_marginBottom="40dp"
-        android:layout_marginEnd="50dp"/>
-
-    <TextView
-        android:id="@+id/separacion"
-        android:layout_width="50dp"
-        android:layout_height="5dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:textColor="@color/negro" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/notify_img3" />
 
     <Button
         android:id="@+id/notify_next"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="190dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginBottom="111dp"
+        android:background="@drawable/btn_next_style"
+        android:elevation="5dp"
         android:text="@string/avanzar"
         android:textAllCaps="false"
         android:textColor="@color/txt_pressed_user_style"
-        android:background="@drawable/btn_next_style"
-        android:elevation="5dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@id/separacion"
-        android:layout_marginStart="50dp"
-        android:layout_marginBottom="40dp"/>
-</RelativeLayout>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/notify_img3" />
+</androidx.constraintlayout.widget.ConstraintLayout>

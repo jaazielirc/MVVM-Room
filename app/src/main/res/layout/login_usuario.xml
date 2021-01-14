@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -13,25 +13,37 @@
         android:id="@+id/main_imgedsa"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/app_name"
         android:src="@drawable/edsalogo"
-        android:contentDescription="@string/app_name" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/main_element1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/main_imgedsa">
+        android:layout_below="@id/main_imgedsa"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.187"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/main_imgedsa"
+        app:layout_constraintVertical_bias="0.148">
+
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/main_loginUsername"
             android:layout_width="250dp"
             android:layout_height="50dp"
-            android:ems="10"
-            android:textSize="20sp"
-            android:textColor="@color/kolaloka"
             android:layout_gravity="center"
+            android:ems="10"
+            android:hint="@string/usuario"
+            android:inputType="textVisiblePassword"
             android:singleLine="true"
-            android:hint="Usuario"
-            android:inputType="textVisiblePassword"/>
+            android:textColor="@color/kolaloka"
+            android:textSize="20sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -39,58 +51,60 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/main_element1"
-        app:passwordToggleTint="@color/kolaloka"
-        app:passwordToggleEnabled="true">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/main_element1"
+        app:layout_constraintVertical_bias="0.115"
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="@color/kolaloka">
+
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/main_loginPassword"
             android:layout_width="250dp"
             android:layout_height="50dp"
-            android:ems="10"
-            android:textSize="20sp"
-            android:textColor="@color/kolaloka"
             android:layout_gravity="center"
+            android:ems="10"
+            android:hint="@string/contrase_a"
+            android:inputType="textPassword"
             android:singleLine="true"
-            android:hint="Contraseña"
-            android:inputType="textPassword" />
+            android:textColor="@color/kolaloka"
+            android:textSize="20sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/main_btnAcceder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=" Acceder "
+        android:layout_below="@id/main_element2"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/btn_user_style"
+        android:elevation="5dp"
+        android:text="@string/acceder"
         android:textAllCaps="false"
         android:textColor="@color/txt_pressed_user_style"
         android:textSize="30sp"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/btn_user_style"
-        android:layout_centerHorizontal="true"
-        android:elevation="5dp"
-        android:layout_below="@id/main_element2"/>
-
-    <TextView
-        android:id="@+id/main_newuser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/main_btnAcceder"
-        android:layout_marginTop="40dp"
-        android:layout_centerHorizontal="true"
-        android:gravity="center_horizontal"
-        android:text="Nuevo usuario"
-        android:visibility="gone"
-        android:textColor="@color/txt_pressed_user_style"
-        android:textSize="20sp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/main_element2"
+        app:layout_constraintVertical_bias="0.365" />
 
     <TextView
         android:id="@+id/main_forgotPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_centerHorizontal="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
         android:gravity="center_horizontal"
-        android:text="Olvidé mis datos"
+        android:text="@string/olvid_mis_datos"
         android:textColor="@color/txt_pressed_user_style"
-        android:textSize="20sp" />
-</RelativeLayout>
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.996"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/main_btnAcceder"
+        app:layout_constraintVertical_bias="0.769" />
+</androidx.constraintlayout.widget.ConstraintLayout>

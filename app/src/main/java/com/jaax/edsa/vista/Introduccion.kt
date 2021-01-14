@@ -28,4 +28,6 @@ class Introduccion: AppCompatActivity() {
             ignored.printStackTrace()
         }
     }
+
+    override fun onBackPressed() {}
 }

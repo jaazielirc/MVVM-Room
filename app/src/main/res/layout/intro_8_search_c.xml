@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -8,79 +9,93 @@
         android:id="@+id/notify_txt4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:gravity="start"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
         android:text="@string/notify_txt4"
         android:textColor="@color/blanco"
         android:textSize="23sp"
-        android:gravity="start"
-        android:layout_marginTop="15dp"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/notify_img1"
         android:layout_width="290dp"
-        android:layout_height="220dp"
+        android:layout_height="130dp"
+        android:layout_below="@id/notify_txt4"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
+        android:contentDescription="@string/app_name"
         android:src="@drawable/edsa_search_4"
-        android:layout_below="@id/notify_txt4"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/notify_txt4" />
 
     <TextView
         android:id="@+id/notify_txt5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/notify_img1"
+        android:gravity="start"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
         android:text="@string/notify_txt5"
         android:textColor="@color/blanco"
         android:textSize="23sp"
-        android:gravity="start"
-        android:layout_marginTop="15dp"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
-        android:layout_below="@id/notify_img1"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/notify_img1" />
 
     <ImageView
         android:id="@+id/notify_img2"
         android:layout_width="290dp"
-        android:layout_height="180dp"
+        android:layout_height="130dp"
+        android:layout_below="@id/notify_txt5"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
+        android:contentDescription="@string/app_name"
         android:src="@drawable/edsa_search_5"
-        android:layout_below="@id/notify_txt5"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/notify_txt5" />
 
     <Button
         android:id="@+id/notify_previous"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="62dp"
+        android:layout_marginEnd="91dp"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/btn_previous_style"
+        android:elevation="5dp"
         android:text="@string/retroceder"
         android:textAllCaps="false"
         android:textColor="@color/txt_pressed_user_style"
-        android:background="@drawable/btn_previous_style"
-        android:elevation="5dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignEnd="@id/separacion"
-        android:layout_marginBottom="40dp"
-        android:layout_marginEnd="50dp"/>
-
-    <TextView
-        android:id="@+id/separacion"
-        android:layout_width="50dp"
-        android:layout_height="5dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:textColor="@color/negro"
-        android:layout_below="@id/notify_img2"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/notify_next"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/notify_img2" />
 
     <Button
         android:id="@+id/notify_next"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="62dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/btn_next_style"
+        android:elevation="5dp"
         android:text="@string/avanzar"
         android:textAllCaps="false"
         android:textColor="@color/txt_pressed_user_style"
-        android:background="@drawable/btn_next_style"
-        android:elevation="5dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@id/separacion"
-        android:layout_marginStart="50dp"
-        android:layout_marginBottom="40dp"/>
-</RelativeLayout>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/notify_img2" />
+</androidx.constraintlayout.widget.ConstraintLayout>

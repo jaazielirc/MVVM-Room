@@ -17,7 +17,6 @@ import java.lang.NullPointerException
 
 class LoginUsuario: AppCompatActivity() {
     private lateinit var txtForPsswrd: TextView
-    private lateinit var txtNewUser: TextView
     private lateinit var btnAcceder: Button
     private lateinit var edTxtUsuario: EditText
     private lateinit var edTxtPsswrd: EditText
@@ -46,7 +45,6 @@ class LoginUsuario: AppCompatActivity() {
         edTxtPsswrd = findViewById(R.id.main_loginPassword)
         btnAcceder = findViewById(R.id.main_btnAcceder)
         txtForPsswrd = findViewById(R.id.main_forgotPassword)
-        txtNewUser = findViewById(R.id.main_newuser)
         db = DBHelper(this.applicationContext, DBHelper.nombreDB, null, DBHelper.version)
         toast = Toast.makeText(this.applicationContext, "txt", Toast.LENGTH_SHORT)
         toast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0)
