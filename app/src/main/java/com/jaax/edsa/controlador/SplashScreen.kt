@@ -5,16 +5,23 @@ import android.database.sqlite.SQLiteException
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.jaax.edsa.R
+import com.jaax.edsa.modelo.DBHModulo
 import com.jaax.edsa.modelo.DBHelper
 import com.jaax.edsa.modelo.Usuario
 import com.jaax.edsa.vista.Introduccion
+import javax.inject.Inject
 
 class SplashScreen: AppCompatActivity() {
+    @Inject
+    private lateinit var dbh: DBHelper
     private lateinit var db: DBHelper
     private lateinit var usuario: Usuario
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.splash_screen)
+
+        (application as App).getDBHelper().inject(this)
+        dbh //a testear
 
         val thread = object : Thread(){
             override fun run() {
