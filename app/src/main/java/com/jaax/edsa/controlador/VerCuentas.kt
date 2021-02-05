@@ -9,12 +9,16 @@ import android.view.Gravity
 import android.view.View
 import android.widget.*
 import androidx.fragment.app.DialogFragment
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.jaax.edsa.R
 import com.jaax.edsa.controlador.*
 import com.jaax.edsa.modelo.Cuenta
 import com.jaax.edsa.modelo.DBHelper
 import com.jaax.edsa.modelo.Email
+import kotlinx.android.synthetic.main.show_accounts.*
+import kotlinx.android.synthetic.main.show_emails.*
 import java.lang.ClassCastException
 import java.sql.SQLException
 
@@ -58,6 +62,9 @@ class VerCuentas(emailElegido: Email): DialogFragment() {
     override fun onStart() {
         super.onStart()
         mostrarCuentas()
+        MobileAds.initialize( activity!!.applicationContext )
+        val adRequest = AdRequest.Builder().build()
+        adview3.loadAd( adRequest )
     }
 
     override fun onResume() {

@@ -44,6 +44,15 @@
         android:padding="10dp"
         android:layout_marginBottom="20dp"/>
 
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adview2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="116dp"
+        android:layout_below="@id/textNoEmail"
+        app:adSize="BANNER"
+        app:adUnitId="ca-app-pub-8133052963274724~8703737904" />
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/emails_add"
         android:layout_width="wrap_content"

@@ -78,17 +78,16 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/main_element2"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="56dp"
         android:background="@drawable/btn_user_style"
         android:elevation="5dp"
         android:text="@string/acceder"
         android:textAllCaps="false"
         android:textColor="@color/txt_pressed_user_style"
         android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_element2"
-        app:layout_constraintVertical_bias="0.365" />
+        app:layout_constraintTop_toBottomOf="@+id/main_element2" />
 
     <TextView
         android:id="@+id/main_forgotPassword"
@@ -107,4 +106,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/main_btnAcceder"
         app:layout_constraintVertical_bias="0.769" />
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adview1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="116dp"
+        app:adSize="BANNER"
+        app:adUnitId="ca-app-pub-8133052963274724~8703737904"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.812"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

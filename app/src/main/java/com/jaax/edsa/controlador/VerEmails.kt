@@ -12,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.SwitchCompat
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.jaax.edsa.controlador.*
 import com.jaax.edsa.modelo.DBHelper
@@ -20,6 +22,7 @@ import com.jaax.edsa.R
 import com.jaax.edsa.modelo.Cuenta
 import com.jaax.edsa.modelo.Usuario
 import com.jaax.edsa.vista.NotificationService
+import kotlinx.android.synthetic.main.show_emails.*
 
 class VerEmails: AppCompatActivity(),
     AddMailFragment.OnCallbackReceivedAdd,
@@ -63,8 +66,11 @@ class VerEmails: AppCompatActivity(),
         toast = Toast.makeText(this.applicationContext, "txt", Toast.LENGTH_LONG)
         toast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0)
         prevPass = ArrayList(0)
-
         initUsuarioLogueado()
+
+        MobileAds.initialize(this@VerEmails)
+        val adRequest = AdRequest.Builder().build()
+        adview2.loadAd( adRequest )
     }
 
     override fun onStart() {

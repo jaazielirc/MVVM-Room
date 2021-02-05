@@ -10,9 +10,12 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
 import com.jaax.edsa.modelo.DBHelper
 import com.jaax.edsa.modelo.Usuario
 import com.jaax.edsa.R
+import kotlinx.android.synthetic.main.login_usuario.*
 import java.lang.NullPointerException
 
 class LoginUsuario: AppCompatActivity() {
@@ -50,6 +53,10 @@ class LoginUsuario: AppCompatActivity() {
         toast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0)
         init()
         edTxtUsuario.setText(usuarioActual.nombre)
+
+        MobileAds.initialize(this@LoginUsuario)
+        val adRequest = AdRequest.Builder().build()
+        adview1.loadAd( adRequest )
     }
 
     override fun onResume() {
