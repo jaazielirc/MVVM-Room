@@ -8,12 +8,13 @@ EDSA es una buena opción para almacenarlos_
 _Sólo un poco de paciencia_
 
 ## Instalación 🔧
-_Puedes dirigirte a esta ruta [RUTA] donde encontrarás el **app_build.apk** para instalarlo en tu dispositivo_
+_Puedes entrar a este [link](https://play.google.com/store/apps/details?id=com.jaax.edsa) en la **Playstore** para instalarlo en tu dispositivo_
 
 ## Elementos utilizados con mayor relevancia 🛠️
 * SQLite
 * Dagger2 (en pruebas aún)
 * Notificaciones
+* Patron de arquitectura MVC
 * Fragments Personalizados
 * Diseños personalizados en XML
 
