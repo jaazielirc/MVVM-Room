@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -11,9 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/azulCSuave"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_alignParentTop="true"
         app:title="Cuentas"
         app:titleTextColor="@color/negro" />
 
@@ -21,15 +19,11 @@
         android:id="@+id/imgNoAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/account_toolbar"
+        android:layout_below="@id/adview3"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="70dp"
+        android:layout_centerVertical="true"
         android:contentDescription="@string/app_name"
-        android:src="@drawable/noaccount"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.8"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/account_toolbar" />
+        android:src="@drawable/noaccount" />
 
     <TextView
         android:id="@+id/txtNoAccount"
@@ -39,33 +33,25 @@
         android:gravity="center"
         android:text="@string/no_hay_cuentas_agregadas"
         android:textColor="@color/grisClaro"
-        android:textSize="25sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgNoAccount" />
+        android:textSize="25sp" />
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/adview3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="440dp"
+        android:layout_below="@id/account_toolbar"
         app:adSize="BANNER"
-        app:adUnitId="ca-app-pub-8133052963274724~8703737904"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:adUnitId="ca-app-pub-8133052963274724/8019229662" />
 
     <ListView
         android:id="@+id/accounts_lista"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/account_toolbar"
-        android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.666"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/account_toolbar" />
+        android:layout_below="@id/adview3"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="5dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/account_add"
@@ -78,13 +64,8 @@
         android:layout_marginEnd="40dp"
         android:layout_marginBottom="10dp"
         android:contentDescription="@string/app_name"
+        android:visibility="visible"
         app:backgroundTint="@color/aguamarina"
         app:elevation="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtNoAccount"
-        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/baseline_create_new_folder_black_18dp" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

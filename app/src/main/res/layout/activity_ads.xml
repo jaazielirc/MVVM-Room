@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".vista.AdsActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Si gustas apoyarme para ganar algo de $, puedes dar clic en los anuncios debajo"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:textStyle="bold"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Gracias!"
+        android:layout_marginTop="10dp"
+        android:textSize="30sp"
+        android:gravity="center"
+        android:textStyle="bold"/>
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adview4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:adSize="BANNER"
+        app:adUnitId="ca-app-pub-8133052963274724/7634719305" />
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adview5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:adSize="BANNER"
+        app:adUnitId="ca-app-pub-8133052963274724/6321637634" />
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adview6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:adSize="BANNER"
+        app:adUnitId="ca-app-pub-8133052963274724/9359219732" />
+
+</LinearLayout>

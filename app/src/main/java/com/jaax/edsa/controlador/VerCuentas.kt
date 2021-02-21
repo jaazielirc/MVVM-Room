@@ -10,6 +10,7 @@ import android.view.View
 import android.widget.*
 import androidx.fragment.app.DialogFragment
 import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.jaax.edsa.R
@@ -29,6 +30,7 @@ class VerCuentas(emailElegido: Email): DialogFragment() {
     private lateinit var txtNoAccount: TextView
     private lateinit var imgNoAccount: ImageView
     private lateinit var toast: Toast
+    private lateinit var adview3: AdView
     private lateinit var cuentaAdapter: CuentaAdapter
     private lateinit var callBack: OnCallbackReceivedView
     private var emailActual: Email
@@ -51,6 +53,7 @@ class VerCuentas(emailElegido: Email): DialogFragment() {
         listaCuentas = view.findViewById(R.id.accounts_lista)
         txtNoAccount = view.findViewById(R.id.txtNoAccount)
         imgNoAccount = view.findViewById(R.id.imgNoAccount)
+        adview3 = view.findViewById(R.id.adview3)
         db = DBHelper(activity!!.applicationContext, DBHelper.nombreDB, null, DBHelper.version)
         toast = Toast.makeText(activity!!.applicationContext, "txt", Toast.LENGTH_SHORT)
         toast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0)
@@ -63,6 +66,7 @@ class VerCuentas(emailElegido: Email): DialogFragment() {
         super.onStart()
         mostrarCuentas()
         MobileAds.initialize( activity!!.applicationContext )
+
         val adRequest = AdRequest.Builder().build()
         adview3.loadAd( adRequest )
     }

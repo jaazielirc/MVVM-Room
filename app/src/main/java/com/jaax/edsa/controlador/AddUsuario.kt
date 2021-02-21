@@ -94,8 +94,11 @@ class AddUsuario: AppCompatActivity() {
     private fun datosValidos(name: String, pss: String, key: String): Boolean{
         val counts = arrayOf(0, 0, 0)
         val regexU = Regex("(?=.*[a-zA-Z])\\S{4,15}" ) //puede aceptar letras
-        val regexP = Regex("(?=.*[a-zA-Z])(?=.*\\d)(?=.*[,._*%-])\\S{8,100}")
-        val regexK = Regex("(?=.*[a-zA-Z])(?=.*[,._*%-])\\S{6,15}")
+        val regexP = Regex("(?=.*[a-zA-Z])\\S{6,100}")
+        val regexK = Regex("(?=.*[a-zA-Z])\\S{4,15}")
+
+        //val regexP = Regex("(?=.*[a-zA-Z])(?=.*\\d)(?=.*[,._*%-])\\S{8,100}")
+        //val regexK = Regex("(?=.*[a-zA-Z])(?=.*[,._*%-])\\S{6,15}")
         toast.setText("Si necesitas ayuda, toca '?' para más información")
 
         if( name=="" || pss=="" || key=="" ){

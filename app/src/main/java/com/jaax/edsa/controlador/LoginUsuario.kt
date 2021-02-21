@@ -11,6 +11,7 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
 import com.jaax.edsa.modelo.DBHelper
 import com.jaax.edsa.modelo.Usuario
@@ -25,6 +26,7 @@ class LoginUsuario: AppCompatActivity() {
     private lateinit var edTxtPsswrd: EditText
     private lateinit var db: DBHelper
     private lateinit var toast: Toast
+    private lateinit var adview1: AdView
     private lateinit var usuarioActual: Usuario
 
     private fun init() {
@@ -48,6 +50,7 @@ class LoginUsuario: AppCompatActivity() {
         edTxtPsswrd = findViewById(R.id.main_loginPassword)
         btnAcceder = findViewById(R.id.main_btnAcceder)
         txtForPsswrd = findViewById(R.id.main_forgotPassword)
+        adview1 = findViewById(R.id.adview1)
         db = DBHelper(this.applicationContext, DBHelper.nombreDB, null, DBHelper.version)
         toast = Toast.makeText(this.applicationContext, "txt", Toast.LENGTH_SHORT)
         toast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0)

@@ -51,7 +51,7 @@
         android:layout_marginBottom="116dp"
         android:layout_below="@id/textNoEmail"
         app:adSize="BANNER"
-        app:adUnitId="ca-app-pub-8133052963274724~8703737904" />
+        app:adUnitId="ca-app-pub-8133052963274724/4791071720" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/emails_add"

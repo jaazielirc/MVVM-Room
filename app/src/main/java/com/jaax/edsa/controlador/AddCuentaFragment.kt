@@ -114,7 +114,7 @@ class AddCuentaFragment(emailPadre: Email): DialogFragment() {
             toast.setText("Ingresa un tipo válido (YT, FB, Twitter, etc)")
             toast.setGravity(Gravity.BOTTOM, 0, 0)
             toast.show()
-            counts[2]++
+            counts[1]++
         }
         if(counts[0]==0 && counts[1]==0 )
             return true

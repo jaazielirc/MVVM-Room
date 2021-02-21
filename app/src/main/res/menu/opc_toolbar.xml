@@ -14,4 +14,10 @@
         android:title="Ver passwords"
         app:showAsAction="always"
         app:actionViewClass="androidx.appcompat.widget.SwitchCompat"/>
+
+    <item
+        android:id="@+id/menu_supportByAds"
+        android:title="Ayudar con un clic"
+        app:showAsAction="always"
+        app:actionViewClass="android.widget.ImageView" />
 </menu>

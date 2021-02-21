@@ -13,6 +13,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.SwitchCompat
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.jaax.edsa.controlador.*
@@ -21,6 +22,7 @@ import com.jaax.edsa.modelo.Email
 import com.jaax.edsa.R
 import com.jaax.edsa.modelo.Cuenta
 import com.jaax.edsa.modelo.Usuario
+import com.jaax.edsa.vista.AdsActivity
 import com.jaax.edsa.vista.NotificationService
 import kotlinx.android.synthetic.main.show_emails.*
 
@@ -40,6 +42,8 @@ class VerEmails: AppCompatActivity(),
     private lateinit var prevPass: ArrayList<String>
     private lateinit var switchView: SwitchCompat
     private lateinit var swipeRefresh: SwipeRefreshLayout
+    private lateinit var adview2: AdView
+    private lateinit var imgAds: ImageView
     private lateinit var usuarioActual: Usuario
 
     private fun initUsuarioLogueado(){
@@ -62,6 +66,7 @@ class VerEmails: AppCompatActivity(),
         txtNoEmail = findViewById(R.id.textNoEmail)
         imgNoEmail = findViewById(R.id.imgNoEmail)
         swipeRefresh = findViewById(R.id.emails_refresh)
+        adview2 = findViewById(R.id.adview2)
         db = DBHelper(this.applicationContext, DBHelper.nombreDB, null, DBHelper.version)
         toast = Toast.makeText(this.applicationContext, "txt", Toast.LENGTH_LONG)
         toast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0)
@@ -222,6 +227,8 @@ class VerEmails: AppCompatActivity(),
 
         val searchView = menu?.findItem(R.id.menu_searchview)!!.actionView as SearchView
         switchView = menu.findItem(R.id.menu_view_password).actionView as SwitchCompat
+        imgAds = menu.findItem(R.id.menu_supportByAds).actionView as ImageView
+        imgAds.setImageResource( R.drawable.baseline_monetization_on_black_18dp )
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -248,6 +255,11 @@ class VerEmails: AppCompatActivity(),
             } else {
                 hideAndRefillPasswords(prevPass, emailAdapter, true)
             }
+        }
+
+        imgAds.setOnClickListener {
+            val intent = Intent( this, AdsActivity::class.java )
+            startActivity( intent )
         }
         return super.onCreateOptionsMenu(menu)
     }
