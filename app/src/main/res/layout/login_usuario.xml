@@ -11,27 +11,23 @@
 
     <ImageView
         android:id="@+id/main_imgedsa"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:contentDescription="@string/app_name"
         android:src="@drawable/edsalogo"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/main_element1"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/main_imgedsa"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.187"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_imgedsa"
-        app:layout_constraintVertical_bias="0.148">
+        app:layout_constraintTop_toBottomOf="@+id/main_imgedsa">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/main_loginUsername"
@@ -48,14 +44,12 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/main_element2"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/main_element1"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/main_element1"
-        app:layout_constraintVertical_bias="0.115"
         app:passwordToggleEnabled="true"
         app:passwordToggleTint="@color/kolaloka">
 
@@ -79,14 +73,12 @@
         android:layout_below="@id/main_element2"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="56dp"
-        android:layout_marginBottom="14dp"
         android:background="@drawable/btn_user_style"
         android:elevation="5dp"
         android:text="@string/acceder"
         android:textAllCaps="false"
         android:textColor="@color/txt_pressed_user_style"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/adview1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/main_element2" />
@@ -98,28 +90,24 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
         android:gravity="center_horizontal"
         android:text="@string/olvid_mis_datos"
         android:textColor="@color/txt_pressed_user_style"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.996"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_btnAcceder"
-        app:layout_constraintVertical_bias="0.769" />
+        app:layout_constraintTop_toBottomOf="@+id/adview1" />
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/adview1"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
-        android:layout_marginBottom="116dp"
+        android:layout_marginTop="32dp"
         app:adSize="BANNER"
         app:adUnitId="ca-app-pub-8133052963274724/9139372669"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.812"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/main_btnAcceder" />
 </androidx.constraintlayout.widget.ConstraintLayout>
