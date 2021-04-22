@@ -11,19 +11,12 @@ import androidx.fragment.app.DialogFragment
 import com.jaax.edsa.R
 import com.jaax.edsa.modelo.Cuenta
 import com.jaax.edsa.modelo.DBHelper
-import com.jaax.edsa.modelo.Email
 
-class DeleteCuentaFragment(cuentaForDelete: Cuenta, emailForReference: Email): DialogFragment() {
+class DeleteCuentaFragment(cuentaForDelete: Cuenta): DialogFragment() {
 
     private lateinit var db: DBHelper
     private lateinit var toast: Toast
-    private var cuenta: Cuenta
-    private var email: Email
-
-    init {
-        this.cuenta = cuentaForDelete
-        this.email = emailForReference
-    }
+    private var cuenta: Cuenta = cuentaForDelete
 
     @SuppressLint("ShowToast")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -65,12 +58,5 @@ class DeleteCuentaFragment(cuentaForDelete: Cuenta, emailForReference: Email): D
             }
         }catch(sql: SQLiteException){sql.printStackTrace()}
         return eliminar
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        VerCuentas(email).show(
-            this@DeleteCuentaFragment.activity!!.supportFragmentManager, "delCuenta"
-        )
     }
 }

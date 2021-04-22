@@ -13,10 +13,9 @@ import androidx.fragment.app.DialogFragment
 import com.jaax.edsa.R
 import com.jaax.edsa.modelo.Cuenta
 import com.jaax.edsa.modelo.DBHelper
-import com.jaax.edsa.modelo.Email
 import java.sql.SQLException
 
-class UpdateCuentaFragment(cuentaForUpdate: Cuenta, emailForReference: Email): DialogFragment() {
+class UpdateCuentaFragment(cuentaForUpdate: Cuenta): DialogFragment() {
 
     private lateinit var db: DBHelper
     private lateinit var toast: Toast
@@ -27,13 +26,7 @@ class UpdateCuentaFragment(cuentaForUpdate: Cuenta, emailForReference: Email): D
     private lateinit var toggleUser: ToggleButton
     private lateinit var togglePsswrd: ToggleButton
     private lateinit var toggleTipo: ToggleButton
-    private var cuenta: Cuenta
-    private var email: Email
-
-    init {
-        this.cuenta = cuentaForUpdate
-        this.email = emailForReference
-    }
+    private var cuenta: Cuenta = cuentaForUpdate
 
     @SuppressLint("ShowToast")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -74,9 +67,6 @@ class UpdateCuentaFragment(cuentaForUpdate: Cuenta, emailForReference: Email): D
             val edTextType = edTxtTipo.text.toString()
             val newCuenta = Cuenta( cuenta.ID, edTextUser, edTextPass, edTextType )
 
-            /*Log.i("OrigiEmail", "${email.ID} - ${email.nombre} - ${email.passwrd}")
-            Log.i("ModifEmail", "${newEmail.ID} - ${newEmail.nombre} - ${newEmail.passwrd}")*/
-
             val acceso = datosValidos(newCuenta.usuario, newCuenta.passwrd, cuenta.tipo)
 
             if(acceso){
@@ -99,14 +89,6 @@ class UpdateCuentaFragment(cuentaForUpdate: Cuenta, emailForReference: Email): D
                 }
             }
         }
-        /*toggleUser.setOnCheckedChangeListener { _, isChecked ->
-            if( isChecked  ){
-                edTxtUsuario.isEnabled = true
-                edTxtUsuario.requestFocus()
-            } else {
-                edTxtUsuario.isEnabled = false
-            }
-        }*/
         togglePsswrd.setOnCheckedChangeListener { _, isChecked ->
             if( isChecked  ){
                 edTxtPsswrd.isEnabled = true
@@ -176,12 +158,5 @@ class UpdateCuentaFragment(cuentaForUpdate: Cuenta, emailForReference: Email): D
         if(counts[0]==0 && counts[1]==0 && counts[2]==0)
             return true
         return false
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        VerCuentas(email).show(
-            this@UpdateCuentaFragment.activity!!.supportFragmentManager, "updateCuentas"
-        )
     }
 }

@@ -29,8 +29,7 @@ import kotlinx.android.synthetic.main.show_emails.*
 class VerEmails: AppCompatActivity(),
     AddMailFragment.OnCallbackReceivedAdd,
     UpdateMailFragment.OnCallbackReceivedEdit,
-    DeleteMailFragment.OnCallbackReceivedDel,
-    VerCuentas.OnCallbackReceivedView {
+    DeleteMailFragment.OnCallbackReceivedDel {
 
     private lateinit var db: DBHelper
     private lateinit var addEmail: FloatingActionButton
@@ -101,33 +100,19 @@ class VerEmails: AppCompatActivity(),
             refreshListEmails()
             swipeRefresh.isRefreshing = false
         }
-        listaEmail.onItemLongClickListener = AdapterView.OnItemLongClickListener { _, view, pos, _ ->
+        /*listaEmail.onItemLongClickListener = AdapterView.OnItemLongClickListener { _, view, pos, _ ->
                 view?.isSelected = true
                 val popupMenu = PopupMenu(this@VerEmails, view)
                 popupMenu.menuInflater.inflate(R.menu.opc_email, popupMenu.menu)
                 popupMenu.setOnMenuItemClickListener { item ->
                     when (item?.itemId) {
                         R.id.menu_cuentas -> {
-
                             VerCuentas(usuarioActual.emails[pos]).show(this@VerEmails.supportFragmentManager, "verCuentas")
                         }
                         R.id.menu_editmail -> {
-                            addEmail.visibility = View.INVISIBLE
-                            val updt = UpdateMailFragment(usuarioActual.emails[pos], usuarioActual)
-                            val bundle = Bundle()
-                            val bundleNombre = usuarioActual.emails[pos].nombre
-                            val bundlePsswrd = usuarioActual.emails[pos].passwrd
-                            updt.arguments = bundle
-                            bundle.putString("bundleEmailNombre", bundleNombre)
-                            bundle.putString("bundleEmailPsswrd", bundlePsswrd)
-                            updt.show(this@VerEmails.supportFragmentManager, "updateEmail")
                         }
                         R.id.menu_delemail -> {
-                            addEmail.visibility = View.INVISIBLE
-                            DeleteMailFragment(
-                                usuarioActual.emails[pos],
-                                usuarioActual
-                            ).show(this@VerEmails.supportFragmentManager, "deleteEmail")
+
                         }
                     }
                     true
@@ -140,7 +125,7 @@ class VerEmails: AppCompatActivity(),
                 }
                 popupMenu.show()
                 true
-            }
+            }*/
     }
 
     private fun mostrarEmails() {
@@ -163,7 +148,7 @@ class VerEmails: AppCompatActivity(),
                 txtNoEmail.visibility = View.INVISIBLE
                 imgNoEmail.visibility = View.INVISIBLE
             }
-            emailAdapter = EmailAdapter(this.applicationContext, allEmails)
+            emailAdapter = EmailAdapter(this.applicationContext, supportFragmentManager, usuarioActual, allEmails)
             listaEmail.adapter = emailAdapter
             hideAndRefillPasswords(prevPass, emailAdapter, true)
         }catch (sql: SQLiteException){}
@@ -201,7 +186,6 @@ class VerEmails: AppCompatActivity(),
     }
 
     private fun setMissingDataEmail( allMails: ArrayList<Email> ): ArrayList<Email> {
-
         for( i: Int in 0 until allMails.size ){ //recorrer cada email
             val cursor = db.getCuentasById(allMails[i].nombre)
             val listaCuentas = ArrayList<Cuenta>()
@@ -281,13 +265,12 @@ class VerEmails: AppCompatActivity(),
     }
 
     override fun refreshByAdding() { refreshListEmails() }
-    override fun refreshByEditing() { refreshListEmails() }
     override fun refreshByDeleting() { refreshListEmails() }
-    override fun refreshByViewing() { refreshListEmails() }
+    override fun refreshByEditing() { refreshListEmails() }
 
-    override fun onDestroy() {
+    /*override fun onDestroy() {
         super.onDestroy()
         val service = Intent(this, NotificationService::class.java)
         startService(service)
-    }
+    }*/
 }

@@ -9,7 +9,8 @@
         android:id="@+id/emails_refresh"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true">
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/adview2">
         <ListView
             android:id="@+id/emails_lista"
             android:layout_width="wrap_content"
@@ -48,8 +49,9 @@
         android:id="@+id/adview2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="116dp"
-        android:layout_below="@id/textNoEmail"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         app:adSize="BANNER"
         app:adUnitId="ca-app-pub-8133052963274724/4791071720" />
 

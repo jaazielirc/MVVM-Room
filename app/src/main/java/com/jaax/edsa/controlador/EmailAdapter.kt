@@ -1,21 +1,30 @@
 package com.jaax.edsa.controlador
 
 import android.content.Context
+import android.os.Bundle
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
-import android.widget.Filter
-import android.widget.TextView
+import android.widget.*
+import androidx.fragment.app.FragmentManager
 import com.jaax.edsa.modelo.Email
 import com.jaax.edsa.R
+import com.jaax.edsa.modelo.Usuario
 
-class EmailAdapter(private val context: Context, var emails: ArrayList<Email>): BaseAdapter() {
+class EmailAdapter(
+    private val context: Context,
+    private val manager: FragmentManager,
+    private val usuario: Usuario,
+    var emails: ArrayList<Email>
+    ): BaseAdapter() {
 
     private class ViewHolder(view: View?){
-        var nombreEmail = view?.findViewById(R.id.adapter_email) as TextView
-        var password = view?.findViewById(R.id.adapter_psswrd) as TextView
+        val nombreEmail = view?.findViewById(R.id.adapter_email) as TextView
+        val password = view?.findViewById(R.id.adapter_psswrd) as TextView
+        val viewAccounts = view?.findViewById( R.id.imgBtnViewAccounts ) as ImageButton
+        val edit = view?.findViewById( R.id.imgBtnEdit ) as ImageButton
+        val delete = view?.findViewById( R.id.imgBtnDelete ) as ImageButton
     }
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view: View?
@@ -35,6 +44,25 @@ class EmailAdapter(private val context: Context, var emails: ArrayList<Email>): 
         viewHolder.nombreEmail.text = email.nombre
         viewHolder.password.text = email.passwrd
 
+        viewHolder.viewAccounts.setOnClickListener {
+            VerCuentas(email).show(manager, "verCuentas")
+        }
+        viewHolder.edit.setOnClickListener {
+            val updt = UpdateMailFragment(email, usuario)
+            val bundle = Bundle()
+            val bundleNombre = email.nombre
+            val bundlePsswrd = email.passwrd //asignar por medio de la BD
+            updt.arguments = bundle
+            bundle.putString("bundleEmailNombre", bundleNombre)
+            bundle.putString("bundleEmailPsswrd", bundlePsswrd)
+            updt.show(manager, "updateEmail")
+        }
+        viewHolder.delete.setOnClickListener {
+            DeleteMailFragment(
+                email,
+                usuario
+            ).show(manager, "deleteEmail")
+        }
         return view!!
     }
 

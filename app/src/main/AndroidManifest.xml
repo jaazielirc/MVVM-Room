@@ -57,7 +57,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
 
-        <service
+        <!-- service
             android:name=".vista.NotificationService"
             android:enabled="true"
             android:exported="false"
@@ -68,7 +68,7 @@
             android:name=".vista.NotificationReceiverO"
             android:enabled="true"
             android:exported="false">
-        </receiver>
+        </receiver -->
     </application>
 
 </manifest>
