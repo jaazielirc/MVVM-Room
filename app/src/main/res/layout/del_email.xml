@@ -3,34 +3,23 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="16dp"
-    android:background="@drawable/opc_usuario">
+    android:padding="16dp">
 
     <TextView
         android:id="@+id/deletequestion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/eliminar"
+        android:text="@string/delete_email"
         android:textSize="25sp"
         android:gravity="center"
         android:textColor="@color/negro"/>
-
-    <ImageView
-        android:id="@+id/imgdel"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:src="@drawable/errormoji"
-        android:contentDescription="@string/app_name"
-        android:layout_below="@id/deletequestion"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"/>
 
     <TextView
         android:id="@+id/alldeletedbyemail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/cuentas_asociadas"
-        android:layout_below="@id/imgdel"
+        android:text="@string/linked_accounts"
+        android:layout_below="@id/deletequestion"
         android:textColor="@color/rojo"
         android:textSize="20sp"
         android:gravity="center"
@@ -47,7 +36,7 @@
             android:layout_width="250dp"
             android:layout_height="50dp"
             android:ems="10"
-            android:hint="@string/palabra_secreta"
+            android:hint="@string/keyword"
             android:textColorHint="@color/azulCielo"
             android:textSize="20sp"
             android:textColor="@color/blanco"
@@ -60,13 +49,11 @@
         android:id="@+id/email_del_btnEliminar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/eliminar"
-        android:textAllCaps="false"
-        android:textColor="@color/txt_pressed_user_style"
-        android:textSize="30sp"
-        android:layout_marginTop="50dp"
-        android:background="@drawable/btn_user_style"
+        android:layout_below="@id/email_del_element3"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
         android:elevation="5dp"
-        android:layout_below="@id/email_del_element3"/>
+        android:text="@string/delete"
+        android:textAllCaps="false"
+        android:textSize="30sp" />
 </RelativeLayout>

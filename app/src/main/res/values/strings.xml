@@ -1,55 +1,31 @@
 <resources>
     <string name="app_name">EDSA</string>
-    <string name="extended_appname">Email Data Storage Application</string>
-    <string name="support_usr">El usuario debe contener mínimo 4 caracteres y máximo 15 sin espacios</string>
-    <string name="support_pss">La contraseña debe contener mínimo 6 caracteres sin espacios</string>
-    <string name="support_key1">La palabra secreta te ayudará a mantener tu cuenta más segura</string>
-    <string name="support_key2">Esta debe contener mínimo 4 caracteres sin espacios</string>
-    <string name="support_npss">La contraseña nueva debe contener mínimo 8 caracteres</string>
-    <string name="support_ncpss">La contraseña confirmada debe coincidir con la contraseña nueva</string>
-    <string name="avanzar">Avanzar</string>
-    <string name="retroceder">Retroceder</string>
-    <string name="registrarme">Registrarme</string>
-    <string name="quees_txt1">¿Qué es EDSA?</string>
-    <string name="quees_txt2">Es una aplicación para gestionar de mejor manera tus correos electrónicos y las cuentas asociadas a ellos.</string>
-    <string name="funciona_txt1">¿Cómo funciona?</string>
-    <string name="funciona_txt2">a) Haz clic en agregar email</string>
-    <string name="funciona_txt3">b) Completa el formulario</string>
-    <string name="funcionb_txt1">
-        Nos interesa asignarle una cuenta al email agregado\n\n
-        c) Haz clic en \'Ver cuentas\'
-    </string>
-    <string name="funcionb_txt2">d) Haz clic en agregar cuenta</string>
-    <string name="funcionc_txt1">e) Completa el formulario</string>
-    <string name="funcionc_txt2">Puedes editar o eliminar la cuenta recién agregada</string>
-    <string name="notify_txt1">f) Para búsqueda rápida puedes usar la barra de notificaciones</string>
-    <string name="notify_txt2">Ingresa un email que ya hayas agregado antes</string>
-    <string name="notify_txt3">Una nueva notificación aparecerá con los datos del email</string>
-    <string name="notify_txt4">g) Para buscar una cuenta asociada al email, sólo agrega "~" seguido del tipo de cuenta</string>
-    <string name="notify_txt5">Una nueva notificación aparecerá con los datos de la cuenta</string>
-    <string name="goto_txt1">¡ Felicidades !</string>
-    <string name="goto_txt2">
-        Has concluido el tutorial\n\n
-        Ahora puedes comenzar a usar EDSA
-    </string>
-    <string name="usuario">Usuario</string>
-    <string name="contrase_a">Contraseña</string>
-    <string name="acceder">Acceder</string>
-    <string name="olvid_mis_datos">Olvidé mis datos</string>
-    <string name="hola_nelige_una_opci_n">¡Hola!\nElige una opción</string>
-    <string name="tomar_el_tutorial">Tomar el tutorial</string>
-    <string name="registrarme_ahora">Registrarme ahora</string>
-    <string name="no_hay_emails_agregados">No hay emails agregados</string>
-    <string name="no_hay_cuentas_agregadas">No hay cuentas agregadas</string>
-    <string name="nombre_de_usuario">Nombre de Usuario</string>
-    <string name="palabra_secreta">Palabra secreta</string>
-    <string name="correo_electr_nico">Correo electrónico</string>
-    <string name="agregar">Agregar</string>
-    <string name="tipo_de_cuenta">Tipo de cuenta</string>
-    <string name="eliminar">Eliminar</string>
-    <string name="cuentas_asociadas">También se eliminarán las cuentas asociadas</string>
-    <string name="tipo_cuenta_ex">Tipo de cuenta (YT, FB, etc)</string>
-    <string name="guardar_cambios">Guardar cambios</string>
-    <string name="cambiar">Cambiar</string>
-    <string name="actualizar">Actualizar</string>
+    <string name="app_name_extended">Email Data Storage Application</string>
+    <string name="next">Siguiente</string>
+    <string name="previous">Anterior</string>
+    <string name="accept">Aceptar</string>
+    <string name="user">Usuario</string>
+    <string name="password">Contraseña</string>
+    <string name="log_in">Acceder</string>
+    <string name="no_emails">No hay emails agregados</string>
+    <string name="no_accounts">No hay cuentas agregadas</string>
+    <string name="username">Nombre de Usuario</string>
+    <string name="keyword">Palabra secreta</string>
+    <string name="email">Correo electrónico</string>
+    <string name="add">Agregar</string>
+    <string name="save">Guardar</string>
+    <string name="update">Actualizar</string>
+    <string name="delete">Eliminar</string>
+    <string name="linked_accounts">También se eliminarán las cuentas asociadas</string>
+    <string name="type_of_account">Tipo de cuenta (YT, FB, etc)</string>
+    <string name="edit_account">Editar cuenta</string>
+    <string name="delete_account">Eliminar cuenta</string>
+    <string name="read_accounts">Ver cuentas</string>
+    <string name="edit_email">Editar email</string>
+    <string name="delete_email">Eliminar email</string>
+    <string name="search">Buscar</string>
+    <string name="read_passwords">Ver contraseñas</string>
+    <string name="empty">" "</string>
+    <string name="img_description">imageview</string>
+    <string name="forgot_data">Olvidé mis datos</string>
 </resources>

@@ -1,25 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:padding="16dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/opc_usuario">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
 
     <ImageView
         android:id="@+id/imgsmile"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:src="@drawable/smilemoji"
-        android:contentDescription="@string/app_name"
+        android:contentDescription="@string/img_description"
         android:layout_centerHorizontal="true"/>
-
-    <ImageView
-        android:id="@+id/usr_reg_help"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/baseline_help_black_18dp"
-        android:layout_alignParentEnd="true"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/usr_reg_element1"
@@ -32,7 +24,7 @@
             android:layout_width="250dp"
             android:layout_height="50dp"
             android:ems="10"
-            android:hint="Usuario"
+            android:hint="@string/user"
             android:textColorHint="@color/azulCielo"
             android:textSize="20sp"
             android:textColor="@color/blanco"
@@ -53,7 +45,7 @@
             android:layout_width="250dp"
             android:layout_height="50dp"
             android:ems="10"
-            android:hint="Contraseña"
+            android:hint="@string/password"
             android:textColorHint="@color/azulCielo"
             android:textSize="20sp"
             android:textColor="@color/blanco"
@@ -72,7 +64,7 @@
             android:layout_width="250dp"
             android:layout_height="50dp"
             android:ems="10"
-            android:hint="Palabra Secreta"
+            android:hint="@string/keyword"
             android:textColorHint="@color/azulCielo"
             android:textSize="20sp"
             android:textColor="@color/blanco"
@@ -85,13 +77,10 @@
         android:id="@+id/usr_reg_btnRegistrar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=" Registrar "
-        android:textAllCaps="false"
-        android:textColor="@color/txt_pressed_user_style"
-        android:textSize="30sp"
-        android:layout_marginTop="50dp"
-        android:background="@drawable/btn_user_style"
+        android:layout_below="@id/usr_reg_element3"
         android:layout_centerHorizontal="true"
-        android:elevation="5dp"
-        android:layout_below="@id/usr_reg_element3"/>
+        android:layout_marginTop="50dp"
+        android:text="@string/save"
+        android:textAllCaps="false"
+        android:textSize="30sp" />
 </RelativeLayout>

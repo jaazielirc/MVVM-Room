@@ -13,21 +13,20 @@
     <color name="rosa">#ff9ac3</color>
     <color name="azulSuave">#a0a3ff</color>
     <color name="azulRey">#0a12f5</color>
-    <color name="ver_pistache">#61F679</color>
+    <color name="verdePistache">#61F679</color>
     <color name="lila">#DB71C3</color>
     <color name="morado">#AF27EA</color>
     <color name="background">#292929</color>
     <color name="agtive">#00FFFF</color>
-    <color name="lila_claro">#E0BAE0</color>
-    <color name="azulCSuave">#C9FAEB</color>
-    <color name="ama_suave">#FDFD9B</color>
+    <color name="lilaClaro">#E0BAE0</color>
+    <color name="azulCieloSuave">#C9FAEB</color>
+    <color name="amarilloSuave">#FDFD9B</color>
     <color name="grisClaro">#B1BFBB</color>
     <color name="naranja">#FEAE0E</color>
     <color name="mamey">#FF5733</color>
     <color name="aguamarina">#33FFBA</color>
     <color name="salmon">#FA8072</color>
-    <color name="casi_salmon">#EDA0A0</color>
-    <color name="medio_salmon">#802E2E</color>
+    <color name="salmonClaro">#EDA0A0</color>
     <drawable name="item_pressed_lv">#B1BFBB</drawable>
     <drawable name="item_select_lv">#61F679</drawable>
 </resources>

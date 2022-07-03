@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:contentDescription="@string/app_name"
+            android:contentDescription="@string/img_description"
             android:src="@drawable/baseline_group_black_18dp" />
 
         <TextView
@@ -29,11 +29,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="3dp"
-            android:background="@color/azulCSuave"
             android:focusable="false"
             android:focusableInTouchMode="false"
-            android:text="@string/tipo_de_cuenta"
-            android:textColor="@color/azulRey"
+            android:text="@string/type_of_account"
+            android:textColor="@color/negro"
             android:textSize="20sp" />
     </LinearLayout>
 
@@ -49,7 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:contentDescription="@string/app_name"
+            android:contentDescription="@string/img_description"
             android:src="@drawable/baseline_vpn_key_black_18dp" />
 
         <TextView
@@ -59,8 +58,8 @@
             android:layout_marginStart="10dp"
             android:focusable="false"
             android:focusableInTouchMode="false"
-            android:text="@string/contrase_a"
-            android:textColor="@color/naranja"
+            android:text="@string/password"
+            android:textColor="@color/negro"
             android:textSize="20sp" />
     </LinearLayout>
 
@@ -92,5 +91,4 @@
             android:backgroundTint="@color/blanco"
             tools:ignore="ContentDescription" />
     </LinearLayout>
-
 </RelativeLayout>

@@ -4,8 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp"
-    android:background="@drawable/bckgrnd_account_options">
+    android:padding="10dp">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/addacc_element1"
@@ -42,7 +41,7 @@
             android:layout_height="50dp"
             android:layout_gravity="center_horizontal"
             android:ems="10"
-            android:hint="@string/contrase_a"
+            android:hint="@string/password"
             android:inputType="textPassword|text"
             android:singleLine="true"
             android:textColor="@color/negro"
@@ -62,7 +61,7 @@
             android:layout_width="250dp"
             android:layout_height="50dp"
             android:ems="10"
-            android:hint="@string/tipo_de_cuenta"
+            android:hint="@string/type_of_account"
             android:textSize="20sp"
             android:textColor="@color/negro"
             android:layout_gravity="center"
@@ -74,14 +73,11 @@
         android:id="@+id/addacc_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/agregar"
+        android:text="@string/add"
         android:textAllCaps="false"
-        android:textColor="@color/txt_pressed_account_style"
         android:textSize="30sp"
         android:layout_marginTop="30dp"
-        android:background="@drawable/btn_account_style"
         android:layout_centerHorizontal="true"
-        android:elevation="5dp"
         android:layout_below="@id/addacc_element3"/>
 
 </RelativeLayout>

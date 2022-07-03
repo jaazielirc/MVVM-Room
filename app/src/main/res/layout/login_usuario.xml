@@ -7,14 +7,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    tools:context=".controlador.LoginUsuario">
+    tools:context=".LoginUsuario">
 
     <ImageView
         android:id="@+id/main_imgedsa"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/app_name"
-        android:src="@drawable/edsalogo"
+        android:contentDescription="@string/img_description"
+        android:src="@drawable/app_logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -35,7 +35,7 @@
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:ems="10"
-            android:hint="@string/usuario"
+            android:hint="@string/user"
             android:inputType="textVisiblePassword"
             android:singleLine="true"
             android:textColor="@color/kolaloka"
@@ -59,7 +59,7 @@
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:ems="10"
-            android:hint="@string/contrase_a"
+            android:hint="@string/password"
             android:inputType="textPassword"
             android:singleLine="true"
             android:imeOptions="actionDone"
@@ -74,11 +74,9 @@
         android:layout_below="@id/main_element2"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="56dp"
-        android:background="@drawable/btn_user_style"
         android:elevation="5dp"
-        android:text="@string/acceder"
+        android:text="@string/accept"
         android:textAllCaps="false"
-        android:textColor="@color/txt_pressed_user_style"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -93,25 +91,10 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="100dp"
         android:gravity="center_horizontal"
-        android:text="@string/olvid_mis_datos"
-        android:textColor="@color/txt_pressed_user_style"
+        android:text="@string/forgot_data"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.996"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/main_btnAcceder" />
-
-    <!-- com.google.android.gms.ads.interstitial.InterstitialAd
-        android:id="@+id/adview1"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        app:adSize="FLUID"
-        app:adUnitId="ca-app-pub-3940256099942544/1033173712"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_btnAcceder" / -->
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    <!-- app:adUnitId="ca-app-pub-8133052963274724~8703737904" -->

@@ -13,62 +13,41 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <meta-data
+        <!--meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-8133052963274724~8703737904" />
+            android:value="ca-app-pub-8133052963274724~8703737904" /-->
 
         <activity
-            android:name=".controlador.SplashScreen"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            android:name=".SplashScreen"
+            android:screenOrientation="fullSensor"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".vista.AdsActivity"
-            android:screenOrientation="portrait"
+        <activity
+            android:name=".LoginUsuario"
+            android:screenOrientation="fullSensor"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
         <activity
-            android:name=".controlador.LoginUsuario"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        </activity>
-        <activity
-            android:name=".controlador.AddUsuario"
-            android:screenOrientation="portrait"
+            android:name=".AddUsuario"
+            android:screenOrientation="fullSensor"
             android:theme="@style/AppTheme">
         </activity>
         <activity
-            android:name=".controlador.UpdateUsuario"
-            android:screenOrientation="portrait"
+            android:name=".UpdateUsuario"
+            android:screenOrientation="fullSensor"
             android:theme="@style/AppTheme">
         </activity>
         <activity
-            android:name=".controlador.VerEmails"
-            android:screenOrientation="portrait"
+            android:name=".VerEmails"
+            android:screenOrientation="fullSensor"
             android:theme="@style/EmailsStyle">
         </activity>
-        <activity
-            android:name=".vista.Introduccion"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        </activity>
-
-        <!-- service
-            android:name=".vista.NotificationService"
-            android:enabled="true"
-            android:exported="false"
-            android:label="service-search-email"
-            android:process=":remote">
-        </service>
-        <receiver
-            android:name=".vista.NotificationReceiverO"
-            android:enabled="true"
-            android:exported="false">
-        </receiver -->
     </application>
 
 </manifest>

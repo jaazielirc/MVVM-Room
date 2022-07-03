@@ -3,49 +3,21 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp"
-    android:background="@drawable/opc_usuario">
-
-    <ImageView
-        android:id="@+id/imgthink"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="8dp"
-        android:contentDescription="@string/app_name"
-        android:src="@drawable/thinkmoji"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-    <ImageView
-        android:id="@+id/edituser_help"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:contentDescription="@string/app_name"
-        android:src="@drawable/baseline_help_black_18dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/txtrecuperar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/imgthink"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="25dp"
         android:layout_marginEnd="16dp"
         android:gravity="center"
-        android:text="@string/cambiar"
+        android:text="@string/update"
         android:textColor="@color/negro"
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgthink" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/linearradio"
@@ -64,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/contrase_a"
+            android:text="@string/password"
             android:textAlignment="textStart"
             android:textColor="@color/negro"
             android:textSize="17sp" />
@@ -81,7 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/palabra_secreta"
+            android:text="@string/keyword"
             android:textAlignment="textEnd"
             android:textColor="@color/negro"
             android:textSize="17sp" />
@@ -194,8 +166,7 @@
         android:layout_marginStart="15dp"
         android:layout_marginEnd="330dp"
         android:layout_marginBottom="20dp"
-        android:background="@drawable/btn_goto_style"
-        android:contentDescription="@string/app_name"
+        android:contentDescription="@string/img_description"
         android:src="@drawable/arrow_back_24px"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -210,11 +181,9 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="80dp"
-        android:background="@drawable/btn_user_style"
         android:elevation="5dp"
-        android:text="@string/actualizar"
+        android:text="@string/update"
         android:textAllCaps="false"
-        android:textColor="@color/txt_pressed_user_style"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

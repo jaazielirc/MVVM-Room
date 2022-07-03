@@ -8,7 +8,7 @@
     </style>
 
     <style name="EmailsStyle" parent="Theme.AppCompat.Light">
-        <item name="colorPrimary">@color/ama_suave</item>
+        <item name="colorPrimary">@color/amarilloSuave</item>
         <item name="colorPrimaryDark">@color/azulCielo</item>
         <item name="colorAccent">@color/azulCielo</item>
         <item name="android:textColor">@color/negro</item>

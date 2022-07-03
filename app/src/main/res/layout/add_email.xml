@@ -4,8 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp"
-    android:background="@drawable/bckgrnd_email_options">
+    android:padding="10dp">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/addmail_element1"
@@ -16,7 +15,7 @@
             android:layout_width="250dp"
             android:layout_height="50dp"
             android:ems="10"
-            android:hint="@string/correo_electr_nico"
+            android:hint="@string/email"
             android:textColorHint="@color/agtive"
             android:textSize="20sp"
             android:textColor="@color/mamey"
@@ -40,7 +39,7 @@
             android:layout_height="50dp"
             android:layout_gravity="center_horizontal"
             android:ems="10"
-            android:hint="@string/contrase_a"
+            android:hint="@string/password"
             android:inputType="textPassword|text"
             android:singleLine="true"
             android:textColor="@color/mamey"
@@ -52,14 +51,12 @@
         android:id="@+id/addmail_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/agregar"
-        android:textAllCaps="false"
-        android:textColor="@color/txt_pressed_email_style"
-        android:textSize="30sp"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/btn_email_style"
+        android:layout_below="@id/addmail_element2"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
         android:elevation="5dp"
-        android:layout_below="@id/addmail_element2"/>
+        android:text="@string/password"
+        android:textAllCaps="false"
+        android:textSize="30sp" />
 
 </RelativeLayout>
