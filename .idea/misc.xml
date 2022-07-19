@@ -25,6 +25,7 @@
         <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/drawable/toggle_edit_style.xml" value="0.139" />
         <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/drawable/toggle_passwrd_style.xml" value="0.1395" />
         <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/drawable/toggle_psswrd_style.xml" value="0.139" />
+        <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/layout/activity_adduser.xml" value="0.196875" />
         <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/layout/activity_ads.xml" value="0.196875" />
         <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/layout/activity_reply.xml" value="0.196875" />
         <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/layout/add_account.xml" value="0.196875" />
@@ -37,6 +38,7 @@
         <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/layout/edit_account.xml" value="0.196875" />
         <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/layout/edit_email.xml" value="0.196875" />
         <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/layout/edit_usuario.xml" value="0.196875" />
+        <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/layout/fragment_adduser.xml" value="0.196875" />
         <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/layout/intro_1_opciones.xml" value="0.196875" />
         <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/layout/login_usuario.xml" value="0.196875" />
         <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/layout/show_accounts.xml" value="0.13148148148148148" />
@@ -49,7 +51,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

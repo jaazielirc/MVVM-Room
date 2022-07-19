@@ -10,10 +10,12 @@ import android.widget.EditText
 import android.widget.Toast
 import android.widget.ToggleButton
 import androidx.fragment.app.DialogFragment
+import com.jaax.edsa.data.model.Email
+import com.jaax.edsa.data.model.User
 import java.lang.ClassCastException
 import java.sql.SQLException
 
-class UpdateMailFragment(emailForUpdate: Email, usrForKeyword: Usuario): DialogFragment(){
+class UpdateMailFragment(emailForUpdate: Email, usrForKeyword: User): DialogFragment(){
     private lateinit var db: DBHelper
     private lateinit var toast: Toast
     private lateinit var edTxtEmail: EditText
@@ -26,11 +28,11 @@ class UpdateMailFragment(emailForUpdate: Email, usrForKeyword: Usuario): DialogF
     private lateinit var bundleP: String
     private lateinit var callBack: OnCallbackReceivedEdit
     private var email: Email
-    private var usuario: Usuario
+    private var user: User
 
     init {
         this.email = emailForUpdate
-        this.usuario = usrForKeyword
+        this.user = usrForKeyword
     }
 
     @SuppressLint("ShowToast")
@@ -82,9 +84,9 @@ class UpdateMailFragment(emailForUpdate: Email, usrForKeyword: Usuario): DialogF
             val edTextUser = edTxtEmail.text.toString()
             val edTextPass = edTxtPsswrd.text.toString()
             val edTextKey = edTxtKeyword.text.toString()
-            val newEmail = Email( usuario.nombre, edTextUser, edTextPass, ArrayList() )
+            val newEmail = Email( user.nombre, edTextUser, edTextPass, ArrayList() )
 
-            val acceso = datosValidos(newEmail.nombre, newEmail.passwrd, usuario.keyword, edTextKey)
+            val acceso = datosValidos(newEmail.nombre, newEmail.passwrd, user.keyword, edTextKey)
 
             if(acceso){
                 val edicion = modificarEmail(email, newEmail)

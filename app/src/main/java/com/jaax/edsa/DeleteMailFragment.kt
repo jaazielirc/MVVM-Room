@@ -11,9 +11,11 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import com.jaax.edsa.data.model.Email
+import com.jaax.edsa.data.model.User
 import java.lang.ClassCastException
 
-class DeleteMailFragment(emailForDelete: Email, usrForKeyword: Usuario): DialogFragment(){
+class DeleteMailFragment(emailForDelete: Email, usrForKeyword: User): DialogFragment(){
     private lateinit var db: DBHelper
     private lateinit var toast: Toast
     private lateinit var txtEmail: TextView
@@ -21,11 +23,11 @@ class DeleteMailFragment(emailForDelete: Email, usrForKeyword: Usuario): DialogF
     private lateinit var btnDelete: Button
     private lateinit var callBack: OnCallbackReceivedDel
     private var email: Email
-    private var usuario: Usuario
+    private var user: User
 
     init {
         this.email = emailForDelete
-        this.usuario = usrForKeyword
+        this.user = usrForKeyword
     }
 
     interface OnCallbackReceivedDel {
@@ -54,7 +56,7 @@ class DeleteMailFragment(emailForDelete: Email, usrForKeyword: Usuario): DialogF
         super.onResume()
         btnDelete.setOnClickListener {
             val keyTyped = keyword.text.toString()
-            if( usuario.keyword==keyTyped ){
+            if( user.keyword==keyTyped ){
                val deleteOk = eliminarEmail(email)
                if( deleteOk ){
                    toast.setText("Email eliminado")

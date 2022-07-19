@@ -8,11 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.FragmentManager
+import com.jaax.edsa.data.model.Email
+import com.jaax.edsa.data.model.User
 
 class EmailAdapter(
     private val context: Context,
     private val manager: FragmentManager,
-    private val usuario: Usuario,
+    private val user: User,
     var emails: ArrayList<Email>
     ): BaseAdapter() {
 
@@ -45,7 +47,7 @@ class EmailAdapter(
             VerCuentas(email).show(manager, "verCuentas")
         }
         viewHolder.edit.setOnClickListener {
-            val updt = UpdateMailFragment(email, usuario)
+            val updt = UpdateMailFragment(email, user)
             val bundle = Bundle()
             val bundleNombre = email.nombre
             val bundlePsswrd = email.passwrd //asignar por medio de la BD
@@ -57,7 +59,7 @@ class EmailAdapter(
         viewHolder.delete.setOnClickListener {
             DeleteMailFragment(
                 email,
-                usuario
+                user
             ).show(manager, "deleteEmail")
         }
         return view!!

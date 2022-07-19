@@ -13,6 +13,7 @@ import android.widget.Toast
 import com.google.android.gms.ads.*
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
+import com.jaax.edsa.data.model.User
 import java.lang.NullPointerException
 
 class LoginUsuario: AppCompatActivity() {
@@ -23,7 +24,7 @@ class LoginUsuario: AppCompatActivity() {
     private lateinit var db: DBHelper
     private lateinit var toast: Toast
     private var adview1: InterstitialAd? = null
-    private lateinit var usuarioActual: Usuario
+    private lateinit var userActual: User
 
     companion object {
         private const val TAG_AD = "Ads"
@@ -32,7 +33,7 @@ class LoginUsuario: AppCompatActivity() {
 
     private fun init() {
         val datosUsuario = this.intent.extras
-        usuarioActual = Usuario(
+        userActual = User(
             datosUsuario?.getString("usrNombre")!!,
             datosUsuario.getString("usrPassword")!!,
             datosUsuario.getString("usrKeyword")!!,
@@ -55,7 +56,7 @@ class LoginUsuario: AppCompatActivity() {
         toast = Toast.makeText(this.applicationContext, "txt", Toast.LENGTH_SHORT)
         toast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0)
         init()
-        edTxtUsuario.setText(usuarioActual.nombre)
+        edTxtUsuario.setText(userActual.nombre)
 
         MobileAds.initialize(this@LoginUsuario) {
             val adRequest = AdRequest.Builder().build()
@@ -68,10 +69,10 @@ class LoginUsuario: AppCompatActivity() {
         btnAcceder.setOnClickListener {
             val usr = edTxtUsuario.text.toString()
             val pss = edTxtPsswrd.text.toString()
-            usuarioActual.nombre = usr
-            usuarioActual.password = pss
+            userActual.nombre = usr
+            userActual.password = pss
 
-            val acceso = verificarLogin( usuarioActual.nombre, usuarioActual.password )
+            val acceso = verificarLogin( userActual.nombre, userActual.password )
             if( acceso ){
                 if( adview1 != null ){
                     adview1?.show( this )
@@ -86,9 +87,9 @@ class LoginUsuario: AppCompatActivity() {
 
         txtForPsswrd.setOnClickListener {
             val intent = Intent(this.applicationContext, UpdateUsuario::class.java)
-            intent.putExtra("Login_usrNombre", usuarioActual.nombre)
-            intent.putExtra("Login_usrPassword", usuarioActual.password)
-            intent.putExtra("Login_usrKeyword", usuarioActual.keyword)
+            intent.putExtra("Login_usrNombre", userActual.nombre)
+            intent.putExtra("Login_usrPassword", userActual.password)
+            intent.putExtra("Login_usrKeyword", userActual.keyword)
             startActivity(intent)
         }
     }
@@ -148,9 +149,9 @@ class LoginUsuario: AppCompatActivity() {
                             toast.show()
                             edTxtPsswrd.setText("")
                             val intent = Intent(this@LoginUsuario, VerEmails::class.java)
-                            intent.putExtra("Login_usrNombre", usuarioActual.nombre)
-                            intent.putExtra("Login_usrPassword", usuarioActual.password)
-                            intent.putExtra("Login_usrKeyword", usuarioActual.keyword)
+                            intent.putExtra("Login_usrNombre", userActual.nombre)
+                            intent.putExtra("Login_usrPassword", userActual.password)
+                            intent.putExtra("Login_usrKeyword", userActual.keyword)
                             startActivity(intent)
                             this@LoginUsuario.finish()
                         }

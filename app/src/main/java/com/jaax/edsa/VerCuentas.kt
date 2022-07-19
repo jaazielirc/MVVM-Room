@@ -14,9 +14,11 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.jaax.edsa.data.model.Account
+import com.jaax.edsa.data.model.Email
 import java.sql.SQLException
 
-class VerCuentas(emailElegido: Email): DialogFragment(), CuentaAdapter.DismissListener {
+class VerCuentas(emailElegido: Email): DialogFragment(), AccountAdapter.DismissListener {
 
     private lateinit var db: DBHelper
     private lateinit var addCuenta: FloatingActionButton
@@ -26,7 +28,7 @@ class VerCuentas(emailElegido: Email): DialogFragment(), CuentaAdapter.DismissLi
     private lateinit var imgNoAccount: ImageView
     private lateinit var toast: Toast
     private lateinit var adview3: AdView
-    private lateinit var cuentaAdapter: CuentaAdapter
+    private lateinit var accountAdapter: AccountAdapter
     private var emailActual: Email
 
     init {
@@ -77,42 +79,42 @@ class VerCuentas(emailElegido: Email): DialogFragment(), CuentaAdapter.DismissLi
     }
 
     private fun mostrarCuentas(){
-        val allCuentas = ArrayList<Cuenta>()
+        val allAccounts = ArrayList<Account>()
         try {
             val cursor = db.getCuentasById(emailActual.nombre)
             if( cursor.count>0 ){
                 while(cursor.moveToNext()){
-                    val cuenta = Cuenta(
+                    val account = Account(
                         emailActual.nombre,
                         cursor.getString(1),
                         cursor.getString(2),
                         cursor.getString(3)
                         )
-                    allCuentas.add(cuenta)
+                    allAccounts.add(account)
                 }
                 emailActual = setMissingDataCuenta(emailActual)
                 txtNoAccount.visibility = View.GONE
                 imgNoAccount.visibility = View.GONE
             }
-            cuentaAdapter = CuentaAdapter(activity!!.applicationContext, activity!!.supportFragmentManager, allCuentas)
-            listaCuentas.adapter = cuentaAdapter
+            accountAdapter = AccountAdapter(activity!!.applicationContext, activity!!.supportFragmentManager, allAccounts)
+            listaCuentas.adapter = accountAdapter
         }catch (sql: SQLException){}
     }
 
     private fun setMissingDataCuenta( currentEmail: Email): Email {
         val cursor = db.getCuentasById(currentEmail.nombre)
-        val listaCuentas = ArrayList<Cuenta>()
+        val listaAccounts = ArrayList<Account>()
 
         try { //no agrego 'if' xq si no tiene cuentas, entonces no hay nada que cliquear
             while( cursor.moveToNext() ) {
-                val cuenta = Cuenta(
+                val account = Account(
                     cursor.getString(0),
                     cursor.getString(1),
                     cursor.getString(2),
                     cursor.getString(3)
                 )
-                listaCuentas.add(cuenta)
-                currentEmail.cuentas = listaCuentas
+                listaAccounts.add(account)
+                currentEmail.accounts = listaAccounts
             }
         } catch(sqli: SQLiteException){ sqli.toString() }
         return currentEmail

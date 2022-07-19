@@ -8,12 +8,13 @@ import android.widget.BaseAdapter
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.fragment.app.FragmentManager
+import com.jaax.edsa.data.model.Account
 import java.lang.ClassCastException
 
-class CuentaAdapter(
+class AccountAdapter(
     private val context: Context,
     private val manager: FragmentManager,
-    private var cuentas: ArrayList<Cuenta>
+    private var accounts: ArrayList<Account>
     ): BaseAdapter() {
 
     private var callback: DismissListener? = null
@@ -50,30 +51,30 @@ class CuentaAdapter(
             viewHolder = view.tag as ViewHolder
         }
 
-        val cuenta: Cuenta = getItem(position) as Cuenta
-        viewHolder.password.text = cuenta.passwrd
-        viewHolder.tipo.text = cuenta.tipo
+        val account: Account = getItem(position) as Account
+        viewHolder.password.text = account.passwrd
+        viewHolder.tipo.text = account.tipo
 
         viewHolder.edit.setOnClickListener {
             callback?.dismissFragment( true )
             manager.popBackStack()
-            val updt = UpdateCuentaFragment(cuenta)
+            val updt = UpdateCuentaFragment(account)
             updt.show(manager, "updateCuenta")
         }
         viewHolder.delete.setOnClickListener {
             callback?.dismissFragment( true )
             manager.popBackStack()
-            val del = DeleteCuentaFragment(cuenta)
+            val del = DeleteCuentaFragment(account)
             del.show(manager, "delCuenta")
         }
         return view!!
     }
     override fun getCount(): Int {
-        return cuentas.count()
+        return accounts.count()
     }
 
     override fun getItem(p0: Int): Any {
-        return cuentas[p0]
+        return accounts[p0]
     }
 
     override fun getItemId(p0: Int): Long {

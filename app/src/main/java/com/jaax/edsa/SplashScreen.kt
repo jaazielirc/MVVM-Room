@@ -4,10 +4,11 @@ import android.content.Intent
 import android.database.sqlite.SQLiteException
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.jaax.edsa.data.model.User
 
 class SplashScreen: AppCompatActivity() {
     private lateinit var db: DBHelper
-    private lateinit var usuario: Usuario
+    private lateinit var user: User
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.splash_screen)
@@ -20,11 +21,11 @@ class SplashScreen: AppCompatActivity() {
                     sleep(3000)
                 } finally {
                     val intent = Intent(applicationContext, LoginUsuario::class.java)
-                    usuario = usuarioYaRegistrado()
-                    if( usuario.nombre != "R" ){ //significa que si existe un usuario
-                        intent.putExtra("usrNombre", usuario.nombre)
-                        intent.putExtra("usrPassword", usuario.password)
-                        intent.putExtra("usrKeyword", usuario.keyword)
+                    user = usuarioYaRegistrado()
+                    if( user.nombre != "R" ){ //significa que si existe un usuario
+                        intent.putExtra("usrNombre", user.nombre)
+                        intent.putExtra("usrPassword", user.password)
+                        intent.putExtra("usrKeyword", user.keyword)
                     }
                     startActivity(intent)
                     this@SplashScreen.finish()
@@ -34,18 +35,18 @@ class SplashScreen: AppCompatActivity() {
         thread.start()
     }
 
-    private fun usuarioYaRegistrado(): Usuario {
+    private fun usuarioYaRegistrado(): User {
         try {
             db = DBHelper(this.applicationContext, DBHelper.nombreDB, null, DBHelper.version)
         } catch(sqle: SQLiteException){
             sqle.printStackTrace()
         }
         val cursor = db.getAllUsuarios()
-        var usr = Usuario("?", "?", "?", ArrayList())
+        var usr = User("?", "?", "?", ArrayList())
 
         if(cursor.count>0) {
             while( cursor.moveToNext() ){
-                usr = Usuario(
+                usr = User(
                     cursor.getString(0),
                     cursor.getString(1),
                     cursor.getString(2),

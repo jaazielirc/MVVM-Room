@@ -8,15 +8,13 @@ import android.os.Bundle
 import android.view.Gravity
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
-import com.jaax.edsa.R
-import com.jaax.edsa.Cuenta
-import com.jaax.edsa.DBHelper
+import com.jaax.edsa.data.model.Account
 
-class DeleteCuentaFragment(cuentaForDelete: Cuenta): DialogFragment() {
+class DeleteCuentaFragment(accountForDelete: Account): DialogFragment() {
 
     private lateinit var db: DBHelper
     private lateinit var toast: Toast
-    private var cuenta: Cuenta = cuentaForDelete
+    private var account: Account = accountForDelete
 
     @SuppressLint("ShowToast")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -26,10 +24,10 @@ class DeleteCuentaFragment(cuentaForDelete: Cuenta): DialogFragment() {
 
         val builder = AlertDialog.Builder(activity)
         builder
-            .setMessage("¿Eliminar\n${cuenta.usuario} : ${cuenta.tipo}?")
+            .setMessage("¿Eliminar\n${account.usuario} : ${account.tipo}?")
             .setIcon(R.drawable.baseline_delete_black_18dp)
             .setPositiveButton("Eliminar") { _, _ ->
-                val delete = eliminarCuenta(cuenta)
+                val delete = eliminarCuenta(account)
                 if( delete ){
                     toast.setText("Cuenta eliminada")
                     toast.show()
@@ -43,13 +41,13 @@ class DeleteCuentaFragment(cuentaForDelete: Cuenta): DialogFragment() {
         return builder.create()
     }
 
-    private fun eliminarCuenta(delCuenta: Cuenta): Boolean {
-        val cursor = db.getDatosCuentaById(delCuenta.ID, delCuenta.tipo) //debe haber sólo 1 email si existe
+    private fun eliminarCuenta(delAccount: Account): Boolean {
+        val cursor = db.getDatosCuentaById(delAccount.ID, delAccount.tipo) //debe haber sólo 1 email si existe
         var eliminar = false
         try {
             if(cursor.count>0){
                 if( cursor.count>0 ){
-                    eliminar = db.delCuenta(delCuenta.ID, delCuenta.tipo)
+                    eliminar = db.delCuenta(delAccount.ID, delAccount.tipo)
                     return eliminar
                 } else {
                     toast.setText("Esa cuenta no existe (?")

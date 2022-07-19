@@ -10,9 +10,10 @@ import android.widget.EditText
 import android.widget.Toast
 import android.widget.ToggleButton
 import androidx.fragment.app.DialogFragment
+import com.jaax.edsa.data.model.Account
 import java.sql.SQLException
 
-class UpdateCuentaFragment(cuentaForUpdate: Cuenta): DialogFragment() {
+class UpdateCuentaFragment(accountForUpdate: Account): DialogFragment() {
 
     private lateinit var db: DBHelper
     private lateinit var toast: Toast
@@ -23,7 +24,7 @@ class UpdateCuentaFragment(cuentaForUpdate: Cuenta): DialogFragment() {
     private lateinit var toggleUser: ToggleButton
     private lateinit var togglePsswrd: ToggleButton
     private lateinit var toggleTipo: ToggleButton
-    private var cuenta: Cuenta = cuentaForUpdate
+    private var account: Account = accountForUpdate
 
     @SuppressLint("ShowToast")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -52,9 +53,9 @@ class UpdateCuentaFragment(cuentaForUpdate: Cuenta): DialogFragment() {
     }
 
     private fun initDatos() {
-        edTxtUsuario.setText( cuenta.usuario )
-        edTxtPsswrd.setText( cuenta.passwrd )
-        edTxtTipo.setText( cuenta.tipo )
+        edTxtUsuario.setText( account.usuario )
+        edTxtPsswrd.setText( account.passwrd )
+        edTxtTipo.setText( account.tipo )
     }
 
     private fun onClick() {
@@ -62,19 +63,19 @@ class UpdateCuentaFragment(cuentaForUpdate: Cuenta): DialogFragment() {
             val edTextUser = edTxtUsuario.text.toString()
             val edTextPass = edTxtPsswrd.text.toString()
             val edTextType = edTxtTipo.text.toString()
-            val newCuenta = Cuenta( cuenta.ID, edTextUser, edTextPass, edTextType )
+            val newAccount = Account( account.ID, edTextUser, edTextPass, edTextType )
 
-            val acceso = datosValidos(newCuenta.usuario, newCuenta.passwrd, cuenta.tipo)
+            val acceso = datosValidos(newAccount.usuario, newAccount.passwrd, account.tipo)
 
             if(acceso){
-                val edicion = modificarCuenta(cuenta, newCuenta)
+                val edicion = modificarCuenta(account, newAccount)
                 if(edicion){
                     toast.setText("Cuenta actualizada")
                     toast.setGravity(Gravity.CENTER_HORIZONTAL, 0 ,0)
                     toast.show()
                     dismiss()
                 } else {
-                    if( (cuenta.usuario==newCuenta.usuario) && (cuenta.passwrd==newCuenta.passwrd) && (cuenta.tipo==newCuenta.tipo) ){
+                    if( (account.usuario==newAccount.usuario) && (account.passwrd==newAccount.passwrd) && (account.tipo==newAccount.tipo) ){
                         toast.setText("No hay cambios a realizar")
                         toast.setGravity(Gravity.TOP, 0 ,0)
                         toast.show()
@@ -104,7 +105,7 @@ class UpdateCuentaFragment(cuentaForUpdate: Cuenta): DialogFragment() {
         }
     }
 
-    private fun modificarCuenta(accountAddress: Cuenta, newAccountAddress: Cuenta): Boolean{
+    private fun modificarCuenta(accountAddress: Account, newAccountAddress: Account): Boolean{
         val cursor = db.getDatosCuentaById(accountAddress.ID, accountAddress.tipo) //debe haber sólo 1 email si existe
         var actualizar = false
         try {

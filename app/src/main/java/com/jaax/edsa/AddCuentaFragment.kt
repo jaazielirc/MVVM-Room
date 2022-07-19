@@ -10,11 +10,13 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import com.jaax.edsa.data.model.Account
+import com.jaax.edsa.data.model.Email
 
 class AddCuentaFragment(emailPadre: Email): DialogFragment() {
     private lateinit var db: DBHelper
     private lateinit var toast: Toast
-    private lateinit var cuenta: Cuenta
+    private lateinit var account: Account
     private lateinit var edTxtUser: EditText
     private lateinit var edTxtPsswrd: EditText
     private lateinit var edTxtTipo: EditText
@@ -50,11 +52,11 @@ class AddCuentaFragment(emailPadre: Email): DialogFragment() {
             val user = edTxtUser.text.toString()
             val pass = edTxtPsswrd.text.toString()
             val type = edTxtTipo.text.toString()
-            cuenta = Cuenta(email.nombre, user, pass, type)
-            val acceso = datosValidos(cuenta.usuario, cuenta.tipo)
+            account = Account(email.nombre, user, pass, type)
+            val acceso = datosValidos(account.usuario, account.tipo)
 
             if( acceso ){
-                val registro = agregarNuevaCuenta(cuenta)
+                val registro = agregarNuevaCuenta(account)
                 if( registro ){
                     if(registro){
                         toast.setText("Cuenta agregada")
@@ -69,8 +71,8 @@ class AddCuentaFragment(emailPadre: Email): DialogFragment() {
         }
     }
 
-    private fun agregarNuevaCuenta(newCuenta: Cuenta): Boolean{
-        val cursor = db.getCuentasById(newCuenta.ID)
+    private fun agregarNuevaCuenta(newAccount: Account): Boolean{
+        val cursor = db.getCuentasById(newAccount.ID)
         val listaCuentas = arrayListOf<String>()
         var i = 0
         var agregar = false
@@ -81,15 +83,15 @@ class AddCuentaFragment(emailPadre: Email): DialogFragment() {
                     i++
                 }
                 for(j: Int in 0 until listaCuentas.size){
-                    if( listaCuentas[j] == newCuenta.tipo ){
+                    if( listaCuentas[j] == newAccount.tipo ){
                         i = 0
                         break
                     }
                 }
                 if(i != 0){
-                    agregar = db.insertarCuenta(cuenta.ID, cuenta.usuario, cuenta.passwrd, cuenta.tipo)
+                    agregar = db.insertarCuenta(account.ID, account.usuario, account.passwrd, account.tipo)
                 }
-            } else {agregar = db.insertarCuenta(cuenta.ID, cuenta.usuario, cuenta.passwrd, cuenta.tipo)} //primer cuenta agregada
+            } else {agregar = db.insertarCuenta(account.ID, account.usuario, account.passwrd, account.tipo)} //primer cuenta agregada
 
         } catch (ne: SQLiteException){ne.printStackTrace()}
 

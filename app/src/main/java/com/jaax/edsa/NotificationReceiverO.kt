@@ -7,6 +7,9 @@ import android.database.sqlite.SQLiteException
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import com.jaax.edsa.data.model.Account
+import com.jaax.edsa.data.model.Email
+import com.jaax.edsa.data.model.User
 
 class NotificationReceiverO: BroadcastReceiver() {
     companion object {
@@ -79,32 +82,32 @@ class NotificationReceiverO: BroadcastReceiver() {
             val emailQuery = separarQuery[0]
             val cuentaQuery = separarQuery[1]
             val cursor = db.getDatosCuentaById(emailQuery, cuentaQuery)
-            val cuenta = Cuenta(emailQuery, "?", "?", cuentaQuery)
+            val account = Account(emailQuery, "?", "?", cuentaQuery)
 
             try {
                 if( cursor.count>0 ){
                     while( cursor.moveToNext() ){
-                        cuenta.usuario = cursor.getString(1)
-                        cuenta.passwrd = cursor.getString(2)
-                        cuenta.tipo = cursor.getString(3)
+                        account.usuario = cursor.getString(1)
+                        account.passwrd = cursor.getString(2)
+                        account.tipo = cursor.getString(3)
                     }
                 }
             } catch(sql: SQLiteException){
                 Toast.makeText(context, "No se encontró esa cuenta", Toast.LENGTH_SHORT).show()
             }
-            return arrayOf(cuenta.usuario, cuenta.passwrd)
+            return arrayOf(account.usuario, account.passwrd)
         }
     }
 
     private fun getIdUsuario(context: Context): String? {
         val db = DBHelper(context, DBHelper.nombreDB, null, DBHelper.version)
         val cursorUsuario = db.getAllUsuarios()
-        var usuario = Usuario("?", "?", "?", ArrayList())
+        var user = User("?", "?", "?", ArrayList())
         if( cursorUsuario.count>0 ){
             while(cursorUsuario.moveToNext()){
-                usuario = Usuario(cursorUsuario.getString(0), cursorUsuario.getString(1), cursorUsuario.getString(2), ArrayList())
+                user = User(cursorUsuario.getString(0), cursorUsuario.getString(1), cursorUsuario.getString(2), ArrayList())
             }
-            return usuario.nombre
+            return user.nombre
         }
         return null
     }

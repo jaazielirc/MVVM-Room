@@ -15,6 +15,9 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.jaax.edsa.data.model.Account
+import com.jaax.edsa.data.model.Email
+import com.jaax.edsa.data.model.User
 
 class VerEmails: AppCompatActivity(),
     AddMailFragment.OnCallbackReceivedAdd,
@@ -33,11 +36,11 @@ class VerEmails: AppCompatActivity(),
     private lateinit var swipeRefresh: SwipeRefreshLayout
     private lateinit var adview2: AdView
     private lateinit var imgAds: ImageView
-    private lateinit var usuarioActual: Usuario
+    private lateinit var userActual: User
 
     private fun initUsuarioLogueado(){
         val datosUsuario = this.intent.extras
-        usuarioActual = Usuario(
+        userActual = User(
             datosUsuario?.getString("Login_usrNombre")!!,
             datosUsuario.getString("Login_usrPassword")!!,
             datosUsuario.getString("Login_usrKeyword")!!,
@@ -69,7 +72,7 @@ class VerEmails: AppCompatActivity(),
     override fun onStart() {
         super.onStart()
         mostrarEmails()
-        supportActionBar?.title = "Emails de: ${this.usuarioActual.nombre}"
+        supportActionBar?.title = "Emails de: ${this.userActual.nombre}"
     }
 
     override fun onResume() {
@@ -80,7 +83,7 @@ class VerEmails: AppCompatActivity(),
     private fun onClick(){
         addEmail.setOnClickListener {
             addEmail.visibility = View.INVISIBLE
-            AddMailFragment(usuarioActual).show(
+            AddMailFragment(userActual).show(
                 supportFragmentManager,
                 "agregarEmailNuevo"
             )
@@ -121,23 +124,23 @@ class VerEmails: AppCompatActivity(),
         val allEmails = ArrayList<Email>()
         var i = 0
         try {
-            val cursor = db.getEmailsById(usuarioActual.nombre)
+            val cursor = db.getEmailsById(userActual.nombre)
             if( cursor.count>0 ){
                 while(cursor.moveToNext()){
                     i++
                     val email = Email(
-                        usuarioActual.nombre,
+                        userActual.nombre,
                         cursor.getString(1),
                         cursor.getString(2),
                         ArrayList()
                     )
                     allEmails.add(email)
                 }
-                usuarioActual.emails = setMissingDataEmail(allEmails) //se agregan las cuentas que es el dato faltante de los Email
+                userActual.emails = setMissingDataEmail(allEmails) //se agregan las cuentas que es el dato faltante de los Email
                 txtNoEmail.visibility = View.INVISIBLE
                 imgNoEmail.visibility = View.INVISIBLE
             }
-            emailAdapter = EmailAdapter(this.applicationContext, supportFragmentManager, usuarioActual, allEmails)
+            emailAdapter = EmailAdapter(this.applicationContext, supportFragmentManager, userActual, allEmails)
             listaEmail.adapter = emailAdapter
             hideAndRefillPasswords(prevPass, emailAdapter, true)
         }catch (sql: SQLiteException){}
@@ -147,20 +150,20 @@ class VerEmails: AppCompatActivity(),
         addEmail.visibility = View.VISIBLE
         val allEmails = ArrayList<Email>()
         try {
-            val cursor = db.getEmailsById(usuarioActual.nombre)
+            val cursor = db.getEmailsById(userActual.nombre)
             var i = 0
             if( cursor.count>0 ){
                 while(cursor.moveToNext()){
                     i++
                     val email = Email(
-                        usuarioActual.nombre,
+                        userActual.nombre,
                         cursor.getString(1),
                         cursor.getString(2),
                         ArrayList()
                     )
                     allEmails.add(email)
                 }
-                usuarioActual.emails = setMissingDataEmail(allEmails)
+                userActual.emails = setMissingDataEmail(allEmails)
                 txtNoEmail.visibility = View.INVISIBLE
                 imgNoEmail.visibility = View.INVISIBLE
             } else {
@@ -177,17 +180,17 @@ class VerEmails: AppCompatActivity(),
     private fun setMissingDataEmail( allMails: ArrayList<Email> ): ArrayList<Email> {
         for( i: Int in 0 until allMails.size ){ //recorrer cada email
             val cursor = db.getCuentasById(allMails[i].nombre)
-            val listaCuentas = ArrayList<Cuenta>()
+            val listaAccounts = ArrayList<Account>()
             try { //no agrego 'if' xq si no tiene cuentas entonces no hay nada que cliquear
                 while( cursor.moveToNext() ) {
-                    val cuenta = Cuenta(
+                    val account = Account(
                         cursor.getString(0),
                         cursor.getString(1),
                         cursor.getString(2),
                         cursor.getString(3)
                     )
-                    listaCuentas.add(cuenta)
-                    allMails[i].cuentas = listaCuentas
+                    listaAccounts.add(account)
+                    allMails[i].accounts = listaAccounts
                 }
             } catch(sqli: SQLiteException){ sqli.toString() }
         }

@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SwitchCompat
+import com.jaax.edsa.data.model.User
 import java.lang.NullPointerException
 
 class UpdateUsuario: AppCompatActivity() {
@@ -22,7 +23,7 @@ class UpdateUsuario: AppCompatActivity() {
     private lateinit var help: ImageView
     private lateinit var db: DBHelper
     private lateinit var toast: Toast
-    private lateinit var usuarioActualizado: Usuario
+    private lateinit var userActualizado: User
 
     @SuppressLint("ShowToast")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,7 +51,7 @@ class UpdateUsuario: AppCompatActivity() {
 
     private fun initDatos() {
         val datosUsuario = this.intent.extras
-        usuarioActualizado = Usuario(
+        userActualizado = User(
             datosUsuario?.getString("Login_usrNombre")!!,
             datosUsuario.getString("Login_usrPassword")!!,
             datosUsuario.getString("Login_usrKeyword")!!,
@@ -66,9 +67,9 @@ class UpdateUsuario: AppCompatActivity() {
         opcionesSwitch()
         back.setOnClickListener {
             val intent = Intent(applicationContext, LoginUsuario::class.java)
-            intent.putExtra("usrNombre", usuarioActualizado.nombre)
-            intent.putExtra("usrPassword", usuarioActualizado.password)
-            intent.putExtra("usrKeyword", usuarioActualizado.keyword)
+            intent.putExtra("usrNombre", userActualizado.nombre)
+            intent.putExtra("usrPassword", userActualizado.password)
+            intent.putExtra("usrKeyword", userActualizado.keyword)
             startActivity(intent)
             this.finish()
         }
@@ -80,17 +81,17 @@ class UpdateUsuario: AppCompatActivity() {
             val confNewCredencial = confNewCredencial.text.toString()
 
             if( !switch.isChecked ){ //actualizar contraseña
-                usuarioActualizado = Usuario(usr, newCredencial, credencial, ArrayList())
+                userActualizado = User(usr, newCredencial, credencial, ArrayList())
 
                 val acceso = datosValidosPassword(
-                    usuarioActualizado.nombre,
-                    usuarioActualizado.keyword,
-                    usuarioActualizado.password,
+                    userActualizado.nombre,
+                    userActualizado.keyword,
+                    userActualizado.password,
                     confNewCredencial
                 )
 
                 if( acceso ){
-                    val actualizar = actualizarPasswordUsuario(usuarioActualizado)
+                    val actualizar = actualizarPasswordUsuario(userActualizado)
                     if( actualizar ) {
                         btnUpdt.isEnabled = false
                         btnUpdt.elevation = 5.0F
@@ -105,9 +106,9 @@ class UpdateUsuario: AppCompatActivity() {
                                     sleep(3000)
                                 } finally {
                                     val intent = Intent(applicationContext, LoginUsuario::class.java)
-                                    intent.putExtra("usrNombre", usuarioActualizado.nombre)
-                                    intent.putExtra("usrPassword", usuarioActualizado.password)
-                                    intent.putExtra("usrKeyword", usuarioActualizado.keyword)
+                                    intent.putExtra("usrNombre", userActualizado.nombre)
+                                    intent.putExtra("usrPassword", userActualizado.password)
+                                    intent.putExtra("usrKeyword", userActualizado.keyword)
                                     startActivity(intent)
                                     finish()
                                 }
@@ -121,17 +122,17 @@ class UpdateUsuario: AppCompatActivity() {
                     }
                 }
             } else {
-                usuarioActualizado = Usuario(usr, credencial, newCredencial, ArrayList())
+                userActualizado = User(usr, credencial, newCredencial, ArrayList())
 
                 val acceso = datosValidosKeyword(
-                    usuarioActualizado.nombre,
-                    usuarioActualizado.password,
-                    usuarioActualizado.keyword,
+                    userActualizado.nombre,
+                    userActualizado.password,
+                    userActualizado.keyword,
                     confNewCredencial
                 )
 
                 if( acceso ){
-                    val actualizar = actualizarKeywordUsuario(usuarioActualizado)
+                    val actualizar = actualizarKeywordUsuario(userActualizado)
                     if( actualizar ) {
                         btnUpdt.isEnabled = false
                         btnUpdt.elevation = 5.0F
@@ -146,9 +147,9 @@ class UpdateUsuario: AppCompatActivity() {
                                     sleep(3000)
                                 } finally {
                                     val intent = Intent(applicationContext, LoginUsuario::class.java)
-                                    intent.putExtra("usrNombre", usuarioActualizado.nombre)
-                                    intent.putExtra("usrPassword", usuarioActualizado.password)
-                                    intent.putExtra("usrKeyword", usuarioActualizado.keyword)
+                                    intent.putExtra("usrNombre", userActualizado.nombre)
+                                    intent.putExtra("usrPassword", userActualizado.password)
+                                    intent.putExtra("usrKeyword", userActualizado.keyword)
                                     startActivity(intent)
                                     finish()
                                 }
@@ -165,7 +166,7 @@ class UpdateUsuario: AppCompatActivity() {
         }
     }
 
-    private fun actualizarPasswordUsuario( user: Usuario): Boolean {
+    private fun actualizarPasswordUsuario( user: User): Boolean {
         val cursor = db.getAllUsuarios()
         var actualizar = false
         try {
@@ -180,7 +181,7 @@ class UpdateUsuario: AppCompatActivity() {
         return actualizar
     }
 
-    private fun actualizarKeywordUsuario( user: Usuario): Boolean{
+    private fun actualizarKeywordUsuario( user: User): Boolean{
         val cursor = db.getAllUsuarios()
         var actualizar = false
         try {
