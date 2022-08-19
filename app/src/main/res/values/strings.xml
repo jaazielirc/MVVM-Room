@@ -7,8 +7,8 @@
     <string name="user">Usuario</string>
     <string name="password">Contraseña</string>
     <string name="log_in">Acceder</string>
-    <string name="no_emails">No hay emails agregados</string>
-    <string name="no_accounts">No hay cuentas agregadas</string>
+    <string name="no_emails">No hay emails</string>
+    <string name="no_accounts">No hay cuentas</string>
     <string name="username">Nombre de Usuario</string>
     <string name="keyword">Palabra secreta</string>
     <string name="email">Correo electrónico</string>
@@ -28,4 +28,9 @@
     <string name="empty">" "</string>
     <string name="img_description">imageview</string>
     <string name="forgot_data">Olvidé mis datos</string>
+    <string name="user_name_hint">Nombre de usuario</string>
+    <string name="password_hint">Contraseña</string>
+    <string name="keyword_hint">Palabra clave</string>
+    <string name="emails">Emails</string>
+    <string name="accounts">Cuentas</string>
 </resources>

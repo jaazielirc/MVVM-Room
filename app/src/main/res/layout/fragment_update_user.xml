@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tvUpdate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="center"
+        android:text="@string/update"
+        android:textColor="@color/negro"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilUpdateUser1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvUpdate">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etUpdateUsername"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:hint="@string/user_name_hint"
+            android:inputType="textVisiblePassword"
+            android:singleLine="true"
+            android:textColor="@color/blanco"
+            android:textColorHint="@color/negro"
+            android:textSize="20sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilUpdateUser2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tilUpdateUser1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tilUpdateUser1"
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="@color/rosa">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etUpdatePassword"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:inputType="textPassword"
+            android:singleLine="true"
+            android:textColor="@color/blanco"
+            android:textColorHint="@color/negro"
+            android:textSize="20sp"
+            android:hint="@string/password_hint"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilUpdateUser3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tilUpdateUser2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tilUpdateUser2"
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="@color/rosa">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etUpdateKeyword"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:inputType="textPassword"
+            android:singleLine="true"
+            android:textColor="@color/blanco"
+            android:textColorHint="@color/negro"
+            android:textSize="20sp"
+            android:hint="@string/keyword_hint"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/btnUpdateUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tilUpdateUser3"
+        android:layout_centerHorizontal="true"
+        android:text="@string/update"
+        android:textAllCaps="false"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tilUpdateUser3" />
+</androidx.constraintlayout.widget.ConstraintLayout>

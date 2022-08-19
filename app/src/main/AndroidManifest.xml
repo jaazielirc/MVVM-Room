@@ -4,7 +4,6 @@
     package="com.jaax.edsa">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <application
         android:icon="@mipmap/ic_launcher"
@@ -18,8 +17,8 @@
             android:value="ca-app-pub-8133052963274724~8703737904" /-->
 
         <activity
-            android:name=".SplashScreen"
-            android:screenOrientation="fullSensor"
+            android:name=".ui.SplashScreenActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:exported="true">
             <intent-filter>
@@ -28,26 +27,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".LoginUsuario"
-            android:screenOrientation="fullSensor"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        </activity>
-        <activity
-            android:name=".ui.AddUser"
-            android:screenOrientation="fullSensor"
-            android:theme="@style/AppTheme">
-        </activity>
-        <activity
-            android:name=".UpdateUsuario"
-            android:screenOrientation="fullSensor"
-            android:theme="@style/AppTheme">
-        </activity>
-        <activity
-            android:name=".VerEmails"
-            android:screenOrientation="fullSensor"
-            android:theme="@style/EmailsStyle">
-        </activity>
+        <activity android:name=".ui.MainActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

@@ -8,6 +8,7 @@
         <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/drawable/bckgrnd_intro.xml" value="0.139" />
         <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/drawable/bckgrnd_splashscreen.xml" value="0.139" />
         <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/drawable/btn_account_style.xml" value="0.139" />
+        <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/drawable/btn_disable_style.xml" value="0.145" />
         <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/drawable/btn_email_style.xml" value="0.139" />
         <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/drawable/btn_goto_style.xml" value="0.139" />
         <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/drawable/btn_next_style.xml" value="0.139" />
@@ -16,21 +17,38 @@
         <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/drawable/disable_btn_style.xml" value="0.139" />
         <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/drawable/goto_enabled.xml" value="0.139" />
         <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/drawable/goto_pressed.xml" value="0.139" />
+        <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.1415" />
+        <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/drawable/ic_baseline_alternate_email_24.xml" value="0.145" />
+        <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/drawable/ic_baseline_attach_email_24.xml" value="0.1415" />
+        <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/drawable/ic_baseline_delete_24.xml" value="0.145" />
+        <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/drawable/ic_baseline_edit_24.xml" value="0.1385" />
+        <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/drawable/ic_baseline_folder_shared_24.xml" value="0.14" />
+        <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/drawable/ic_baseline_lock_24.xml" value="0.1385" />
+        <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/drawable/ic_baseline_lock_open_24.xml" value="0.1385" />
+        <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.14" />
+        <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/drawable/ic_baseline_save_24.xml" value="0.1385" />
         <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.139" />
+        <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/drawable/ic_baseline_see_more_24.xml" value="0.1385" />
         <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/drawable/item_selected_lv.xml" value="0.139" />
         <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/drawable/next_enabled.xml" value="0.139" />
         <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/drawable/next_pressed.xml" value="0.139" />
         <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/drawable/opc_usuario.xml" value="0.139" />
         <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/drawable/previous_enabled.xml" value="0.139" />
         <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/drawable/toggle_edit_style.xml" value="0.139" />
+        <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/drawable/toggle_open_close_style.xml" value="0.14" />
         <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/drawable/toggle_passwrd_style.xml" value="0.1395" />
         <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/drawable/toggle_psswrd_style.xml" value="0.139" />
         <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/layout/activity_adduser.xml" value="0.196875" />
         <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/layout/activity_ads.xml" value="0.196875" />
+        <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/layout/activity_login.xml" value="0.196875" />
+        <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/layout/activity_main.xml" value="0.19583333333333333" />
         <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/layout/activity_reply.xml" value="0.196875" />
         <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/layout/add_account.xml" value="0.196875" />
         <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/layout/add_email.xml" value="0.196875" />
         <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/layout/add_usuario.xml" value="0.196875" />
+        <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/layout/card_data_email.xml" value="0.25" />
+        <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/layout/data_account_adapter.xml" value="0.22" />
+        <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/layout/data_email_adapter.xml" value="0.196875" />
         <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/layout/datos_adapter_cuenta.xml" value="0.196875" />
         <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/layout/datos_adapter_email.xml" value="0.196875" />
         <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/layout/del_email.xml" value="0.196875" />
@@ -38,13 +56,27 @@
         <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/layout/edit_account.xml" value="0.196875" />
         <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/layout/edit_email.xml" value="0.196875" />
         <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/layout/edit_usuario.xml" value="0.196875" />
+        <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/layout/fragment_add_account.xml" value="0.196875" />
+        <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/layout/fragment_add_email.xml" value="0.196875" />
+        <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/layout/fragment_add_user.xml" value="0.196875" />
         <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/layout/fragment_adduser.xml" value="0.196875" />
+        <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/layout/fragment_delete_email.xml" value="0.196875" />
+        <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/layout/fragment_login.xml" value="0.196875" />
+        <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/layout/fragment_show_accounts.xml" value="0.196875" />
+        <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/layout/fragment_show_emails.xml" value="0.196875" />
+        <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/layout/fragment_update_account.xml" value="0.196875" />
+        <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/layout/fragment_update_email.xml" value="0.25" />
+        <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/layout/fragment_update_user.xml" value="0.196875" />
+        <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/layout/fragment_updateuser.xml" value="0.25" />
         <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/layout/intro_1_opciones.xml" value="0.196875" />
         <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/layout/login_usuario.xml" value="0.196875" />
         <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/layout/show_accounts.xml" value="0.13148148148148148" />
         <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/layout/show_emails.xml" value="0.196875" />
         <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/layout/splash_screen.xml" value="0.196875" />
         <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/layout/support_user.xml" value="0.196875" />
+        <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/menu/menu_account.xml" value="0.196875" />
+        <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/menu/menu_email.xml" value="0.1" />
+        <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/menu/menu_toolbar_activitymain.xml" value="0.196875" />
         <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/menu/opc_cuenta.xml" value="0.196875" />
         <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/menu/opc_email.xml" value="0.196875" />
         <entry key="..\:/Users/Jaaziel/Documents/Android Projects/EDSA/app/src/main/res/menu/opc_toolbar.xml" value="0.196875" />
