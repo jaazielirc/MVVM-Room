@@ -4,11 +4,14 @@ import androidx.lifecycle.*
 import com.jaax.edsa.data.RoomRepository
 import com.jaax.edsa.data.model.User
 import com.jaax.edsa.utils.Utils
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import javax.inject.Inject
 
-class UserViewModel(private val repository: RoomRepository): ViewModel() {
+@HiltViewModel
+class UserViewModel @Inject constructor(private val repository: RoomRepository): ViewModel() {
     private var _username = MutableLiveData("")
     val username: LiveData<String> get() = _username
 
@@ -64,7 +67,8 @@ class UserViewModel(private val repository: RoomRepository): ViewModel() {
 }
 
 @Suppress("UNCHECKED_CAST")
-class UserViewModelFactory(private val repository: RoomRepository): ViewModelProvider.Factory {
+class UserViewModelFactory @Inject constructor(private val repository: RoomRepository):
+    ViewModelProvider.Factory {
     override fun <T: ViewModel> create(modelClass: Class<T>): T {
         return UserViewModel(repository) as T
     }

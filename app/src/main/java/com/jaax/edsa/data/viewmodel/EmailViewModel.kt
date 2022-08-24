@@ -3,11 +3,16 @@ package com.jaax.edsa.data.viewmodel
 import androidx.lifecycle.*
 import com.jaax.edsa.data.RoomRepository
 import com.jaax.edsa.data.model.Email
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class EmailViewModel(private val repository: RoomRepository, private val username: String):
-    ViewModel() {
+@HiltViewModel
+class EmailViewModel @Inject constructor(
+    private val repository: RoomRepository,
+    private val username: String
+): ViewModel() {
 
     private var _emails = MutableLiveData<List<Email>>(emptyList())
     val emails: LiveData<List<Email>> get() = _emails

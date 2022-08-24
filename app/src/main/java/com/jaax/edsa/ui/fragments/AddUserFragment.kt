@@ -10,16 +10,19 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import com.jaax.edsa.R
 import com.jaax.edsa.data.RoomRepository
-import com.jaax.edsa.data.db.DatabaseEDSA
 import com.jaax.edsa.data.viewmodel.UserViewModel
 import com.jaax.edsa.data.viewmodel.UserViewModelFactory
 import com.jaax.edsa.databinding.FragmentAddUserBinding
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class AddUserFragment: Fragment() {
     private var _binding: FragmentAddUserBinding? = null
     private val binding get() = _binding!!
-    private lateinit var repository: RoomRepository
-    private lateinit var factory: UserViewModelFactory
+
+    @Inject lateinit var repository: RoomRepository
+    @Inject lateinit var factory: UserViewModelFactory
     private lateinit var viewModel: UserViewModel
 
     override fun onCreateView(
@@ -28,8 +31,6 @@ class AddUserFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentAddUserBinding.inflate(inflater, container, false)
-        repository = RoomRepository(DatabaseEDSA(requireActivity().applicationContext))
-        factory = UserViewModelFactory(repository)
         viewModel = ViewModelProvider(this, factory)[UserViewModel::class.java]
 
         return binding.root

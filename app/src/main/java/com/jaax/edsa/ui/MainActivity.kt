@@ -2,29 +2,27 @@ package com.jaax.edsa.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.jaax.edsa.R
 import com.jaax.edsa.data.RoomRepository
-import com.jaax.edsa.data.db.DatabaseEDSA
 import com.jaax.edsa.data.viewmodel.UserViewModel
 import com.jaax.edsa.data.viewmodel.UserViewModelFactory
 import com.jaax.edsa.ui.fragments.AddUserFragment
 import com.jaax.edsa.ui.fragments.LoginFragment
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity: AppCompatActivity() {
-    private lateinit var repository: RoomRepository
-    private lateinit var factory: UserViewModelFactory
+    @Inject lateinit var repository: RoomRepository
+    @Inject lateinit var factory: UserViewModelFactory
     private lateinit var viewModel: UserViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        repository = RoomRepository(DatabaseEDSA(this))
-        factory = UserViewModelFactory(repository)
         viewModel = ViewModelProvider(this, factory)[UserViewModel::class.java]
-
         setNextFragment()
     }
 

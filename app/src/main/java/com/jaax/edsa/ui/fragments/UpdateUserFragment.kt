@@ -10,18 +10,20 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.jaax.edsa.data.RoomRepository
-import com.jaax.edsa.data.db.DatabaseEDSA
 import com.jaax.edsa.data.viewmodel.UserViewModel
 import com.jaax.edsa.data.viewmodel.UserViewModelFactory
 import com.jaax.edsa.databinding.FragmentUpdateUserBinding
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class UpdateUserFragment: Fragment() {
     private var _binding: FragmentUpdateUserBinding? = null
     private val binding get() = _binding!!
-    private lateinit var repository: RoomRepository
-    private lateinit var factory: UserViewModelFactory
+    @Inject lateinit var repository: RoomRepository
+    @Inject lateinit var factory: UserViewModelFactory
     private lateinit var viewModel: UserViewModel
 
     override fun onCreateView(
@@ -30,8 +32,6 @@ class UpdateUserFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentUpdateUserBinding.inflate(inflater, container, false)
-        repository = RoomRepository(DatabaseEDSA(requireActivity().applicationContext))
-        factory = UserViewModelFactory(repository)
         viewModel = ViewModelProvider(this, factory)[UserViewModel::class.java]
 
         return binding.root

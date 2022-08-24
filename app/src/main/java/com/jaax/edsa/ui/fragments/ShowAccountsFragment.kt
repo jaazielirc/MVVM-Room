@@ -8,28 +8,29 @@ import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jaax.edsa.data.RoomRepository
-import com.jaax.edsa.data.db.DatabaseEDSA
 import com.jaax.edsa.data.model.Account
 import com.jaax.edsa.data.viewmodel.AccountViewModel
 import com.jaax.edsa.data.viewmodel.AccountViewModelFactory
 import com.jaax.edsa.databinding.FragmentShowAccountsBinding
 import com.jaax.edsa.ui.AccountAdapter
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class ShowAccountsFragment(private val email: String): DialogFragment() {
 
     private var accountMutableList: MutableList<Account> = mutableListOf()
     private var _binding: FragmentShowAccountsBinding? = null
     private val binding get() = _binding!!
-    private lateinit var repository: RoomRepository
-    private lateinit var factory: AccountViewModelFactory
+
+    @Inject lateinit var repository: RoomRepository
+    @Inject lateinit var factory: AccountViewModelFactory
     private lateinit var viewModel: AccountViewModel
     private lateinit var adapter: AccountAdapter
     private lateinit var layoutManager: LinearLayoutManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        repository = RoomRepository(DatabaseEDSA(requireActivity().applicationContext))
-        factory = AccountViewModelFactory(repository, email)
         viewModel = ViewModelProvider(this, factory)[AccountViewModel::class.java]
     }
 

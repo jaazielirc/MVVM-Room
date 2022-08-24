@@ -4,8 +4,9 @@ import com.jaax.edsa.data.db.DatabaseEDSA
 import com.jaax.edsa.data.model.Account
 import com.jaax.edsa.data.model.Email
 import com.jaax.edsa.data.model.User
+import javax.inject.Inject
 
-class RoomRepository(private val room: DatabaseEDSA) {
+class RoomRepository @Inject constructor(private val room: DatabaseEDSA) {
 
     suspend fun saveuser(user: User) = room.userDao().insertUser(user)
     suspend fun getUser() = room.userDao().getUser()

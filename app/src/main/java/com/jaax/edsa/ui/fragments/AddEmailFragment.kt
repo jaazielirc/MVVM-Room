@@ -8,19 +8,22 @@ import android.os.Bundle
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import com.jaax.edsa.data.RoomRepository
-import com.jaax.edsa.data.db.DatabaseEDSA
 import com.jaax.edsa.data.model.Email
 import com.jaax.edsa.data.viewmodel.EmailViewModel
 import com.jaax.edsa.data.viewmodel.EmailViewModelFactory
 import com.jaax.edsa.databinding.FragmentAddEmailBinding
+import dagger.hilt.android.AndroidEntryPoint
 import java.lang.ClassCastException
+import javax.inject.Inject
 
-class AddEmailFragment(private val username: String): DialogFragment() {
+@AndroidEntryPoint
+class AddEmailFragment @Inject constructor(private val username: String): DialogFragment() {
     private var _binding: FragmentAddEmailBinding? = null
     private val binding get() = _binding!!
     private var callback: NotifyEmailAddedListener? = null
-    private lateinit var repository: RoomRepository
-    private lateinit var factory: EmailViewModelFactory
+
+    @Inject lateinit var repository: RoomRepository
+    @Inject lateinit var factory: EmailViewModelFactory
     private lateinit var viewModel: EmailViewModel
 
     interface NotifyEmailAddedListener {
@@ -38,8 +41,6 @@ class AddEmailFragment(private val username: String): DialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        repository = RoomRepository(DatabaseEDSA(requireActivity().applicationContext))
-        factory = EmailViewModelFactory(repository, username)
         viewModel = ViewModelProvider(this, factory)[EmailViewModel::class.java]
     }
 
