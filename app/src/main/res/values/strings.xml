@@ -33,4 +33,5 @@
     <string name="keyword_hint">Palabra clave</string>
     <string name="emails">Emails</string>
     <string name="accounts">Cuentas</string>
+    <string name="new_password">Nueva contraseña</string>
 </resources>

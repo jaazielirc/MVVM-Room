@@ -18,18 +18,31 @@
         app:layout_constraintStart_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
-    <EditText
-        android:id="@+id/tvPassword"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilEmailAdapter1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/password"
-        android:textColor="@color/negro"
-        android:textSize="20sp"
-        android:enabled="false"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvEmail" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvEmail"
+        app:passwordToggleEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tvPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/password"
+            android:textColor="@color/negro"
+            android:inputType="textPassword"
+            android:textSize="20sp"
+            android:enabled="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvEmail" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
 
     <ImageButton
         android:id="@+id/imgBtnShowAccounts"
@@ -37,7 +50,7 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ic_baseline_see_more_24"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvPassword"
+        app:layout_constraintTop_toBottomOf="@id/tilEmailAdapter1"
         android:contentDescription="@string/img_description"/>
 
     <ImageButton
@@ -46,7 +59,7 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ic_baseline_edit_24"
         android:contentDescription="@string/img_description"
-        app:layout_constraintTop_toBottomOf="@id/tvPassword"
+        app:layout_constraintTop_toBottomOf="@id/tilEmailAdapter1"
         app:layout_constraintStart_toEndOf="@id/imgBtnShowAccounts"
         app:layout_constraintEnd_toStartOf="@id/imgBtnDeleteEmail"
         app:layout_constraintHorizontal_bias="0.1"/>
@@ -58,7 +71,7 @@
         android:src="@drawable/ic_baseline_save_24"
         android:visibility="invisible"
         android:contentDescription="@string/img_description"
-        app:layout_constraintTop_toBottomOf="@id/tvPassword"
+        app:layout_constraintTop_toBottomOf="@id/tilEmailAdapter1"
         app:layout_constraintStart_toEndOf="@id/imgBtnEditEmail"
         app:layout_constraintEnd_toStartOf="@id/imgBtnDeleteEmail"
         app:layout_constraintHorizontal_bias="0.1"/>
@@ -69,7 +82,7 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ic_baseline_delete_24"
         android:contentDescription="@string/img_description"
-        app:layout_constraintTop_toBottomOf="@id/tvPassword"
+        app:layout_constraintTop_toBottomOf="@id/tilEmailAdapter1"
         app:layout_constraintEnd_toEndOf="parent"/>
 
 

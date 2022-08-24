@@ -24,13 +24,14 @@ class ShowAccountsFragment(private val email: String): DialogFragment() {
     private val binding get() = _binding!!
 
     @Inject lateinit var repository: RoomRepository
-    @Inject lateinit var factory: AccountViewModelFactory
+    private lateinit var factory: AccountViewModelFactory
     private lateinit var viewModel: AccountViewModel
     private lateinit var adapter: AccountAdapter
     private lateinit var layoutManager: LinearLayoutManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        factory = AccountViewModelFactory(repository, email)
         viewModel = ViewModelProvider(this, factory)[AccountViewModel::class.java]
     }
 

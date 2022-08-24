@@ -22,8 +22,10 @@ import javax.inject.Inject
 class UpdateUserFragment: Fragment() {
     private var _binding: FragmentUpdateUserBinding? = null
     private val binding get() = _binding!!
-    @Inject lateinit var repository: RoomRepository
-    @Inject lateinit var factory: UserViewModelFactory
+    @Inject
+    lateinit var repository: RoomRepository
+    @Inject
+    lateinit var factory: UserViewModelFactory
     private lateinit var viewModel: UserViewModel
 
     override fun onCreateView(
@@ -42,35 +44,28 @@ class UpdateUserFragment: Fragment() {
 
         binding.btnUpdateUser.setOnClickListener {
             lifecycleScope.launch {
+                val oldPassword = binding.etUpdatePassword.text.toString()
                 val user = viewModel.createUser(
                     binding.etUpdateUsername.text.toString(),
-                    binding.etUpdatePassword.text.toString(),
+                    binding.etUpdateNewPassword.text.toString(),
                     binding.etUpdateKeyword.text.toString()
                 )
-                if( viewModel.existUser(user.name) ){
-                    if(viewModel.isValidUsername(user.name)
-                        && (viewModel.isValidPassword(user.password))
-                        && (viewModel.isValidKeyword(user.keyword))
-                    ) {
+                if(viewModel.validateUser(user.name, oldPassword, user.keyword)) {
+                    if(!viewModel.isValidPassword(user.password)) {
+                        binding.etUpdateNewPassword.error = "4 a 20 caracteres"
+                    } else {
                         viewModel.updateUser(user)
                         Toast.makeText(context, "Usuario actualizado", Toast.LENGTH_SHORT).show()
-                        parentFragmentManager.popBackStack("updateuser", FragmentManager.POP_BACK_STACK_INCLUSIVE)
-                    } else {
-                        if(viewModel.isValidUsername(user.name)) {
-                            binding.etUpdateUsername.error = "4 a 10 caracteres a-z sin espacios"
-                        }
-                        if(viewModel.isValidPassword(user.password)) {
-                            binding.etUpdatePassword.error = "6 a 20 caracteres"
-                        }
-                        if(viewModel.isValidKeyword(user.keyword)) {
-                            binding.etUpdateKeyword.error = "4 a 15 caracteres sin espacios"
-                        }
+                        parentFragmentManager.popBackStack(
+                            "updateuser",
+                            FragmentManager.POP_BACK_STACK_INCLUSIVE
+                        )
                     }
                 } else {
                     Toast.makeText(context, "Usuario no encontrado", Toast.LENGTH_SHORT).show()
-                    binding.btnUpdateUser.visibility  = View.INVISIBLE
+                    binding.btnUpdateUser.visibility = View.INVISIBLE
                     delay(2000)
-                    binding.btnUpdateUser.visibility  = View.VISIBLE
+                    binding.btnUpdateUser.visibility = View.VISIBLE
                 }
             }
         }

@@ -41,13 +41,6 @@ class UserViewModel @Inject constructor(private val repository: RoomRepository):
         }
     }
 
-    fun deleteUser(user: User) {
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.dropEmailsByUser(user.name)
-            repository.deleteUser(user)
-        }
-    }
-
     fun isValidUsername(username: String): Boolean {
         return username.matches(Utils.validateUsername)
     }
@@ -56,13 +49,14 @@ class UserViewModel @Inject constructor(private val repository: RoomRepository):
         return password.matches(Utils.validatePassword)
     }
 
-    fun isValidKeyword(keyword: String): Boolean {
-        return keyword.matches(Utils.validateKeyword)
+    fun validateUser(username: String, password: String, keyword: String): Boolean {
+        val userdb = runBlocking(Dispatchers.IO) { repository.getUser() }
+        return username==userdb?.name && password==userdb.password && keyword==userdb.keyword
     }
 
-    fun existUser(username: String): Boolean {
-        val userdb = runBlocking { repository.getUser() }
-        return username == userdb?.name
+    fun isValidUser(username: String, password: String): Boolean {
+        val userdb = runBlocking(Dispatchers.IO) { repository.getUser() }
+        return username==userdb?.name && password==userdb.password
     }
 }
 

@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.jaax.edsa.R
@@ -56,7 +55,7 @@ class LoginFragment: Fragment() {
                     binding.etPassword.text.toString(),
                     "",
                 )
-                if(viewModel.existUser(user.name)) {
+                if(viewModel.isValidUser(user.name, user.password)) {
                     fragmentTransition(ShowEmailsFragment(user.name), "showemails")
                 } else {
                     Toast.makeText(context, "Revisa tus credenciales", Toast.LENGTH_SHORT).show()
@@ -73,11 +72,10 @@ class LoginFragment: Fragment() {
     }
 
     private fun fragmentTransition(fragment: Fragment, tag: String) {
-        parentFragmentManager
-            .popBackStack("login", FragmentManager.POP_BACK_STACK_INCLUSIVE)
+        binding.etPassword.setText("")
         parentFragmentManager
             .beginTransaction()
-            .replace(R.id.mainFrame, fragment)
+            .replace(R.id.mainFrame, fragment, tag)
             .addToBackStack(tag)
             .commit()
     }

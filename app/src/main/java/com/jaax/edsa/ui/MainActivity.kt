@@ -2,6 +2,7 @@ package com.jaax.edsa.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import com.jaax.edsa.R
 import com.jaax.edsa.data.RoomRepository
@@ -27,19 +28,31 @@ class MainActivity: AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        super.onBackPressed()
+        val updateuser = supportFragmentManager.findFragmentByTag("updateuser")
+        val showemails = supportFragmentManager.findFragmentByTag("showemails")
+
+        if(supportFragmentManager.backStackEntryCount == 1) this.finish()
+        if(updateuser != null) popFragment(updateuser.tag)
+        if(showemails != null) popFragment(showemails.tag)
+    }
+
+    private fun popFragment(tag: String?) {
+        supportFragmentManager.popBackStack(
+            tag,
+            FragmentManager.POP_BACK_STACK_INCLUSIVE
+        )
     }
 
     private fun setNextFragment() {
         val user = viewModel.getUser()
         if(user == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.mainFrame, AddUserFragment())
+                .replace(R.id.mainFrame, AddUserFragment(), "adduser")
                 .addToBackStack("adduser")
                 .commit()
         } else {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.mainFrame, LoginFragment())
+                .replace(R.id.mainFrame, LoginFragment(), "login")
                 .addToBackStack("login")
                 .commit()
         }

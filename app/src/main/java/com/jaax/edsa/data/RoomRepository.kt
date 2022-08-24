@@ -11,8 +11,6 @@ class RoomRepository @Inject constructor(private val room: DatabaseEDSA) {
     suspend fun saveuser(user: User) = room.userDao().insertUser(user)
     suspend fun getUser() = room.userDao().getUser()
     suspend fun updateUser(user: User) = room.userDao().updateUser(user)
-    suspend fun deleteUser(user: User) = room.userDao().deleteUser(user)
-    suspend fun dropEmailsByUser(username: String) = room.userDao().dropEmailsByUser(username)
 
     suspend fun saveEmail(email: Email) = room.emailDao().insertEmail(email)
     suspend fun getAllEmails(username: String) = room.emailDao().getEmailsByUser(username)
